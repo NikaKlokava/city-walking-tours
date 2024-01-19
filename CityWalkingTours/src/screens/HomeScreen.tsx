@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
-import {StyledBtn} from './StyledBtn';
+import {StyledBtn} from '../components/StyledBtn';
 
 const image = require('../assets/back_travel_img.png');
 const windowWidth = Dimensions.get('window').width;
@@ -24,9 +24,6 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    padding: 10,
-    paddingTop: 80,
-    backgroundColor: '#031F2B',
   },
   container: {
     flex: 3,
