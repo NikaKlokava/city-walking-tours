@@ -4,11 +4,12 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
+  // TextInput,
   View,
 } from 'react-native';
-import {Sections} from '../components/Sections';
-import {Categories} from '../components/Categories';
+// import {Sections} from '../components/Sections';
+// import {Categories} from '../components/Categories';
+import {CategoryItem} from '../components/CategoryItem';
 
 const image = require('../assets/lith_heart.png');
 const windowWidth = Dimensions.get('window').width;
@@ -20,13 +21,14 @@ export const CityScreen = () => {
         <Text style={styles.title}>Hello from {CITIES[0]}!</Text>
         <Image source={image} style={styles.image} />
       </View>
-      <TextInput
+      {/* <TextInput
         placeholder="what do you want to find?"
         placeholderTextColor={'grey'}
         style={styles.searchInput}
       />
-      <Categories />
-      <Sections />
+      <Categories /> */}
+      {/* <Sections /> */}
+      <CategoryItem />
     </View>
   );
 };
