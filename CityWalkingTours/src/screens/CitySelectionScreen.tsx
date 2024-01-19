@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import {StyledBtn} from './StyledBtn';
+import {StyledBtn} from '../components/StyledBtn';
 
 const image = require('../assets/lith_img.png');
 const windowWidth = Dimensions.get('window').width;
@@ -34,9 +34,6 @@ export const CitySelectionScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    paddingTop: 80,
-    backgroundColor: '#031F2B',
   },
   image: {
     alignSelf: 'center',
