@@ -14,6 +14,7 @@ export const Categories = () => {
       <FlatList
         data={CATEGORIES}
         horizontal
+        showsHorizontalScrollIndicator={false}
         renderItem={item => {
           return (
             <Pressable
