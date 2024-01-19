@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
+import SelectDropdown from 'react-native-select-dropdown'; //! modal + flatlist
 import {StyledBtn} from '../components/StyledBtn';
 
 const image = require('../assets/lith_img.png');

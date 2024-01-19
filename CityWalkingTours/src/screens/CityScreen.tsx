@@ -1,34 +1,36 @@
 import React from 'react';
 import {
   Dimensions,
-  Image,
+  // Image,
   StyleSheet,
-  Text,
+  // Text,
   // TextInput,
   View,
 } from 'react-native';
+import {Details} from '../components/Details';
 // import {Sections} from '../components/Sections';
 // import {Categories} from '../components/Categories';
-import {CategoryItem} from '../components/CategoryItem';
+// import {CategoryItem} from '../components/CategoryItem';
 
-const image = require('../assets/lith_heart.png');
+// const image = require('../assets/lith_heart.png');
 const windowWidth = Dimensions.get('window').width;
 
 export const CityScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
+      {/* <View style={styles.titleContainer}>
         <Text style={styles.title}>Hello from {CITIES[0]}!</Text>
         <Image source={image} style={styles.image} />
       </View>
-      {/* <TextInput
+      <TextInput
         placeholder="what do you want to find?"
         placeholderTextColor={'grey'}
         style={styles.searchInput}
       />
-      <Categories /> */}
-      {/* <Sections /> */}
-      <CategoryItem />
+      <Categories />
+      <Sections />
+      <CategoryItem /> */}
+      <Details />
     </View>
   );
 };
@@ -63,11 +65,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const CITIES = [
-  'VILNIUS',
-  'KAUNO',
-  'TRAKAI',
-  'KLAIPEDA',
-  'PALANGA',
-  'DRUSKININKAI',
-];
+// const CITIES = [
+//   'VILNIUS',
+//   'KAUNO',
+//   'TRAKAI',
+//   'KLAIPEDA',
+//   'PALANGA',
+//   'DRUSKININKAI',
+// ];
