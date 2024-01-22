@@ -3,8 +3,9 @@ import {Text as RnText, StyleSheet, TextProps} from 'react-native';
 import {fonts} from '../../utils/fonts';
 
 type Props = {
-  type: 'primary' | 'secondary';
+  type: 'primary' | 'secondary' | 'tertiary';
   color: string;
+  center?: boolean;
   children: any;
 } & TextProps;
 
@@ -15,6 +16,7 @@ export const Text = (props: Props) => (
       props.style,
       fonts[props.type],
       {color: props.color},
+      props.center && {textAlign: 'center'},
     ])}>
     {props.children}
   </RnText>

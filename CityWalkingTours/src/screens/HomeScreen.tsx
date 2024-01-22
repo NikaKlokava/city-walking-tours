@@ -1,52 +1,117 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  Image,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
-
-const image = require('../assets/back_travel_img.png');
-const windowWidth = Dimensions.get('window').width;
+import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../utils/screen';
+import {colors} from '../utils/colors';
+import {DATA} from '../utils/data';
+import {Text} from '../components/base/Text';
 
 export const HomeScreen = () => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const handleScreenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const totalWidth = e.nativeEvent.layoutMeasurement.width;
+    const xPos = e.nativeEvent.contentOffset.x;
+    const index = Math.floor(xPos / totalWidth);
+    setCurrentIndex(index);
+  };
+
   return (
-    <View style={styles.main}>
-      <View style={styles.container}>
-        <Image source={image} style={styles.backImg} />
-        <View>
-          <Text style={styles.title}>Escape the ordinary life</Text>
-          <Text style={styles.description}>
-            Discover great experiences around you and make you live interesting!
-          </Text>
-        </View>
+    <View style={styles.mainContainer}>
+      <View style={styles.imageContainer}>
+        <FlatList
+          data={DATA}
+          horizontal
+          pagingEnabled
+          onScroll={e => handleScreenScroll(e)}
+          keyExtractor={(_, index) => index.toString()}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.listContainer}>
+                {item.image && (
+                  <Image source={item.image} style={styles.backImg} />
+                )}
+                <View style={styles.descriptionContainer}>
+                  <Text
+                    type="primary"
+                    color={colors.primary1}
+                    style={styles.title}
+                    center>
+                    {item.title}
+                  </Text>
+                  <View style={styles.line} />
+                  <Text type="tertiary" color={colors.primary4} center>
+                    {item.description}
+                  </Text>
+                </View>
+              </View>
+            );
+          }}
+        />
       </View>
-      <StyledBtn title="Get Started" />
+      <View style={styles.dottsContainer}>
+        {currentIndex === DATA.length - 1 ? (
+          <StyledBtn title="Get Started" />
+        ) : (
+          <>
+            {DATA.map((_, index) => (
+              <View
+                key={index}
+                style={[styles.dott, currentIndex === index && styles.active]}
+              />
+            ))}
+          </>
+        )}
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
-  main: {
+  mainContainer: {
     flex: 1,
   },
-  container: {
-    flex: 3,
-    rowGap: 20,
+  imageContainer: {
+    flex: 1,
+  },
+  listContainer: {
+    width: DEVICE_WIDTH,
+    rowGap: 70,
+    marginTop: 30,
   },
   backImg: {
-    width: 0.9 * windowWidth,
-    height: 300,
-    alignSelf: 'center',
+    height: 0.3 * DEVICE_HEIGHT,
+    width: DEVICE_WIDTH,
+    objectFit: 'contain',
   },
+  descriptionContainer: {paddingHorizontal: 15, rowGap: 10},
   title: {
-    fontSize: 26,
-    color: 'white',
-    textAlign: 'center',
-    fontFamily: 'Georgia',
     marginBottom: 10,
   },
-  description: {
-    color: '#D6D2D2',
-    textAlign: 'center',
-    marginHorizontal: 20,
-    fontSize: 16,
-    letterSpacing: 1,
-    fontFamily: 'Georgia',
+  dottsContainer: {
+    flexDirection: 'row',
+    columnGap: 20,
+    justifyContent: 'center',
+  },
+  dott: {
+    width: 15,
+    height: 15,
+    borderRadius: 10,
+    backgroundColor: colors.primary3,
+    opacity: 0.4,
+  },
+  active: {
+    opacity: 1,
+  },
+  line: {
+    borderWidth: 0.7,
+    borderColor: colors.primary3,
   },
 });
