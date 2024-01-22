@@ -1,8 +1,14 @@
-const image1 = require('../assets/back_travel_img.png');
-const image2 = require('../assets/back_restor.png');
-const image3 = require('../assets/back_shopp.png');
-const image4 = require('../assets/back_attrac.png');
-const image5 = require('../assets/back_city.png');
+const image1 = require('../assets/home_welcome.png');
+const image2 = require('../assets/home_attract.png');
+const image3 = require('../assets/home_food.png');
+const image4 = require('../assets/home_shopping.png');
+const image5 = require('../assets/home_get_started.png');
+
+const photo1 = require('../assets/viln.png');
+const photo2 = require('../assets/wars.png');
+const photo3 = require('../assets/riga.png');
+const photo4 = require('../assets/tallinn.png');
+const photo5 = require('../assets/hrod.png');
 
 export const DATA = [
   {
@@ -12,21 +18,21 @@ export const DATA = [
     key: 1,
   },
   {
-    image: image4,
+    image: image2,
     title: 'Explore new horizons',
     description:
       'Discover the best and most popular attractions and capture those moments!',
     key: 2,
   },
   {
-    image: image2,
+    image: image3,
     title: 'Feel the best tastes',
     description:
       'Choose for yourself the best cafes and restaurants that will leave the most pleasant aftertaste!',
     key: 3,
   },
   {
-    image: image3,
+    image: image4,
     title: 'Make your shopping experience enjoyable',
     description:
       'Explore the most popular shopping centers that will make your shopping faster and easier.!',
@@ -39,4 +45,12 @@ export const DATA = [
       'Discover great experiences around you and make you live interesting!',
     key: 5,
   },
+];
+
+export const CITIES = [
+  {city: 'Vilnius', country: 'Lithuania', photo: photo1},
+  {city: 'Warsaw', country: 'Poland', photo: photo2},
+  {city: 'RIGA', country: 'Latvia', photo: photo3},
+  {city: 'TALLINN', country: 'Estonia', photo: photo4},
+  {city: 'HRODNA', country: 'Belarus', photo: photo5},
 ];

@@ -1,86 +1,116 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown'; //! modal + flatlist
-import {StyledBtn} from '../components/StyledBtn';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  Modal,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const image = require('../assets/lith_img.png');
-const windowWidth = Dimensions.get('window').width;
+import {StyledBtn} from '../components/StyledBtn';
+import {Text} from '../components/base/Text';
+import {colors} from '../utils/colors';
+import {CITIES} from '../utils/data';
+
+const image = require('../assets/city.png');
+const image2 = require('../assets/close.png');
 
 export const CitySelectionScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.title}>Select your city</Text>
-        <SelectDropdown
-          defaultValue={CITIES[0]}
-          defaultButtonText="city"
-          buttonStyle={styles.buttonStyle}
-          buttonTextStyle={styles.buttonTextStyle}
-          dropdownStyle={styles.dropdownStyle}
-          rowTextStyle={styles.rowTextStyle}
-          data={CITIES}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
-          }}
-        />
-      </View>
-      <View style={styles.btnContainer}>
-        <StyledBtn title="Next" />
-      </View>
-      <Image source={image} style={styles.image} />
+      <ImageBackground source={image} style={styles.container}>
+        {!modalVisible && (
+          <>
+            <Text type="primary" color={colors.primary3} center>
+              Select your city
+            </Text>
+            <StyledBtn title="SELECT" onClick={() => setModalVisible(true)} />
+          </>
+        )}
+      </ImageBackground>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}>
+        <TouchableOpacity onPressOut={() => setModalVisible(false)}>
+          <View style={styles.modalContainer}>
+            <Pressable
+              onPress={() => setModalVisible(false)}
+              style={styles.pressContainer}>
+              <Image source={image2} style={styles.closeIcon} />
+              <Text type="primary" color={colors.primary1} center>
+                Select your city
+              </Text>
+            </Pressable>
+            <FlatList
+              data={CITIES}
+              renderItem={({item}) => {
+                return (
+                  <Pressable>
+                    <ImageBackground
+                      style={styles.cityContainer}
+                      source={item.photo}>
+                      <View style={styles.cityDescription}>
+                        <Text type={'primary'} color={colors.primary1}>
+                          {item.city}
+                        </Text>
+                        <Text type={'tertiary'} color={colors.primary1}>
+                          {item.country}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                  </Pressable>
+                );
+              }}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    rowGap: 60,
   },
-  image: {
-    alignSelf: 'center',
-    width: 0.9 * windowWidth,
-    height: 300,
-    opacity: 0.8,
-  },
-  inputContainer: {
-    flex: 7,
-    rowGap: 30,
-  },
-  title: {
-    color: '#031F2B',
-    fontSize: 30,
-    fontFamily: 'Gill Sans',
-    marginHorizontal: 30,
-    textAlign: 'center',
-    lineHeight: 50,
-    backgroundColor: 'rgba(94, 223, 255, 0.8)',
-  },
-  buttonStyle: {
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 2,
+  press: {flex: 1, backgroundColor: 'pink'},
+  modalContainer: {
+    marginHorizontal: 20,
+    marginTop: 70,
+    marginBottom: 160,
+    borderWidth: 1,
+    padding: 10,
+    rowGap: 10,
+    borderColor: colors.primary3,
     borderRadius: 20,
-    borderColor: '#5EDFFF',
+    backgroundColor: 'rgb(3, 31, 43)',
   },
-  buttonTextStyle: {
-    fontFamily: 'Gill Sans',
-    fontSize: 20,
-    color: '#5EDFFF',
+  closeIcon: {width: 30, height: 30},
+  cityContainer: {
+    backgroundColor: colors.primary1,
+    marginVertical: 10,
+    minHeight: 150,
+    justifyContent: 'flex-end',
   },
-  dropdownStyle: {
-    backgroundColor: 'rgba(94, 223, 255, 0.8)',
+  cityDescription: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: colors.primary6,
   },
-  rowTextStyle: {
-    color: '#031F2B',
-    fontFamily: 'Georgia',
+  pressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 20,
   },
-  btnContainer: {flex: 1},
 });
-
-const CITIES = [
-  'VILNIUS',
-  'KAUNO',
-  'TRAKAI',
-  'KLAIPEDA',
-  'PALANGA',
-  'DRUSKININKAI',
-];
