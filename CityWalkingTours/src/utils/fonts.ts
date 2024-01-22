@@ -7,4 +7,9 @@ export const fonts = {
     fontSize: 20,
     fontFamily: 'Georgia',
   },
+  tertiary: {
+    fontSize: 16,
+    fontFamily: 'Georgia',
+    letterSpacing: 1,
+  },
 };
