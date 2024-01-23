@@ -1,12 +1,8 @@
 import React from 'react';
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Text} from './base/Text';
+import {colors} from '../utils/colors';
+import {CATEGORIES} from '../utils/data';
 
 export const Categories = () => {
   return (
@@ -17,14 +13,14 @@ export const Categories = () => {
         showsHorizontalScrollIndicator={false}
         renderItem={item => {
           return (
-            <Pressable
+            <TouchableOpacity
               style={styles.categoryItem}
               onPress={() => {}}
               key={item.index}>
-              <TouchableOpacity>
-                <Text style={styles.category}>{item.item}</Text>
-              </TouchableOpacity>
-            </Pressable>
+              <Text type="tertiary" color={colors.primary3}>
+                {item.item}
+              </Text>
+            </TouchableOpacity>
           );
         }}
       />
@@ -35,24 +31,10 @@ export const Categories = () => {
 const styles = StyleSheet.create({
   categoryItem: {
     padding: 10,
-    borderWidth: 2,
-    borderColor: '#5EDFFF',
+    borderWidth: 1,
+    borderColor: colors.primary3,
     borderRadius: 10,
     marginHorizontal: 15,
     marginLeft: 0,
   },
-  category: {
-    color: '#5EDFFF',
-    lineHeight: 30,
-    fontSize: 20,
-    fontFamily: 'Gill Sans',
-  },
 });
-
-const CATEGORIES = [
-  'Attractions',
-  'Museums',
-  'Shopping centers',
-  'Parks',
-  'Cafees',
-];

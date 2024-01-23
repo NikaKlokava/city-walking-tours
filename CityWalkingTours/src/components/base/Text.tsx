@@ -3,7 +3,7 @@ import {Text as RnText, StyleSheet, TextProps} from 'react-native';
 import {fonts} from '../../utils/fonts';
 
 type Props = {
-  type: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+  type: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'fifth';
   color: string;
   center?: boolean;
   children: any;

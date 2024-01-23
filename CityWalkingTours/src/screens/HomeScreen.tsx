@@ -12,6 +12,7 @@ import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../utils/screen';
 import {colors} from '../utils/colors';
 import {DATA} from '../utils/data';
 import {Text} from '../components/base/Text';
+import {Line} from '../components/Line';
 
 export const HomeScreen = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -47,7 +48,7 @@ export const HomeScreen = () => {
                     center>
                     {item.title}
                   </Text>
-                  <View style={styles.line} />
+                  <Line />
                   <Text type="tertiary" color={colors.primary4} center>
                     {item.description}
                   </Text>
@@ -109,9 +110,5 @@ const styles = StyleSheet.create({
   },
   active: {
     opacity: 1,
-  },
-  line: {
-    borderWidth: 0.7,
-    borderColor: colors.primary3,
   },
 });

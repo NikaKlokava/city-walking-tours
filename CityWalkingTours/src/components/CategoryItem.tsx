@@ -15,13 +15,7 @@ export const CategoryItem = () => {
   const data = DATA[2].data;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{DATA[2].title.toLocaleUpperCase()}</Text>
-      <Pressable>
-        <TouchableOpacity style={styles.btnContainer}>
-          <Image style={styles.svg} source={image} />
-          <Text style={styles.backBtn}>BACK</Text>
-        </TouchableOpacity>
-      </Pressable>
+      {/* <Text style={styles.title}>{DATA[2].title.toLocaleUpperCase()}</Text>
       <ScrollView>
         <View style={styles.container}>
           {data.map(category => (
@@ -34,7 +28,7 @@ export const CategoryItem = () => {
             </Pressable>
           ))}
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
