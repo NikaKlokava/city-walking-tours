@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {colors} from '../utils/colors';
 import {Text} from './base/Text';
 
@@ -8,20 +8,17 @@ type Props = {
   onClick?: () => void;
 };
 
-export const StyledBtn = ({title, onClick}: Props) => {
-  return (
-    <Pressable style={styles.btnContainer} onPress={onClick}>
-      <Text type="quaternary" style={styles.btnStyle} color={colors.primary3}>
-        {title}
-      </Text>
-    </Pressable>
-  );
-};
+export const StyledBtn = ({title, onClick}: Props) => (
+  <TouchableOpacity style={styles.btnContainer} onPress={onClick}>
+    <Text type="quaternary" style={styles.btnStyle} color={colors.primary3}>
+      {title}
+    </Text>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   btnContainer: {alignSelf: 'center'},
   btnStyle: {
-    alignSelf: 'center',
     minWidth: 200,
     textAlign: 'center',
     padding: 10,

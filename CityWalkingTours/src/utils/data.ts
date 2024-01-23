@@ -48,8 +48,8 @@ export const DATA = [
 ];
 
 export const CITIES = [
-  {city: 'Vilnius', country: 'Lithuania', photo: photo1},
-  {city: 'Warsaw', country: 'Poland', photo: photo2},
+  {city: 'VILNIUS', country: 'Lithuania', photo: photo1},
+  {city: 'WARSAW', country: 'Poland', photo: photo2},
   {city: 'RIGA', country: 'Latvia', photo: photo3},
   {city: 'TALLINN', country: 'Estonia', photo: photo4},
   {city: 'HRODNA', country: 'Belarus', photo: photo5},
