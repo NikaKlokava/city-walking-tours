@@ -1,86 +1,59 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown'; //! modal + flatlist
+import React, {useState} from 'react';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
+import {Text} from '../components/base/Text';
+import {colors} from '../utils/colors';
+import {SelectCityModal} from '../components/SelectCityModal';
 
-const image = require('../assets/lith_img.png');
-const windowWidth = Dimensions.get('window').width;
+const image = require('../assets/city.png');
 
 export const CitySelectionScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentCity, setCurrentCity] = useState<string>('');
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
+
+  const handleSelectCity = (city: string) => {
+    setCurrentCity(city);
+    setModalVisible(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.title}>Select your city</Text>
-        <SelectDropdown
-          defaultValue={CITIES[0]}
-          defaultButtonText="city"
-          buttonStyle={styles.buttonStyle}
-          buttonTextStyle={styles.buttonTextStyle}
-          dropdownStyle={styles.dropdownStyle}
-          rowTextStyle={styles.rowTextStyle}
-          data={CITIES}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
-          }}
-        />
-      </View>
-      <View style={styles.btnContainer}>
-        <StyledBtn title="Next" />
-      </View>
-      <Image source={image} style={styles.image} />
-    </View>
+    <>
+      <ImageBackground source={image} style={styles.container}>
+        {!modalVisible && (
+          <>
+            <View style={styles.selectBlock}>
+              <Text type="primary" color={colors.primary3} center>
+                Select your city
+              </Text>
+              <StyledBtn title="SELECT" onClick={() => setModalVisible(true)} />
+              {currentCity && (
+                <Text type="primary" color={colors.primary3} center>
+                  {currentCity}
+                </Text>
+              )}
+            </View>
+            {currentCity && <StyledBtn title="NEXT" />}
+          </>
+        )}
+      </ImageBackground>
+      <SelectCityModal
+        visible={modalVisible}
+        onClose={handleModalClose}
+        onSelect={handleSelectCity}
+      />
+    </>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
-  image: {
-    alignSelf: 'center',
-    width: 0.9 * windowWidth,
-    height: 300,
-    opacity: 0.8,
+  selectBlock: {
+    rowGap: 60,
   },
-  inputContainer: {
-    flex: 7,
-    rowGap: 30,
-  },
-  title: {
-    color: '#031F2B',
-    fontSize: 30,
-    fontFamily: 'Gill Sans',
-    marginHorizontal: 30,
-    textAlign: 'center',
-    lineHeight: 50,
-    backgroundColor: 'rgba(94, 223, 255, 0.8)',
-  },
-  buttonStyle: {
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderRadius: 20,
-    borderColor: '#5EDFFF',
-  },
-  buttonTextStyle: {
-    fontFamily: 'Gill Sans',
-    fontSize: 20,
-    color: '#5EDFFF',
-  },
-  dropdownStyle: {
-    backgroundColor: 'rgba(94, 223, 255, 0.8)',
-  },
-  rowTextStyle: {
-    color: '#031F2B',
-    fontFamily: 'Georgia',
-  },
-  btnContainer: {flex: 1},
 });
-
-const CITIES = [
-  'VILNIUS',
-  'KAUNO',
-  'TRAKAI',
-  'KLAIPEDA',
-  'PALANGA',
-  'DRUSKININKAI',
-];

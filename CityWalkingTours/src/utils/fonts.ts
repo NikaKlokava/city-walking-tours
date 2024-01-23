@@ -12,4 +12,8 @@ export const fonts = {
     fontFamily: 'Georgia',
     letterSpacing: 1,
   },
+  quaternary: {
+    fontSize: 25,
+    fontFamily: 'Gill Sans',
+  },
 };
