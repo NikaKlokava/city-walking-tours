@@ -16,4 +16,9 @@ export const fonts = {
     fontSize: 25,
     fontFamily: 'Gill Sans',
   },
+  fifth: {
+    fontSize: 14,
+    fontFamily: 'Georgia',
+    letterSpacing: 1,
+  },
 };

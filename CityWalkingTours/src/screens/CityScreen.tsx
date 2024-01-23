@@ -1,36 +1,56 @@
 import React from 'react';
 import {
-  Dimensions,
-  // Image,
+  Image,
+  ScrollView,
   StyleSheet,
-  // Text,
-  // TextInput,
+  TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import {Details} from '../components/Details';
+import {CITIES} from '../utils/data';
+import {Text} from '../components/base/Text';
+import {colors} from '../utils/colors';
+import {flexRow} from '../utils/flex';
+import {Line} from '../components/Line';
+import {Categories} from '../components/Categories';
+import {BackBtn} from '../components/BackBtn';
+import {CategoryItem} from '../components/CategoryItem';
+import {Sections} from '../components/Sections';
 // import {Sections} from '../components/Sections';
 // import {Categories} from '../components/Categories';
 // import {CategoryItem} from '../components/CategoryItem';
 
-// const image = require('../assets/lith_heart.png');
-const windowWidth = Dimensions.get('window').width;
+const image = require('../assets/back_icon.png');
+const icon = require('../assets/search.png');
 
 export const CityScreen = () => {
   return (
     <View style={styles.container}>
-      {/* <View style={styles.titleContainer}>
-        <Text style={styles.title}>Hello from {CITIES[0]}!</Text>
-        <Image source={image} style={styles.image} />
+      <View style={[styles.headerContainer, flexRow]}>
+        <BackBtn />
+        <View style={[styles.cityContainer, flexRow]}>
+          <Text type="tertiary" center color={colors.primary2}>
+            city:
+          </Text>
+          <Text type="primary" center color={colors.primary1}>
+            {CITIES[0].city}
+          </Text>
+        </View>
       </View>
-      <TextInput
-        placeholder="what do you want to find?"
-        placeholderTextColor={'grey'}
-        style={styles.searchInput}
-      />
-      <Categories />
-      <Sections />
-      <CategoryItem /> */}
-      <Details />
+      <Line />
+      <ScrollView>
+        <View style={styles.scrollContainer}>
+          <View style={[styles.inputContainer, flexRow]}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="What do you want to find?"
+              placeholderTextColor={colors.primary2}></TextInput>
+            <Image source={icon} style={styles.searchIcon} />
+          </View>
+          <Categories />
+          <Sections />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -38,38 +58,23 @@ export const CityScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    rowGap: 25,
+    paddingHorizontal: 10,
   },
-  titleContainer: {
-    flexDirection: 'row',
+  headerContainer: {
     justifyContent: 'space-between',
-    alignItems: 'center',
+    marginBottom: 20,
   },
-  title: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: 'Georgia',
-    textAlign: 'center',
-  },
-  image: {
-    width: 0.1 * windowWidth,
-    height: 35,
-    marginRight: 10,
-  },
-  searchInput: {
+  scrollContainer: {rowGap: 20, marginTop: 10},
+  cityContainer: {columnGap: 10},
+  inputContainer: {
     padding: 15,
-    color: 'white',
-    fontSize: 20,
     backgroundColor: '#263238',
     borderRadius: 10,
+    justifyContent: 'space-between',
+  },
+  searchIcon: {width: 20, height: 20},
+  searchInput: {
+    color: 'white',
+    fontSize: 15,
   },
 });
-
-// const CITIES = [
-//   'VILNIUS',
-//   'KAUNO',
-//   'TRAKAI',
-//   'KLAIPEDA',
-//   'PALANGA',
-//   'DRUSKININKAI',
-// ];

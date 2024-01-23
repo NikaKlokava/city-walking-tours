@@ -1,63 +1,71 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
+import {Text} from './base/Text';
+import {colors} from '../utils/colors';
+import {SECTIONS} from '../utils/data';
+import {Line} from './Line';
 
 export const Sections = () => {
   return (
-    <ScrollView>
-      {DATA.map(section => (
+    <>
+      {SECTIONS.map(section => (
         <View style={styles.container}>
-          <Text style={styles.sectionTitle}>{section.title}</Text>
+          <Text type="primary" color={colors.primary1}>
+            {section.title}
+          </Text>
           <FlatList
             data={section.data}
             horizontal
             showsHorizontalScrollIndicator={false}
-            renderItem={() => <Text style={styles.sectionItem} />}
+            renderItem={({item}) => (
+              <ImageBackground
+                source={item.image}
+                style={styles.imageContainer}
+                imageStyle={styles.image}>
+                <View style={styles.titleContainer}>
+                  <Text
+                    type="fifth"
+                    color={colors.primary1}
+                    style={styles.title}
+                    center>
+                    {item.title}
+                  </Text>
+                </View>
+              </ImageBackground>
+            )}
           />
+          <Line white />
         </View>
       ))}
-    </ScrollView>
+    </>
   );
 };
 const styles = StyleSheet.create({
   container: {
     rowGap: 25,
   },
-  sectionTitle: {
-    color: 'white', // #5EDFFF
-    fontSize: 25,
-    fontFamily: 'Georgia',
-  },
-
-  sectionItem: {
-    minHeight: 150,
-    minWidth: 100,
-    borderColor: 'pink',
-    borderWidth: 1,
-    borderRadius: 20,
+  imageContainer: {
+    minHeight: 220,
+    width: 150,
     marginHorizontal: 10,
-    marginBottom: 30,
+  },
+  image: {
+    borderRadius: 15,
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    borderRadius: 10,
+    paddingBottom: 10,
+  },
+  title: {
+    backgroundColor: colors.primary5,
+    lineHeight: 28,
   },
 });
-
-const DATA = [
-  {
-    title: 'Attractions',
-    data: ['Gedimina prospectas', 'Gediminas Tower', 'Cafedral Square'],
-  },
-  {
-    title: 'Museums',
-    data: ['Museum 1', 'Museum 2', 'Museum 3', 'Museum 4', 'Museum 5'],
-  },
-  {
-    title: 'Shopping centers',
-    data: ['Akropolis', 'Ozas', 'Penorama', 'Europa', 'Cup'],
-  },
-  {
-    title: 'Parks',
-    data: ['Japan Park', 'Bernardinas Park'],
-  },
-  {
-    title: 'Cafees',
-    data: ['Caffeine', 'London Grill', 'Chilli Pizza'],
-  },
-];

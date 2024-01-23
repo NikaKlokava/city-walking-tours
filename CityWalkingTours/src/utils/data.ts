@@ -10,6 +10,8 @@ const photo3 = require('../assets/riga.png');
 const photo4 = require('../assets/tallinn.png');
 const photo5 = require('../assets/hrod.png');
 
+const ozas = require('../assets/ozas.png');
+
 export const DATA = [
   {
     image: image1,
@@ -54,3 +56,53 @@ export const CITIES = [
   {city: 'TALLINN', country: 'Estonia', photo: photo4},
   {city: 'HRODNA', country: 'Belarus', photo: photo5},
 ];
+
+export const SECTIONS = [
+  {
+    title: 'Attractions',
+    data: [
+      {title: 'Gedimina prospectas', image: ozas},
+      {title: 'Gediminas Tower', image: ozas},
+      {title: 'Cafedral Square', image: ozas},
+    ],
+  },
+  {
+    title: 'Museums',
+    data: [
+      {title: 'Museum 1', image: ozas},
+      {title: 'Museum 2', image: ozas},
+      {title: 'Museum 3', image: ozas},
+      {title: 'Museum 4', image: ozas},
+      {title: 'Museum 5', image: ozas},
+    ],
+  },
+  {
+    title: 'Shopping centers',
+    data: [
+      {title: 'Akropolis', image: ozas},
+      {title: 'Ozas', image: ozas},
+      {title: 'Panorama', image: ozas},
+      {title: 'Europa', image: ozas},
+      {title: 'Cup', image: ozas},
+    ],
+  },
+  {
+    title: 'Parks',
+    data: [
+      {title: 'Japan Park', image: ozas},
+      {title: 'Bernardinas Park', image: ozas},
+    ],
+  },
+  {
+    title: 'Cafees',
+    data: [
+      {title: 'Caffeine', image: ozas},
+      {title: 'London Grill', image: ozas},
+      {title: 'Chilli Pizza', image: ozas},
+    ],
+  },
+];
+
+export const CATEGORIES = SECTIONS.reduce((accum: string[], curr) => {
+  return [...accum, curr.title];
+}, []);
