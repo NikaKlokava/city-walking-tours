@@ -2,102 +2,89 @@ import React from 'react';
 import {
   Image,
   ImageBackground,
-  Pressable,
-  ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-const image = require('../assets/back_icon.png');
+import {Text} from './base/Text';
+import {colors} from '../utils/colors';
+import {flexRow} from '../utils/flex';
 
-export const CategoryItem = () => {
-  const data = DATA[2].data;
+const icon1 = require('../assets/heart_icon.png');
+const icon2 = require('../assets/star.png');
+
+type Props = {
+  category: CategotyItemType;
+  verticalScroll?: boolean;
+};
+
+export const CategoryItem = ({category, verticalScroll}: Props) => {
   return (
-    <View style={styles.container}>
-      {/* <Text style={styles.title}>{DATA[2].title.toLocaleUpperCase()}</Text>
-      <ScrollView>
-        <View style={styles.container}>
-          {data.map(category => (
-            <Pressable style={styles.categoryItem}>
-              <TouchableOpacity>
-                <ImageBackground>
-                  <Text style={styles.description}>{category}</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </Pressable>
-          ))}
+    <View style={[styles.container, verticalScroll && styles.containerV]}>
+      <ImageBackground
+        source={category.image}
+        style={styles.image}
+        imageStyle={styles.imageBackgorund}>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={icon1} style={styles.icon} />
+        </TouchableOpacity>
+      </ImageBackground>
+      <View style={styles.descriptionContainer}>
+        <Text type="fifth" color={colors.primary6}>
+          {category.title}
+        </Text>
+        <View style={[styles.starsContainer, flexRow]}>
+          <Image source={icon2} style={styles.star} />
+          <Text type="fifth" color={colors.primary6}>
+            ({category.rating})
+          </Text>
         </View>
-      </ScrollView> */}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, rowGap: 20},
-  title: {
-    color: '#5EDFFF',
-    alignSelf: 'center',
-    fontFamily: 'Georgia',
-    fontSize: 20,
-    borderWidth: 1,
-    borderColor: '#5EDFFF',
-    padding: 5,
-  },
-  btnContainer: {
-    backgroundColor: '#5EDFFF',
-    alignSelf: 'flex-start',
+  container: {
+    width: 220,
+    height: 240,
+    backgroundColor: colors.primary1,
+    marginHorizontal: 20,
     borderRadius: 15,
-    minWidth: 90,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  svg: {
-    width: 15,
-    height: 15,
+  containerV: {
+    width: '100%',
   },
-  backBtn: {
-    fontFamily: 'Gill Sans',
-    padding: 10,
-    textAlign: 'center',
-    color: '#263238',
-  },
-  categoryItem: {
-    minHeight: 250,
-    minWidth: '80%',
-    borderWidth: 1,
-    borderColor: 'pink',
+  iconContainer: {
+    margin: 5,
+    backgroundColor: 'rgba(20, 20, 20, 0.6)',
     borderRadius: 20,
-    padding: 10,
+    alignSelf: 'flex-end',
   },
-  description: {
-    color: '#5EDFFF',
-    fontFamily: 'Georgia',
-    fontSize: 18,
-    fontWeight: '500',
+  icon: {
+    width: 30,
+    height: 30,
+    margin: 5,
   },
+  imageBackgorund: {
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  image: {
+    flex: 4,
+    width: '100%',
+  },
+  descriptionContainer: {
+    borderTopWidth: 3,
+    borderColor: colors.primary4,
+    flex: 1,
+    padding: 5,
+    paddingHorizontal: 15,
+    justifyContent: 'space-around',
+  },
+  starsContainer: {
+    alignSelf: 'flex-end',
+    columnGap: 3,
+  },
+  star: {width: 15, height: 15},
 });
-
-const DATA = [
-  {
-    title: 'Attractions',
-    data: ['Gedimina prospectas', 'Gediminas Tower', 'Cafedral Square'],
-  },
-  {
-    title: 'Museums',
-    data: ['Museum 1', 'Museum 2', 'Museum 3', 'Museum 4', 'Museum 5'],
-  },
-  {
-    title: 'Shopping centers',
-    data: ['Akropolis', 'Ozas', 'Panorama', 'Europa', 'Cup'],
-  },
-  {
-    title: 'Parks',
-    data: ['Japan Park', 'Bernardinas Park'],
-  },
-  {
-    title: 'Cafees',
-    data: ['Caffeine', 'London Grill', 'Chilli Pizza'],
-  },
-];

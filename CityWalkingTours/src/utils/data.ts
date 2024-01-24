@@ -12,6 +12,13 @@ const photo5 = require('../assets/hrod.png');
 
 const ozas = require('../assets/ozas.png');
 
+const icon1 = require('../assets/all_icon.png');
+const icon2 = require('../assets/attract_icon.png');
+const icon3 = require('../assets/museum_icon.png');
+const icon4 = require('../assets/shop_icon.png');
+const icon5 = require('../assets/park_icon.png');
+const icon6 = require('../assets/cafe_icon.png');
+
 export const DATA = [
   {
     image: image1,
@@ -57,52 +64,57 @@ export const CITIES = [
   {city: 'HRODNA', country: 'Belarus', photo: photo5},
 ];
 
-export const SECTIONS = [
+export const SECTIONS: CategoriesType = [
   {
     title: 'Attractions',
     data: [
-      {title: 'Gedimina prospectas', image: ozas},
-      {title: 'Gediminas Tower', image: ozas},
-      {title: 'Cafedral Square', image: ozas},
+      {title: 'Gedimina prospectas', image: ozas, rating: '5.0'},
+      {title: 'Gediminas Tower', image: ozas, rating: '4.7'},
+      {title: 'Cafedral Square', image: ozas, rating: '4.8'},
     ],
   },
   {
     title: 'Museums',
     data: [
-      {title: 'Museum 1', image: ozas},
-      {title: 'Museum 2', image: ozas},
-      {title: 'Museum 3', image: ozas},
-      {title: 'Museum 4', image: ozas},
-      {title: 'Museum 5', image: ozas},
+      {title: 'Museum 1', image: ozas, rating: '4.1'},
+      {title: 'Museum 2', image: ozas, rating: '4.3'},
+      {title: 'Museum 3', image: ozas, rating: '4.9'},
+      {title: 'Museum 4', image: ozas, rating: '5.0'},
+      {title: 'Museum 5', image: ozas, rating: '4.7'},
     ],
   },
   {
-    title: 'Shopping centers',
+    title: 'Shopping',
     data: [
-      {title: 'Akropolis', image: ozas},
-      {title: 'Ozas', image: ozas},
-      {title: 'Panorama', image: ozas},
-      {title: 'Europa', image: ozas},
-      {title: 'Cup', image: ozas},
+      {title: 'Akropolis', image: ozas, rating: '5.0'},
+      {title: 'Ozas', image: ozas, rating: '4.9'},
+      {title: 'Panorama', image: ozas, rating: '4.8'},
+      {title: 'Europa', image: ozas, rating: '4.9'},
+      {title: 'Cup', image: ozas, rating: '4.7'},
     ],
   },
   {
     title: 'Parks',
     data: [
-      {title: 'Japan Park', image: ozas},
-      {title: 'Bernardinas Park', image: ozas},
+      {title: 'Japan Park', image: ozas, rating: '4.7'},
+      {title: 'Bernardinas Park', image: ozas, rating: '4.8'},
     ],
   },
   {
-    title: 'Cafees',
+    title: 'Cafes',
     data: [
-      {title: 'Caffeine', image: ozas},
-      {title: 'London Grill', image: ozas},
-      {title: 'Chilli Pizza', image: ozas},
+      {title: 'Caffeine', image: ozas, rating: '4.8'},
+      {title: 'London Grill', image: ozas, rating: '5.0'},
+      {title: 'Chilli Pizza', image: ozas, rating: '4.5'},
     ],
   },
 ];
 
-export const CATEGORIES = SECTIONS.reduce((accum: string[], curr) => {
-  return [...accum, curr.title];
-}, []);
+export const CATEGORIES = [
+  {category: 'See all', icon: icon1},
+  {category: 'Attractions', icon: icon2},
+  {category: 'Museums', icon: icon3},
+  {category: 'Shopping', icon: icon4},
+  {category: 'Parks', icon: icon5},
+  {category: 'Cafes', icon: icon6},
+];
