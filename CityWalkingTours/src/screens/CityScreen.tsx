@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -7,15 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {CITIES} from '../utils/data';
+import {CITIES, SECTIONS} from '../utils/data';
 import {Text} from '../components/base/Text';
 import {colors} from '../utils/colors';
 import {flexRow} from '../utils/flex';
 import {Line} from '../components/Line';
-import {Categories} from '../components/Categories';
+import {Navigation} from '../components/Navigation';
 import {BackBtn} from '../components/BackBtn';
-import {CategoryItem} from '../components/CategoryItem';
-import {Sections} from '../components/Sections';
+// import {CategoryItem} from '../components/CategoryItem';
+import {Categories} from '../components/Categories';
+import {SelectedCategory} from '../components/SelectedCategory';
 // import {Sections} from '../components/Sections';
 // import {Categories} from '../components/Categories';
 // import {CategoryItem} from '../components/CategoryItem';
@@ -24,6 +25,12 @@ const image = require('../assets/back_icon.png');
 const icon = require('../assets/search.png');
 
 export const CityScreen = () => {
+  const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
+
+  const handleCategorySelect = (title: string) => {
+    const category = SECTIONS.find(section => section.title === title);
+    setSelectedCategory(category);
+  };
   return (
     <View style={styles.container}>
       <View style={[styles.headerContainer, flexRow]}>
@@ -38,17 +45,26 @@ export const CityScreen = () => {
         </View>
       </View>
       <Line />
-      <ScrollView>
+      <ScrollView scrollsToTop>
         <View style={styles.scrollContainer}>
-          <View style={[styles.inputContainer, flexRow]}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="What do you want to find?"
-              placeholderTextColor={colors.primary2}></TextInput>
-            <Image source={icon} style={styles.searchIcon} />
-          </View>
-          <Categories />
-          <Sections />
+          {!selectedCategory && (
+            <View style={[styles.inputContainer, flexRow]}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="What do you want to find?"
+                placeholderTextColor={colors.primary2}></TextInput>
+              <Image source={icon} style={styles.searchIcon} />
+            </View>
+          )}
+          <Navigation
+            onSelect={handleCategorySelect}
+            title={selectedCategory?.title}
+          />
+          {selectedCategory ? (
+            <SelectedCategory category={selectedCategory} />
+          ) : (
+            <Categories categories={SECTIONS} onSelect={handleCategorySelect} />
+          )}
         </View>
       </ScrollView>
     </View>

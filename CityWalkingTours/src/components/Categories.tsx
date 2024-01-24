@@ -1,40 +1,49 @@
 import React from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
 import {colors} from '../utils/colors';
-import {CATEGORIES} from '../utils/data';
+import {Line} from './Line';
+import {flexRow} from '../utils/flex';
+import {CategoryItem} from './CategoryItem';
 
-export const Categories = () => {
-  return (
-    <View>
-      <FlatList
-        data={CATEGORIES}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={item => {
-          return (
-            <TouchableOpacity
-              style={styles.categoryItem}
-              onPress={() => {}}
-              key={item.index}>
-              <Text type="tertiary" color={colors.primary3}>
-                {item.item}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
-  );
+type Props = {
+  categories: CategoriesType;
+  onSelect: (title: string) => void;
 };
 
+export const Categories = ({categories, onSelect}: Props) => {
+  return (
+    <>
+      {categories.map((caregory, index) => (
+        <View style={styles.container} key={index}>
+          <View style={[styles.titleContainer, flexRow]}>
+            <Text type="primary" color={colors.primary1}>
+              {caregory.title}
+            </Text>
+            <TouchableOpacity onPress={(e) => {
+                
+              onSelect(caregory.title)}}>
+              <Text type="secondary" color={colors.primary2}>
+                see all
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <FlatList
+            data={caregory.data}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => <CategoryItem category={item} />}
+          />
+          <Line white />
+        </View>
+      ))}
+    </>
+  );
+};
 const styles = StyleSheet.create({
-  categoryItem: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: colors.primary3,
-    borderRadius: 10,
-    marginHorizontal: 15,
-    marginLeft: 0,
+  container: {
+    rowGap: 25,
   },
+  titleContainer: {justifyContent: 'space-between'},
 });
