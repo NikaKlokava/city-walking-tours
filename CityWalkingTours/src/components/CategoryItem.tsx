@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ImageBackground,
@@ -9,9 +9,9 @@ import {
 import {Text} from './base/Text';
 import {colors} from '../utils/colors';
 import {flexRow} from '../utils/flex';
+import {Rating} from './Rating';
 
 const icon1 = require('../assets/heart_icon.png');
-const icon2 = require('../assets/star.png');
 
 type Props = {
   category: CategotyItemType;
@@ -30,15 +30,10 @@ export const CategoryItem = ({category, verticalScroll}: Props) => {
         </TouchableOpacity>
       </ImageBackground>
       <View style={styles.descriptionContainer}>
-        <Text type="fifth" color={colors.primary6}>
+        <Text type="fifth" color={colors.primary5}>
           {category.title}
         </Text>
-        <View style={[styles.starsContainer, flexRow]}>
-          <Image source={icon2} style={styles.star} />
-          <Text type="fifth" color={colors.primary6}>
-            ({category.rating})
-          </Text>
-        </View>
+        <Rating rating={category.rating} />
       </View>
     </View>
   );
@@ -61,6 +56,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf: 'flex-end',
   },
+  liked: {
+    backgroundColor: 'rgba(255, 85, 110, 0.8)',
+  },
   icon: {
     width: 30,
     height: 30,
@@ -82,9 +80,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     justifyContent: 'space-around',
   },
-  starsContainer: {
-    alignSelf: 'flex-end',
-    columnGap: 3,
-  },
-  star: {width: 15, height: 15},
 });

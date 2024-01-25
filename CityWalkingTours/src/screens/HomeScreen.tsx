@@ -78,6 +78,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingTop: 80,
   },
   imageContainer: {
     flex: 1,

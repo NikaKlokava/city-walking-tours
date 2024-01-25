@@ -1,27 +1,15 @@
 import React, {useState} from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {CITIES, SECTIONS} from '../utils/data';
 import {Text} from '../components/base/Text';
 import {colors} from '../utils/colors';
 import {flexRow} from '../utils/flex';
 import {Line} from '../components/Line';
-import {Navigation} from '../components/Navigation';
+import {SearchBar} from '../components/SearchBar';
 import {BackBtn} from '../components/BackBtn';
-// import {CategoryItem} from '../components/CategoryItem';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
-// import {Sections} from '../components/Sections';
-// import {Categories} from '../components/Categories';
-// import {CategoryItem} from '../components/CategoryItem';
 
-const image = require('../assets/back_icon.png');
 const icon = require('../assets/search.png');
 
 export const CityScreen = () => {
@@ -36,7 +24,11 @@ export const CityScreen = () => {
       <View style={[styles.headerContainer, flexRow]}>
         <BackBtn />
         <View style={[styles.cityContainer, flexRow]}>
-          <Text type="tertiary" center color={colors.primary2}>
+          <Text
+            type="tertiary"
+            center
+            color={colors.primary1}
+            style={styles.opacity}>
             city:
           </Text>
           <Text type="primary" center color={colors.primary1}>
@@ -45,18 +37,18 @@ export const CityScreen = () => {
         </View>
       </View>
       <Line />
-      <ScrollView scrollsToTop>
+      <ScrollView>
         <View style={styles.scrollContainer}>
           {!selectedCategory && (
             <View style={[styles.inputContainer, flexRow]}>
               <TextInput
                 style={styles.searchInput}
                 placeholder="What do you want to find?"
-                placeholderTextColor={colors.primary2}></TextInput>
+                placeholderTextColor={`rgba(250,250,250,0.7)`}></TextInput>
               <Image source={icon} style={styles.searchIcon} />
             </View>
           )}
-          <Navigation
+          <SearchBar
             onSelect={handleCategorySelect}
             title={selectedCategory?.title}
           />
@@ -74,6 +66,7 @@ export const CityScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 80,
     paddingHorizontal: 10,
   },
   headerContainer: {
@@ -84,13 +77,16 @@ const styles = StyleSheet.create({
   cityContainer: {columnGap: 10},
   inputContainer: {
     padding: 15,
-    backgroundColor: '#263238',
+    backgroundColor: '#263238', // !!!
     borderRadius: 10,
     justifyContent: 'space-between',
   },
   searchIcon: {width: 20, height: 20},
   searchInput: {
-    color: 'white',
+    color: colors.primary1,
     fontSize: 15,
+  },
+  opacity: {
+    opacity: 0.7,
   },
 });

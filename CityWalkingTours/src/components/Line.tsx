@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     borderColor: colors.primary3,
   },
   white: {
-    borderColor: colors.primary2,
+    borderColor: colors.primary1,
+    opacity: 0.6,
     borderStyle: 'dashed',
   },
 });

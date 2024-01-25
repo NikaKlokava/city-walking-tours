@@ -16,7 +16,7 @@ type Props = {
   onSelect: (title: string) => void;
 };
 
-export const Navigation = ({title, onSelect}: Props) => {
+export const SearchBar = ({title, onSelect}: Props) => {
   return (
     <View>
       <FlatList

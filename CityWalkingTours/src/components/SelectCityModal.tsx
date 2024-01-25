@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     rowGap: 10,
     borderColor: colors.primary3,
     borderRadius: 20,
-    backgroundColor: colors.primary6,
+    backgroundColor: colors.primary5,
   },
   closeIcon: {width: 30, height: 30},
   cityContainer: {
