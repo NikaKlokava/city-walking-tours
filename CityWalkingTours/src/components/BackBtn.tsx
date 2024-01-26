@@ -9,13 +9,14 @@ const image = require('../assets/back_icon.png');
 
 type Props = {
   isEmpty?: boolean;
+  onClick?: () => void;
 };
 
-export const BackBtn = ({isEmpty}: Props) => {
+export const BackBtn = ({isEmpty, onClick}: Props) => {
   return (
     <TouchableOpacity
       style={[styles.backBtn, flexRow, isEmpty && styles.emptyBtn]}
-      onPress={() => {}}>
+      onPress={onClick}>
       <Icon source={image} size="medium" />
       {!isEmpty && (
         <Text type="tertiary" color={colors.primary3}>

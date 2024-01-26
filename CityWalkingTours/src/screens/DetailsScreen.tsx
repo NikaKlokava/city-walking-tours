@@ -17,11 +17,17 @@ import {Line} from '../components/Line';
 import {Icon} from '../components/base/Icon';
 import {Details} from '../components/Details';
 import {Gallery} from '../components/Gallery';
+import {AppWrapper} from '../components/AppWrapper';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const image = require('../assets/ozas.png');
 const icon1 = require('../assets/location.png');
 
-export const DetailsScreen = () => {
+type Props = {
+  navigation: NativeStackNavigationProp<any, any>;
+};
+
+export const DetailsScreen = ({navigation}: Props) => {
   const place = SECTIONS[0].data[0];
   const Max_Header_Height = DEVICE_HEIGHT * 0.4;
   const Min_Header_Height = DEVICE_HEIGHT * 0.3;
@@ -36,51 +42,53 @@ export const DetailsScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={{height: animatedHeaderHeight}}>
-        <ImageBackground source={image} style={styles.headerContainer}>
-          <View style={styles.backBtnContainer}>
-            <BackBtn isEmpty />
-          </View>
-          <View style={styles.headerDescription}>
-            <Text type="primary" color={colors.primary1}>
-              {place.title}
-            </Text>
-            <View style={[styles.locationContainer, flexRow]}>
-              <Icon source={icon1} size="small" />
-              <Text type="fifth" color={colors.primary1}>
-                {place.details.location}
-              </Text>
+    <AppWrapper>
+      <View style={styles.container}>
+        <Animated.View style={{height: animatedHeaderHeight}}>
+          <ImageBackground source={image} style={styles.headerContainer}>
+            <View style={styles.backBtnContainer}>
+              <BackBtn isEmpty onClick={() => navigation.goBack()} />
             </View>
-            <Rating rating={place.rating} white />
-          </View>
-        </ImageBackground>
-      </Animated.View>
+            <View style={styles.headerDescription}>
+              <Text type="primary" color={colors.primary1}>
+                {place.title}
+              </Text>
+              <View style={[styles.locationContainer, flexRow]}>
+                <Icon source={icon1} size="small" />
+                <Text type="fifth" color={colors.primary1}>
+                  {place.details.location}
+                </Text>
+              </View>
+              <Rating rating={place.rating} white />
+            </View>
+          </ImageBackground>
+        </Animated.View>
 
-      <ScrollView
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
-          {useNativeDriver: false},
-        )}>
-        <View style={styles.generalInfo}>
-          <Line white />
-          <Text
-            type="tertiary"
-            color={colors.primary1}
-            style={styles.placeDescription}>
-            {place.description}
-          </Text>
-          <Line />
-        </View>
-        <View style={styles.detailsContainer}>
-          <Details title={place.details.location} type="location" />
-          <Details title={place.details.workingHours} type="hours" />
-          <Details title={place.details.site} type="site" />
-        </View>
-        <Gallery />
-      </ScrollView>
-    </View>
+        <ScrollView
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
+            {useNativeDriver: false},
+          )}>
+          <View style={styles.generalInfo}>
+            <Line white />
+            <Text
+              type="tertiary"
+              color={colors.primary1}
+              style={styles.placeDescription}>
+              {place.description}
+            </Text>
+            <Line />
+          </View>
+          <View style={styles.detailsContainer}>
+            <Details title={place.details.location} type="location" />
+            <Details title={place.details.workingHours} type="hours" />
+            <Details title={place.details.site} type="site" />
+          </View>
+          <Gallery />
+        </ScrollView>
+      </View>
+    </AppWrapper>
   );
 };
 

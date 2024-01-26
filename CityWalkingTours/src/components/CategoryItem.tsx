@@ -8,9 +8,13 @@ import {
 } from 'react-native';
 import {Text} from './base/Text';
 import {colors} from '../utils/colors';
-import {flexRow} from '../utils/flex';
 import {Rating} from './Rating';
 import {Icon} from './base/Icon';
+import {
+  useNavigation,
+  ParamListBase,
+  NavigationProp,
+} from '@react-navigation/native';
 
 const icon1 = require('../assets/heart_icon.png');
 
@@ -20,8 +24,11 @@ type Props = {
 };
 
 export const CategoryItem = ({category, verticalScroll}: Props) => {
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
-    <View style={[styles.container, verticalScroll && styles.containerV]}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Details')}
+      style={[styles.container, verticalScroll && styles.containerV]}>
       <ImageBackground
         source={category.image}
         style={styles.image}
@@ -36,7 +43,7 @@ export const CategoryItem = ({category, verticalScroll}: Props) => {
         </Text>
         <Rating rating={category.rating} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
