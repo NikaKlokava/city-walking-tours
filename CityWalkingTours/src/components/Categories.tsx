@@ -20,10 +20,14 @@ export const Categories = ({categories, onSelect}: Props) => {
             <Text type="primary" color={colors.primary1}>
               {caregory.title}
             </Text>
-            <TouchableOpacity onPress={(e) => {
-                
-              onSelect(caregory.title)}}>
-              <Text type="secondary" color={colors.primary2}>
+            <TouchableOpacity
+              onPress={e => {
+                onSelect(caregory.title);
+              }}>
+              <Text
+                type="secondary"
+                color={colors.primary1}
+                style={styles.opacity}>
                 see all
               </Text>
             </TouchableOpacity>
@@ -46,4 +50,5 @@ const styles = StyleSheet.create({
     rowGap: 25,
   },
   titleContainer: {justifyContent: 'space-between'},
+  opacity: {opacity: 0.7},
 });

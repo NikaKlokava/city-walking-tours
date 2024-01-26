@@ -10,13 +10,14 @@ import {Text} from './base/Text';
 import {colors} from '../utils/colors';
 import {CATEGORIES} from '../utils/data';
 import {Line} from './Line';
+import {Icon} from './base/Icon';
 
 type Props = {
   title: string | undefined;
   onSelect: (title: string) => void;
 };
 
-export const Navigation = ({title, onSelect}: Props) => {
+export const SearchBar = ({title, onSelect}: Props) => {
   return (
     <View>
       <FlatList
@@ -37,7 +38,7 @@ export const Navigation = ({title, onSelect}: Props) => {
                 onSelect(item.category);
               }}
               key={index}>
-              <Image source={item.icon} style={styles.icon} />
+              <Icon source={item.icon} size="xxxlarge" />
               <Text type="fifth" color={colors.primary1}>
                 {item.category}
               </Text>
@@ -61,8 +62,4 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
   },
   active: {borderBottomColor: colors.primary3},
-  icon: {
-    width: 40,
-    height: 40,
-  },
 });

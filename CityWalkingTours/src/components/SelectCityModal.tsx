@@ -12,6 +12,7 @@ import {
 import {Text} from './base/Text';
 import {CITIES} from '../utils/data';
 import {colors} from '../utils/colors';
+import {Icon} from './base/Icon';
 
 const image2 = require('../assets/close.png');
 
@@ -31,7 +32,7 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
       <View style={styles.modalContainer}>
         <View style={styles.pressContainer}>
           <TouchableOpacity onPress={onClose}>
-            <Image source={image2} style={styles.closeIcon} />
+            <Icon source={image2} size="xlarge" />
           </TouchableOpacity>
           <Text type="primary" color={colors.primary1} center>
             Select your city
@@ -76,9 +77,8 @@ const styles = StyleSheet.create({
     rowGap: 10,
     borderColor: colors.primary3,
     borderRadius: 20,
-    backgroundColor: colors.primary6,
+    backgroundColor: colors.primary5,
   },
-  closeIcon: {width: 30, height: 30},
   cityContainer: {
     backgroundColor: colors.primary1,
     marginVertical: 10,

@@ -13,14 +13,14 @@ import {colors} from '../utils/colors';
 import {DATA} from '../utils/data';
 import {Text} from '../components/base/Text';
 import {Line} from '../components/Line';
+import {ProgressBar} from '../components/ProgressBar';
+import {getIndex} from '../utils/helpers';
 
 export const HomeScreen = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleScreenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const totalWidth = e.nativeEvent.layoutMeasurement.width;
-    const xPos = e.nativeEvent.contentOffset.x;
-    const index = Math.floor(xPos / totalWidth);
+    const index = getIndex(e);
     setCurrentIndex(index);
   };
 
@@ -62,14 +62,7 @@ export const HomeScreen = () => {
         {currentIndex === DATA.length - 1 ? (
           <StyledBtn title="Get Started" />
         ) : (
-          <>
-            {DATA.map((_, index) => (
-              <View
-                key={index}
-                style={[styles.dott, currentIndex === index && styles.active]}
-              />
-            ))}
-          </>
+          <ProgressBar index={currentIndex} dataLength={DATA.length} />
         )}
       </View>
     </View>
@@ -78,6 +71,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingTop: 80,
   },
   imageContainer: {
     flex: 1,
@@ -100,15 +94,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: 20,
     justifyContent: 'center',
-  },
-  dott: {
-    width: 15,
-    height: 15,
-    borderRadius: 10,
-    backgroundColor: colors.primary3,
-    opacity: 0.4,
-  },
-  active: {
-    opacity: 1,
   },
 });
