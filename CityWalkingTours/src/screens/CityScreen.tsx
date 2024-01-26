@@ -9,6 +9,7 @@ import {SearchBar} from '../components/SearchBar';
 import {BackBtn} from '../components/BackBtn';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
+import {Icon} from '../components/base/Icon';
 
 const icon = require('../assets/search.png');
 
@@ -44,8 +45,9 @@ export const CityScreen = () => {
               <TextInput
                 style={styles.searchInput}
                 placeholder="What do you want to find?"
-                placeholderTextColor={`rgba(250,250,250,0.7)`}></TextInput>
-              <Image source={icon} style={styles.searchIcon} />
+                placeholderTextColor={`rgba(250,250,250,0.7)`}
+              />
+              <Icon source={icon} size="medium" />
             </View>
           )}
           <SearchBar
@@ -81,7 +83,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'space-between',
   },
-  searchIcon: {width: 20, height: 20},
   searchInput: {
     color: colors.primary1,
     fontSize: 15,

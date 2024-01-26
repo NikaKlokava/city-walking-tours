@@ -2,7 +2,7 @@ declare type CategotyItemType = {
   title: string;
   image: any;
   rating: string;
-  location: string;
+  details: {location: string; workingHours: string; site: string};
   description: string;
 };
 

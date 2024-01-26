@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import {
   Animated,
-  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -15,14 +14,17 @@ import {Rating} from '../components/Rating';
 import {flexRow} from '../utils/flex';
 import {SECTIONS} from '../utils/data';
 import {Line} from '../components/Line';
+import {Icon} from '../components/base/Icon';
+import {Details} from '../components/Details';
+import {Gallery} from '../components/Gallery';
 
 const image = require('../assets/ozas.png');
-const icon = require('../assets/location.png');
+const icon1 = require('../assets/location.png');
 
 export const DetailsScreen = () => {
   const place = SECTIONS[0].data[0];
   const Max_Header_Height = DEVICE_HEIGHT * 0.4;
-  const Min_Header_Height = DEVICE_HEIGHT * 0.2;
+  const Min_Header_Height = DEVICE_HEIGHT * 0.3;
   const Scroll_Distance = Max_Header_Height - Min_Header_Height;
 
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
@@ -37,14 +39,17 @@ export const DetailsScreen = () => {
     <View style={styles.container}>
       <Animated.View style={{height: animatedHeaderHeight}}>
         <ImageBackground source={image} style={styles.headerContainer}>
-          <View style={styles.generalDescription}>
+          <View style={styles.backBtnContainer}>
+            <BackBtn isEmpty />
+          </View>
+          <View style={styles.headerDescription}>
             <Text type="primary" color={colors.primary1}>
               {place.title}
             </Text>
-            <View style={[styles.location, flexRow]}>
-              <Image source={icon} style={styles.icon} />
-              <Text type="fifth" color={colors.primary1} style={styles.opacity}>
-                {place.location}
+            <View style={[styles.locationContainer, flexRow]}>
+              <Icon source={icon1} size="small" />
+              <Text type="fifth" color={colors.primary1}>
+                {place.details.location}
               </Text>
             </View>
             <Rating rating={place.rating} white />
@@ -53,30 +58,27 @@ export const DetailsScreen = () => {
       </Animated.View>
 
       <ScrollView
-        scrollEventThrottle={10}
+        scrollEventThrottle={16}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
           {useNativeDriver: false},
         )}>
-        <View style={styles.detailedContainer}>
-          <Text type="primary" color={colors.primary1} center>
-            {place.title}
-          </Text>
+        <View style={styles.generalInfo}>
           <Line white />
           <Text
             type="tertiary"
             color={colors.primary1}
-            style={styles.description}>
+            style={styles.placeDescription}>
             {place.description}
           </Text>
-          <Line white />
+          <Line />
         </View>
-        <View style={styles.aboutContainer}>
-          <View>
-            <View></View>
-            <View></View>
-          </View>
+        <View style={styles.detailsContainer}>
+          <Details title={place.details.location} type="location" />
+          <Details title={place.details.workingHours} type="hours" />
+          <Details title={place.details.site} type="site" />
         </View>
+        <Gallery />
       </ScrollView>
     </View>
   );
@@ -88,31 +90,27 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     height: '100%',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
-  generalDescription: {
+  backBtnContainer: {
+    marginTop: 70,
+    marginLeft: 20,
+    opacity: 0.7,
+  },
+  headerDescription: {
     backgroundColor: 'rgba(0,0,0,0.7)', // !!
     paddingHorizontal: 10,
     paddingVertical: 5,
     rowGap: 5,
   },
-  location: {columnGap: 5},
-  icon: {width: 15, height: 15},
-  detailedContainer: {
+  locationContainer: {columnGap: 5},
+  generalInfo: {
     paddingHorizontal: 10,
     marginTop: 20,
     rowGap: 20,
   },
-  description: {
-    opacity: 0.5,
-  },
-  opacity: {
+  placeDescription: {
     opacity: 0.7,
   },
-
-  aboutContainer: {
-    backgroundColor: 'pink',
-    margin: 30,
-    minHeight: 500,
-  },
+  detailsContainer: {margin: 30, rowGap: 20},
 });

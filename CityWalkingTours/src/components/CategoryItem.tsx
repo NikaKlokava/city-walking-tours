@@ -10,6 +10,7 @@ import {Text} from './base/Text';
 import {colors} from '../utils/colors';
 import {flexRow} from '../utils/flex';
 import {Rating} from './Rating';
+import {Icon} from './base/Icon';
 
 const icon1 = require('../assets/heart_icon.png');
 
@@ -26,7 +27,7 @@ export const CategoryItem = ({category, verticalScroll}: Props) => {
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
         <TouchableOpacity style={styles.iconContainer}>
-          <Image source={icon1} style={styles.icon} />
+          <Icon source={icon1} size="xlarge" style={styles.icon} />
         </TouchableOpacity>
       </ImageBackground>
       <View style={styles.descriptionContainer}>
@@ -60,8 +61,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 85, 110, 0.8)',
   },
   icon: {
-    width: 30,
-    height: 30,
     margin: 5,
   },
   imageBackgorund: {

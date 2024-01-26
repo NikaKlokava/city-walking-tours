@@ -3,16 +3,25 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
 import {colors} from '../utils/colors';
 import {flexRow} from '../utils/flex';
+import {Icon} from './base/Icon';
 
 const image = require('../assets/back_icon.png');
 
-export const BackBtn = () => {
+type Props = {
+  isEmpty?: boolean;
+};
+
+export const BackBtn = ({isEmpty}: Props) => {
   return (
-    <TouchableOpacity style={[styles.backBtn, flexRow]} onPress={() => {}}>
-      <Image source={image} style={styles.backIcon} />
-      <Text type="tertiary" color={colors.primary3}>
-        BACK
-      </Text>
+    <TouchableOpacity
+      style={[styles.backBtn, flexRow, isEmpty && styles.emptyBtn]}
+      onPress={() => {}}>
+      <Icon source={image} size="medium" />
+      {!isEmpty && (
+        <Text type="tertiary" color={colors.primary3}>
+          BACK
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -26,8 +35,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     columnGap: 5,
   },
-  backIcon: {
-    width: 20,
-    height: 20,
+  emptyBtn: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.primary5,
+    borderWidth: 0,
   },
 });

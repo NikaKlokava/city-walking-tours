@@ -72,38 +72,34 @@ export const SECTIONS: CategoriesType = [
         title: 'Gedimina prospectas',
         image: ozas,
         rating: '5.0',
-        location: 'Location str, 34',
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Gediminas Tower',
         image: ozas,
         rating: '4.7',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Cafedral Square',
         image: ozas,
         rating: '4.8',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
     ],
   },
@@ -114,76 +110,56 @@ export const SECTIONS: CategoriesType = [
         title: 'Museum 1',
         image: ozas,
         rating: '4.1',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Museum 2',
         image: ozas,
         rating: '4.3',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Museum 3',
         image: ozas,
         rating: '4.9',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Museum 4',
         image: ozas,
         rating: '5.0',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Museum 5',
         image: ozas,
         rating: '4.7',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
     ],
   },
@@ -194,76 +170,56 @@ export const SECTIONS: CategoriesType = [
         title: 'Akropolis',
         image: ozas,
         rating: '5.0',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Ozas',
         image: ozas,
         rating: '4.9',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Panorama',
         image: ozas,
         rating: '4.8',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Europa',
         image: ozas,
         rating: '4.9',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Cup',
         image: ozas,
         rating: '4.7',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
     ],
   },
@@ -274,31 +230,23 @@ export const SECTIONS: CategoriesType = [
         title: 'Japan Park',
         image: ozas,
         rating: '4.7',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Bernardinas Park',
         image: ozas,
         rating: '4.8',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
     ],
   },
@@ -309,46 +257,34 @@ export const SECTIONS: CategoriesType = [
         title: 'Caffeine',
         image: ozas,
         rating: '4.8',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'London Grill',
         image: ozas,
         rating: '5.0',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
       {
         title: 'Chilli Pizza',
         image: ozas,
         rating: '4.5',
-        location: 'Location str, 34',
-        description: `Lorem ipsum dolor 
-      sit amet, consectetur adipiscing elit. 
-      Aenean vel risus eget sapien ullamcorper 
-      ultricies. Sed lobortis cursus dignissim. 
-      Interdum et malesuada fames ac ante ipsum 
-      primis in faucibus. Fusce aliquam auctor odio. 
-      Phasellus lobortis, elit vitae tristique 
-      tincidunt, nibh elit vehicula elit, a 
-      facilisis dui leo ac felis. `,
+        details: {
+          location: 'Location str, 34',
+          workingHours: '09:00 AM',
+          site: 'https://ozas.lt/',
+        },
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
       },
     ],
   },
