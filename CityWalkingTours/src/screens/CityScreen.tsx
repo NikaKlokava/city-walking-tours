@@ -10,58 +10,73 @@ import {BackBtn} from '../components/BackBtn';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
+import {AppWrapper} from '../components/AppWrapper';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const icon = require('../assets/search.png');
 
-export const CityScreen = () => {
+type Props = {
+  navigation: NativeStackNavigationProp<any, any>;
+  route: any;
+  // route?: NativeStackNavigationProp<Record<string, object | undefined>, 'city'>;
+};
+
+export const CityScreen = ({navigation, route}: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
+
+  const {city} = route.params;
 
   const handleCategorySelect = (title: string) => {
     const category = SECTIONS.find(section => section.title === title);
     setSelectedCategory(category);
   };
   return (
-    <View style={styles.container}>
-      <View style={[styles.headerContainer, flexRow]}>
-        <BackBtn />
-        <View style={[styles.cityContainer, flexRow]}>
-          <Text
-            type="tertiary"
-            center
-            color={colors.primary1}
-            style={styles.opacity}>
-            city:
-          </Text>
-          <Text type="primary" center color={colors.primary1}>
-            {CITIES[0].city}
-          </Text>
+    <AppWrapper>
+      <View style={styles.container}>
+        <View style={[styles.headerContainer, flexRow]}>
+          <BackBtn onClick={() => navigation.goBack()} />
+          <View style={[styles.cityContainer, flexRow]}>
+            <Text
+              type="tertiary"
+              center
+              color={colors.primary1}
+              style={styles.opacity}>
+              city:
+            </Text>
+            <Text type="primary" center color={colors.primary1}>
+              {city}
+            </Text>
+          </View>
         </View>
-      </View>
-      <Line />
-      <ScrollView>
-        <View style={styles.scrollContainer}>
-          {!selectedCategory && (
-            <View style={[styles.inputContainer, flexRow]}>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="What do you want to find?"
-                placeholderTextColor={`rgba(250,250,250,0.7)`}
+        <Line />
+        <ScrollView>
+          <View style={styles.scrollContainer}>
+            {!selectedCategory && (
+              <View style={[styles.inputContainer, flexRow]}>
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder="What do you want to find?"
+                  placeholderTextColor={`rgba(250,250,250,0.7)`}
+                />
+                <Icon source={icon} size="medium" />
+              </View>
+            )}
+            <SearchBar
+              onSelect={handleCategorySelect}
+              title={selectedCategory?.title}
+            />
+            {selectedCategory ? (
+              <SelectedCategory category={selectedCategory} />
+            ) : (
+              <Categories
+                categories={SECTIONS}
+                onSelect={handleCategorySelect}
               />
-              <Icon source={icon} size="medium" />
-            </View>
-          )}
-          <SearchBar
-            onSelect={handleCategorySelect}
-            title={selectedCategory?.title}
-          />
-          {selectedCategory ? (
-            <SelectedCategory category={selectedCategory} />
-          ) : (
-            <Categories categories={SECTIONS} onSelect={handleCategorySelect} />
-          )}
-        </View>
-      </ScrollView>
-    </View>
+            )}
+          </View>
+        </ScrollView>
+      </View>
+    </AppWrapper>
   );
 };
 

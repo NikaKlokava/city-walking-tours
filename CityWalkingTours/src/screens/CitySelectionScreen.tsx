@@ -4,10 +4,16 @@ import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
 import {colors} from '../utils/colors';
 import {SelectCityModal} from '../components/SelectCityModal';
+import {AppWrapper} from '../components/AppWrapper';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const image = require('../assets/city.png');
 
-export const CitySelectionScreen = () => {
+type Props = {
+  navigation: NativeStackNavigationProp<any, any>;
+};
+
+export const CitySelectionScreen = ({navigation}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCity, setCurrentCity] = useState<string>('');
 
@@ -21,7 +27,7 @@ export const CitySelectionScreen = () => {
   };
 
   return (
-    <>
+    <AppWrapper>
       <ImageBackground source={image} style={styles.container}>
         {!modalVisible && (
           <>
@@ -36,7 +42,12 @@ export const CitySelectionScreen = () => {
                 </Text>
               )}
             </View>
-            {currentCity && <StyledBtn title="NEXT" />}
+            {currentCity && (
+              <StyledBtn
+                title="NEXT"
+                onClick={() => navigation.navigate('City', {city: currentCity})}
+              />
+            )}
           </>
         )}
       </ImageBackground>
@@ -45,7 +56,7 @@ export const CitySelectionScreen = () => {
         onClose={handleModalClose}
         onSelect={handleSelectCity}
       />
-    </>
+    </AppWrapper>
   );
 };
 const styles = StyleSheet.create({

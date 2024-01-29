@@ -15,57 +15,67 @@ import {Text} from '../components/base/Text';
 import {Line} from '../components/Line';
 import {ProgressBar} from '../components/ProgressBar';
 import {getIndex} from '../utils/helpers';
+import {AppWrapper} from '../components/AppWrapper';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-export const HomeScreen = () => {
+type Props = {
+  navigation: NativeStackNavigationProp<any, any>;
+};
+
+export const HomeScreen = ({navigation}: Props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
   const handleScreenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = getIndex(e);
     setCurrentIndex(index);
   };
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.imageContainer}>
-        <FlatList
-          data={DATA}
-          horizontal
-          pagingEnabled
-          onScroll={e => handleScreenScroll(e)}
-          keyExtractor={(_, index) => index.toString()}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item}) => {
-            return (
-              <View style={styles.listContainer}>
-                {item.image && (
-                  <Image source={item.image} style={styles.backImg} />
-                )}
-                <View style={styles.descriptionContainer}>
-                  <Text
-                    type="primary"
-                    color={colors.primary1}
-                    style={styles.title}
-                    center>
-                    {item.title}
-                  </Text>
-                  <Line />
-                  <Text type="tertiary" color={colors.primary4} center>
-                    {item.description}
-                  </Text>
+    <AppWrapper>
+      <View style={styles.mainContainer}>
+        <View style={styles.imageContainer}>
+          <FlatList
+            data={DATA}
+            horizontal
+            pagingEnabled
+            onScroll={e => handleScreenScroll(e)}
+            keyExtractor={(_, index) => index.toString()}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => {
+              return (
+                <View style={styles.listContainer}>
+                  {item.image && (
+                    <Image source={item.image} style={styles.backImg} />
+                  )}
+                  <View style={styles.descriptionContainer}>
+                    <Text
+                      type="primary"
+                      color={colors.primary1}
+                      style={styles.title}
+                      center>
+                      {item.title}
+                    </Text>
+                    <Line />
+                    <Text type="tertiary" color={colors.primary4} center>
+                      {item.description}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            );
-          }}
-        />
+              );
+            }}
+          />
+        </View>
+        <View style={styles.dottsContainer}>
+          {currentIndex === DATA.length - 1 ? (
+            <StyledBtn
+              title="Get Started"
+              onClick={() => navigation.navigate('Selection')}
+            />
+          ) : (
+            <ProgressBar index={currentIndex} dataLength={DATA.length} />
+          )}
+        </View>
       </View>
-      <View style={styles.dottsContainer}>
-        {currentIndex === DATA.length - 1 ? (
-          <StyledBtn title="Get Started" />
-        ) : (
-          <ProgressBar index={currentIndex} dataLength={DATA.length} />
-        )}
-      </View>
-    </View>
+    </AppWrapper>
   );
 };
 const styles = StyleSheet.create({

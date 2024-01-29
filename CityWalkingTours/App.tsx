@@ -1,24 +1,28 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-// import {CityScreen} from './src/screens/CityScreen';
-// import {CitySelectionScreen} from './src/screens/CitySelectionScreen';
-// import {HomeScreen} from './src/screens/HomeScreen';
-import {colors} from './src/utils/colors';
+import {CityScreen} from './src/screens/CityScreen';
+import {CitySelectionScreen} from './src/screens/CitySelectionScreen';
+import {HomeScreen} from './src/screens/HomeScreen';
 import {DetailsScreen} from './src/screens/DetailsScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   return (
-    <LinearGradient colors={colors.gradient} style={styles.main}>
-      <DetailsScreen />
-    </LinearGradient>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Selection" component={CitySelectionScreen} />
+        <Stack.Screen name="City" component={CityScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    paddingBottom: 50,
-  },
-});
 
 export default App;
