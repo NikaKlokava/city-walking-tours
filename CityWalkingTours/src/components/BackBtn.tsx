@@ -20,7 +20,7 @@ export const BackBtn = ({isEmpty, onClick}: Props) => {
       <Icon source={image} size="medium" />
       {!isEmpty && (
         <Text type="tertiary" color={colors.primary3}>
-          BACK
+          Change city
         </Text>
       )}
     </TouchableOpacity>

@@ -4,6 +4,7 @@ declare type CategotyItemType = {
   rating: string;
   details: {location: string; workingHours: string; site: string};
   description: string;
+  liked: boolean;
 };
 
 declare type CategotyType = {
