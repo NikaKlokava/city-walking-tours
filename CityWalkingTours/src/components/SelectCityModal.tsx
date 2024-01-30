@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   FlatList,
-  Image,
   ImageBackground,
   Modal,
   Pressable,
@@ -13,6 +12,7 @@ import {Text} from './base/Text';
 import {CITIES} from '../utils/data';
 import {colors} from '../utils/colors';
 import {Icon} from './base/Icon';
+import {flexRow} from '../utils/flex';
 
 const image2 = require('../assets/close.png');
 
@@ -30,7 +30,7 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
       visible={visible}
       onRequestClose={onClose}>
       <View style={styles.modalContainer}>
-        <View style={styles.pressContainer}>
+        <View style={[styles.pressContainer, flexRow]}>
           <TouchableOpacity onPress={onClose}>
             <Icon source={image2} size="xlarge" />
           </TouchableOpacity>
@@ -49,7 +49,7 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
                 <ImageBackground
                   style={styles.cityContainer}
                   source={item.photo}>
-                  <View style={styles.cityDescription}>
+                  <View style={[styles.cityDescription, flexRow]}>
                     <Text type={'primary'} color={colors.primary1}>
                       {item.city}
                     </Text>
@@ -80,20 +80,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary5,
   },
   cityContainer: {
-    backgroundColor: colors.primary1,
     marginVertical: 10,
     minHeight: 150,
     justifyContent: 'flex-end',
   },
   cityDescription: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: colors.primary5,
   },
   pressContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     columnGap: 20,
   },
 });

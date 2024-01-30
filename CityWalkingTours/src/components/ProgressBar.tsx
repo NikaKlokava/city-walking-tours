@@ -9,7 +9,7 @@ type Props = {
 
 export const ProgressBar = ({index, dataLength}: Props) => {
   const emptyArray = Array.from({length: dataLength});
-  
+
   return (
     <>
       {emptyArray.map((_, i) => (
@@ -20,11 +20,6 @@ export const ProgressBar = ({index, dataLength}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    columnGap: 20,
-    justifyContent: 'center',
-  },
   dott: {
     width: 15,
     height: 15,

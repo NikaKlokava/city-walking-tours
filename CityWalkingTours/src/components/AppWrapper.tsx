@@ -4,15 +4,12 @@ import {colors} from '../utils/colors';
 import {StyleSheet} from 'react-native';
 
 type Props = {
-  withNavbar?: boolean;
   children: any;
 };
 
-export const AppWrapper = ({withNavbar, children}: Props) => {
+export const AppWrapper = ({children}: Props) => {
   return (
-    <LinearGradient
-      colors={colors.gradient}
-      style={[styles.main, !withNavbar && styles.padding]}>
+    <LinearGradient colors={colors.gradient} style={styles.main}>
       {children}
     </LinearGradient>
   );
@@ -21,8 +18,6 @@ export const AppWrapper = ({withNavbar, children}: Props) => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  },
-  padding: {
-    paddingBottom: 50,
+    paddingTop: 80,
   },
 });

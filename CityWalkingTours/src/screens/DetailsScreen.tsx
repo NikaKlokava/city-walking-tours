@@ -19,7 +19,6 @@ import {Details} from '../components/Details';
 import {Gallery} from '../components/Gallery';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Navigation} from '../components/Navigation';
 
 const image = require('../assets/ozas.png');
 const icon1 = require('../assets/location.png');
@@ -92,7 +91,6 @@ export const DetailsScreen = ({navigation, route}: Props) => {
           <Gallery />
         </ScrollView>
       </View>
-      <Navigation city={city} />
     </AppWrapper>
   );
 };
