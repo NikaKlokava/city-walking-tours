@@ -8,10 +8,11 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   categories: CategoriesType;
+  city: string;
   onSelect: (title: string) => void;
 };
 
-export const Categories = ({categories, onSelect}: Props) => {
+export const Categories = ({categories, onSelect, city}: Props) => {
   return (
     <>
       {categories.map((caregory, index) => (
@@ -37,7 +38,9 @@ export const Categories = ({categories, onSelect}: Props) => {
             data={caregory.data}
             horizontal
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <CategoryItem category={item} />}
+            renderItem={({item}) => (
+              <CategoryItem category={item} city={city} />
+            )}
           />
           <Line white />
         </View>

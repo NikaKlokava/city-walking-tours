@@ -6,8 +6,9 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   category: CategotyType;
+  city: string;
 };
-export const SelectedCategory = ({category}: Props) => {
+export const SelectedCategory = ({category, city}: Props) => {
   return (
     <>
       <Text type="primary" color={colors.primary1} center>
@@ -15,7 +16,12 @@ export const SelectedCategory = ({category}: Props) => {
       </Text>
       <View style={styles.itemContainer}>
         {category.data.map((item, index) => (
-          <CategoryItem category={item} key={index} verticalScroll />
+          <CategoryItem
+            category={item}
+            key={index}
+            verticalScroll
+            city={city}
+          />
         ))}
       </View>
     </>

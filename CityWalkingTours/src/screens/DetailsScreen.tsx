@@ -19,15 +19,19 @@ import {Details} from '../components/Details';
 import {Gallery} from '../components/Gallery';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Navigation} from '../components/Navigation';
 
 const image = require('../assets/ozas.png');
 const icon1 = require('../assets/location.png');
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
+  route: any;
 };
 
-export const DetailsScreen = ({navigation}: Props) => {
+export const DetailsScreen = ({navigation, route}: Props) => {
+  const {city}: {city: string} = route.params;
+
   const place = SECTIONS[0].data[0];
   const Max_Header_Height = DEVICE_HEIGHT * 0.4;
   const Min_Header_Height = DEVICE_HEIGHT * 0.3;
@@ -42,7 +46,7 @@ export const DetailsScreen = ({navigation}: Props) => {
   });
 
   return (
-    <AppWrapper>
+    <AppWrapper withNavbar>
       <View style={styles.container}>
         <Animated.View style={{height: animatedHeaderHeight}}>
           <ImageBackground source={image} style={styles.headerContainer}>
@@ -88,6 +92,7 @@ export const DetailsScreen = ({navigation}: Props) => {
           <Gallery />
         </ScrollView>
       </View>
+      <Navigation city={city} />
     </AppWrapper>
   );
 };

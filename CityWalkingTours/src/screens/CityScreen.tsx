@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {CITIES, SECTIONS} from '../utils/data';
 import {Text} from '../components/base/Text';
@@ -12,26 +12,31 @@ import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Navigation} from '../components/Navigation';
 
 const icon = require('../assets/search.png');
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
   route: any;
-  // route?: NativeStackNavigationProp<Record<string, object | undefined>, 'city'>;
 };
 
 export const CityScreen = ({navigation, route}: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
 
-  const {city} = route.params;
+  useEffect(() => {
+    handleCategorySelect('See all');
+  }, []);
+
+  const {city}: {city: string} = route.params;
 
   const handleCategorySelect = (title: string) => {
     const category = SECTIONS.find(section => section.title === title);
     setSelectedCategory(category);
   };
+
   return (
-    <AppWrapper>
+    <AppWrapper withNavbar>
       <View style={styles.container}>
         <View style={[styles.headerContainer, flexRow]}>
           <BackBtn onClick={() => navigation.goBack()} />
@@ -66,9 +71,10 @@ export const CityScreen = ({navigation, route}: Props) => {
               title={selectedCategory?.title}
             />
             {selectedCategory ? (
-              <SelectedCategory category={selectedCategory} />
+              <SelectedCategory category={selectedCategory} city={city} />
             ) : (
               <Categories
+                city={city}
                 categories={SECTIONS}
                 onSelect={handleCategorySelect}
               />
@@ -76,6 +82,7 @@ export const CityScreen = ({navigation, route}: Props) => {
           </View>
         </ScrollView>
       </View>
+      <Navigation city={city} />
     </AppWrapper>
   );
 };
