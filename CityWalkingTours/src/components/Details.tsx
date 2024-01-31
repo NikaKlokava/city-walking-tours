@@ -6,8 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {colors} from '../utils/colors';
-import {flexRow} from '../utils/flex';
+import {colors, flexRow} from '../utils';
 import {Icon} from './base/Icon';
 import {Text} from './base/Text';
 

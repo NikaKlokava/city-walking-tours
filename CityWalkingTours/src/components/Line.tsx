@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors} from '../utils/colors';
+import {colors} from '../utils';
 
 export const Line = ({white}: {white?: boolean}) => {
   return <View style={[styles.line, white && styles.white]} />;

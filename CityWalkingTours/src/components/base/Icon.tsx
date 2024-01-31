@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageSourcePropType, ImageProps, StyleSheet} from 'react-native';
-import {iconSize} from '../../utils/icon';
+import {iconSize} from '../../utils';
 
 type Props = {
   source: ImageSourcePropType;

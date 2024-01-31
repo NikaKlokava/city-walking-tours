@@ -1,28 +1,23 @@
-import React from 'react';
-import {CityScreen} from './src/screens/CityScreen';
-import {CitySelectionScreen} from './src/screens/CitySelectionScreen';
-import {HomeScreen} from './src/screens/HomeScreen';
-import {DetailsScreen} from './src/screens/DetailsScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useState} from 'react';
 
-const Stack = createNativeStackNavigator();
+import {RootNavigator} from './src/navigation';
+
+import {Onboarding} from './src/components/Onboarding';
+import {CitySelectionScreen} from './src/screens/CitySelectionScreen';
 
 function App(): React.JSX.Element {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Selection" component={CitySelectionScreen} />
-        <Stack.Screen name="City" component={CityScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const [isOnboardingPassed, setIsOnboardingPassed] = useState(false);
+  const [city, setCity] = useState<string>()
+
+  if (isOnboardingPassed) {
+    return <Onboarding onSubmit={() => setIsOnboardingPassed(true)} />;
+  }
+
+  if (city === null) {
+    return <CitySelectionScreen onSelect={(city: string) => setCity(city)}/>;
+  }
+
+  return <RootNavigator />;
 }
 
 export default App;

@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
-import {CATEGORIES} from '../utils/data';
+import {CATEGORIES, colors} from '../utils';
 import {Line} from './Line';
 import {Icon} from './base/Icon';
 

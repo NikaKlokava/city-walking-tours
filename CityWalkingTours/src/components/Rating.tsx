@@ -1,8 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
-import {flexRow} from '../utils/flex';
+import {colors, flexRow} from '../utils';
 import {Icon} from './base/Icon';
 const icon2 = require('../assets/star.png');
 

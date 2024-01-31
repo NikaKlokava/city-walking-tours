@@ -1,108 +1,100 @@
 import React, {useState} from 'react';
-import {
-  FlatList,
-  Image,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {StyledBtn} from '../components/StyledBtn';
-import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../utils/screen';
-import {colors} from '../utils/colors';
-import {DATA} from '../utils/data';
+import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
+import {SECTIONS, colors, flexRow} from '../utils';
 import {Text} from '../components/base/Text';
 import {Line} from '../components/Line';
-import {ProgressBar} from '../components/ProgressBar';
-import {getIndex} from '../utils/helpers';
+import {SearchBar} from '../components/SearchBar';
+import {Categories} from '../components/Categories';
+import {SelectedCategory} from '../components/SelectedCategory';
+import {Icon} from '../components/base/Icon';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+const icon = require('../assets/search.png');
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
 };
 
 export const HomeScreen = ({navigation}: Props) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const handleScreenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = getIndex(e);
-    setCurrentIndex(index);
+  const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
+
+  const {city}: {city: string} = {city: 'Vilnius'};
+
+  const handleCategorySelect = (title: string) => {
+    const category = SECTIONS.find(section => section.title === title);
+    setSelectedCategory(category);
   };
 
   return (
     <AppWrapper>
-      <View style={styles.mainContainer}>
-        <View style={styles.imageContainer}>
-          <FlatList
-            data={DATA}
-            horizontal
-            pagingEnabled
-            onScroll={e => handleScreenScroll(e)}
-            keyExtractor={(_, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => {
-              return (
-                <View style={styles.listContainer}>
-                  {item.image && (
-                    <Image source={item.image} style={styles.backImg} />
-                  )}
-                  <View style={styles.descriptionContainer}>
-                    <Text
-                      type="primary"
-                      color={colors.primary1}
-                      style={styles.title}
-                      center>
-                      {item.title}
-                    </Text>
-                    <Line />
-                    <Text type="tertiary" color={colors.primary4} center>
-                      {item.description}
-                    </Text>
-                  </View>
-                </View>
-              );
-            }}
-          />
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={[styles.cityContainer, flexRow]}>
+            <Text
+              type="tertiary"
+              center
+              color={colors.primary1}
+              style={styles.opacity}>
+              city:
+            </Text>
+            <Text type="primary" center color={colors.primary1}>
+              {city}
+            </Text>
+          </View>
         </View>
-        <View style={styles.dottsContainer}>
-          {currentIndex === DATA.length - 1 ? (
-            <StyledBtn
-              title="Get Started"
-              onClick={() => navigation.navigate('Selection')}
+        <Line />
+        <ScrollView>
+          <View style={styles.scrollContainer}>
+            <View style={[styles.inputContainer, flexRow]}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="What do you want to find?"
+                placeholderTextColor={`rgba(250,250,250,0.7)`}
+              />
+              <Icon source={icon} size="medium" />
+            </View>
+            <SearchBar
+              onSelect={handleCategorySelect}
+              title={selectedCategory?.title}
             />
-          ) : (
-            <ProgressBar index={currentIndex} dataLength={DATA.length} />
-          )}
-        </View>
+            {selectedCategory ? (
+              <SelectedCategory category={selectedCategory} city={city} />
+            ) : (
+              <Categories
+                city={city}
+                categories={SECTIONS}
+                onSelect={handleCategorySelect}
+              />
+            )}
+          </View>
+        </ScrollView>
       </View>
     </AppWrapper>
   );
 };
+
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    paddingTop: 80,
+    paddingHorizontal: 10,
   },
-  imageContainer: {
-    flex: 1,
+  headerContainer: {
+    marginBottom: 20,
   },
-  listContainer: {
-    width: DEVICE_WIDTH,
-    rowGap: 70,
-    marginTop: 30,
+  scrollContainer: {rowGap: 20, marginTop: 10},
+  cityContainer: {columnGap: 10, justifyContent: 'flex-end'},
+  inputContainer: {
+    padding: 15,
+    backgroundColor: '#263238', // !!!
+    borderRadius: 10,
+    justifyContent: 'space-between',
   },
-  backImg: {
-    height: 0.3 * DEVICE_HEIGHT,
-    width: DEVICE_WIDTH,
-    objectFit: 'contain',
+  searchInput: {
+    color: colors.primary1,
+    fontSize: 15,
   },
-  descriptionContainer: {paddingHorizontal: 15, rowGap: 10},
-  title: {
-    marginBottom: 10,
-  },
-  dottsContainer: {
-    flexDirection: 'row',
-    columnGap: 20,
-    justifyContent: 'center',
+  opacity: {
+    opacity: 0.7,
   },
 });

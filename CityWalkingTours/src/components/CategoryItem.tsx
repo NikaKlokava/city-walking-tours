@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
+import {colors} from '../utils';
 import {Rating} from './Rating';
 import {Icon} from './base/Icon';
 import {
@@ -14,19 +14,21 @@ import {
   ParamListBase,
   NavigationProp,
 } from '@react-navigation/native';
+import {routes} from '../navigation';
 
 const icon1 = require('../assets/heart_icon.png');
 
 type Props = {
   category: CategotyItemType;
   verticalScroll?: boolean;
+  city: string;
 };
 
-export const CategoryItem = ({category, verticalScroll}: Props) => {
+export const CategoryItem = ({category, verticalScroll, city}: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Details')}
+      onPress={() => navigation.navigate(routes.DETAILS, {city})}
       style={[styles.container, verticalScroll && styles.containerV]}>
       <ImageBackground
         source={category.image}

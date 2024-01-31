@@ -1,17 +1,17 @@
 import React from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
+import {colors, flexRow} from '../utils';
 import {Line} from './Line';
-import {flexRow} from '../utils/flex';
 import {CategoryItem} from './CategoryItem';
 
 type Props = {
   categories: CategoriesType;
+  city: string;
   onSelect: (title: string) => void;
 };
 
-export const Categories = ({categories, onSelect}: Props) => {
+export const Categories = ({categories, onSelect, city}: Props) => {
   return (
     <>
       {categories.map((caregory, index) => (
@@ -37,7 +37,9 @@ export const Categories = ({categories, onSelect}: Props) => {
             data={caregory.data}
             horizontal
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <CategoryItem category={item} />}
+            renderItem={({item}) => (
+              <CategoryItem category={item} city={city} />
+            )}
           />
           <Line white />
         </View>
