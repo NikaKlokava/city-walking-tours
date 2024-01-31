@@ -17,17 +17,14 @@ import {Gallery} from '../components/Gallery';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const image = require('../assets/ozas.png');
+const image = require('../assets/sodas.png');
 const icon1 = require('../assets/location.png');
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
-  route: any;
 };
 
-export const DetailsScreen = ({navigation, route}: Props) => {
-  const {city}: {city: string} = route.params;
-
+export const DetailsScreen = ({navigation}: Props) => {
   const place = SECTIONS[0].data[0];
   const Max_Header_Height = DEVICE_HEIGHT * 0.4;
   const Min_Header_Height = DEVICE_HEIGHT * 0.3;
