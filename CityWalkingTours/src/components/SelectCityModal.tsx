@@ -9,10 +9,8 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {CITIES} from '../utils/data';
-import {colors} from '../utils/colors';
+import {CITIES, colors, flexRow} from '../utils';
 import {Icon} from './base/Icon';
-import {flexRow} from '../utils/flex';
 
 const image2 = require('../assets/close.png');
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
+import {colors, flexRow} from '../utils';
 import {Line} from './Line';
-import {flexRow} from '../utils/flex';
 import {CategoryItem} from './CategoryItem';
 
 type Props = {

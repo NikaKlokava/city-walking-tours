@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, TextInput, View} from 'react-native';
-import {CITIES, SECTIONS} from '../utils/data';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
+import {SECTIONS, colors, flexRow} from '../utils';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils/colors';
-import {flexRow} from '../utils/flex';
 import {Line} from '../components/Line';
 import {SearchBar} from '../components/SearchBar';
-import {BackBtn} from '../components/BackBtn';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
@@ -32,8 +29,7 @@ export const HomeScreen = ({navigation}: Props) => {
   return (
     <AppWrapper>
       <View style={styles.container}>
-        <View style={[styles.headerContainer, flexRow]}>
-          <BackBtn onClick={() => navigation.goBack()} />
+        <View style={styles.headerContainer}>
           <View style={[styles.cityContainer, flexRow]}>
             <Text
               type="tertiary"
@@ -50,16 +46,14 @@ export const HomeScreen = ({navigation}: Props) => {
         <Line />
         <ScrollView>
           <View style={styles.scrollContainer}>
-            {!selectedCategory && (
-              <View style={[styles.inputContainer, flexRow]}>
-                <TextInput
-                  style={styles.searchInput}
-                  placeholder="What do you want to find?"
-                  placeholderTextColor={`rgba(250,250,250,0.7)`}
-                />
-                <Icon source={icon} size="medium" />
-              </View>
-            )}
+            <View style={[styles.inputContainer, flexRow]}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="What do you want to find?"
+                placeholderTextColor={`rgba(250,250,250,0.7)`}
+              />
+              <Icon source={icon} size="medium" />
+            </View>
             <SearchBar
               onSelect={handleCategorySelect}
               title={selectedCategory?.title}
@@ -83,15 +77,13 @@ export const HomeScreen = ({navigation}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 80,
     paddingHorizontal: 10,
   },
   headerContainer: {
-    justifyContent: 'space-between',
     marginBottom: 20,
   },
   scrollContainer: {rowGap: 20, marginTop: 10},
-  cityContainer: {columnGap: 10},
+  cityContainer: {columnGap: 10, justifyContent: 'flex-end'},
   inputContainer: {
     padding: 15,
     backgroundColor: '#263238', // !!!

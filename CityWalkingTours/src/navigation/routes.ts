@@ -9,4 +9,5 @@ export const tabs = {
   HOME: 'HOME_TAB',
   WISHES: 'WISHES_TAB',
   MAP: 'MAP_TAB',
+  SETTINGS: 'SETTINGS_TAB',
 };

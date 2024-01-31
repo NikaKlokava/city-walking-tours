@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
+import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
 
 type Props = {

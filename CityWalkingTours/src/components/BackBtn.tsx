@@ -1,8 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils/colors';
-import {flexRow} from '../utils/flex';
+import {colors, flexRow} from '../utils';
 import {Icon} from './base/Icon';
 
 const image = require('../assets/back_icon.png');

@@ -8,15 +8,18 @@ import {
   View,
 } from 'react-native';
 import {StyledBtn} from './StyledBtn';
-import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../utils/screen';
-import {colors} from '../utils/colors';
-import {DATA} from '../utils/data';
+import {
+  DEVICE_HEIGHT,
+  DEVICE_WIDTH,
+  DATA,
+  colors,
+  getIndex,
+  flexRow,
+} from '../utils';
 import {Text} from './base/Text';
 import {Line} from './Line';
 import {ProgressBar} from './ProgressBar';
-import {getIndex} from '../utils/helpers';
 import {AppWrapper} from './AppWrapper';
-import {flexRow} from '../utils/flex';
 
 type Props = {
   onSubmit: () => void;

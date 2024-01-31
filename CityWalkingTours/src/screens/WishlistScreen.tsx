@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils/colors';
+import {colors} from '../utils';
 import {View} from 'react-native';
 
 export const WishlistScreen = () => {

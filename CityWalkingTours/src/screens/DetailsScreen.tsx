@@ -7,12 +7,9 @@ import {
   View,
 } from 'react-native';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils/colors';
-import {DEVICE_HEIGHT} from '../utils/screen';
+import {DEVICE_HEIGHT, SECTIONS, flexRow, colors} from '../utils';
 import {BackBtn} from '../components/BackBtn';
 import {Rating} from '../components/Rating';
-import {flexRow} from '../utils/flex';
-import {SECTIONS} from '../utils/data';
 import {Line} from '../components/Line';
 import {Icon} from '../components/base/Icon';
 import {Details} from '../components/Details';
@@ -45,7 +42,7 @@ export const DetailsScreen = ({navigation, route}: Props) => {
   });
 
   return (
-    <AppWrapper withNavbar>
+    <AppWrapper noPaddingTop>
       <View style={styles.container}>
         <Animated.View style={{height: animatedHeaderHeight}}>
           <ImageBackground source={image} style={styles.headerContainer}>

@@ -8,10 +8,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../utils/screen';
+import {DEVICE_HEIGHT, DEVICE_WIDTH, flexRow, getIndex} from '../utils';
 import {ProgressBar} from './ProgressBar';
-import {flexRow} from '../utils/flex';
-import {getIndex} from '../utils/helpers';
 
 const image: ImageSourcePropType = require('../assets/gedim.png');
 
