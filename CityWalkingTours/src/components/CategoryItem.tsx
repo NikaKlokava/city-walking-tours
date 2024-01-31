@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils';
+import {DEVICE_HEIGHT, DEVICE_WIDTH, colors, flexRow} from '../utils';
 import {Rating} from './Rating';
 import {Icon} from './base/Icon';
 import {
@@ -21,28 +21,57 @@ const icon1 = require('../assets/heart_icon.png');
 type Props = {
   category: CategotyItemType;
   verticalScroll?: boolean;
+  liked?: boolean;
   city: string;
 };
 
-export const CategoryItem = ({category, verticalScroll, city}: Props) => {
+export const CategoryItem = ({
+  category,
+  verticalScroll,
+  liked,
+  city,
+}: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(routes.DETAILS, {city})}
-      style={[styles.container, verticalScroll && styles.containerV]}>
+      style={[
+        styles.container,
+        verticalScroll && styles.containerV,
+        liked && styles.likedContainer,
+      ]}>
       <ImageBackground
         source={category.image}
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={[styles.iconContainer, liked && styles.liked]}>
           <Icon source={icon1} size="xlarge" style={styles.icon} />
         </TouchableOpacity>
       </ImageBackground>
-      <View style={styles.descriptionContainer}>
-        <Text type="fifth" color={colors.primary5}>
+      <View
+        style={[styles.descriptionContainer, liked && styles.likedDescription]}>
+        <Text type="fifth" color={colors.primary5} center={liked}>
           {category.title}
         </Text>
-        <Rating rating={category.rating} />
+        {liked && (
+          <Text type="fifth" color={colors.primary5} style={{opacity: 0.4}}>
+            {category.description.slice(0, 90) + `...`}
+          </Text>
+        )}
+
+        <View
+          style={[
+            styles.smallDescription,
+            liked && styles.smallLikedDescription,
+            flexRow,
+          ]}>
+          {liked && (
+            <Text type="fifth" color={colors.primary5}>
+              {category.details.location}
+            </Text>
+          )}
+          <Rating rating={category.rating} />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -55,6 +84,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary1,
     marginHorizontal: 20,
     borderRadius: 15,
+  },
+  likedContainer: {
+    width: DEVICE_WIDTH * 0.9,
+    height: DEVICE_HEIGHT * 0.3,
   },
   containerV: {
     width: '100%',
@@ -80,11 +113,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   descriptionContainer: {
-    borderTopWidth: 3,
-    borderColor: colors.primary4,
     flex: 1,
     padding: 5,
     paddingHorizontal: 15,
     justifyContent: 'space-around',
+  },
+  likedDescription: {
+    flex: 3,
+  },
+  smallDescription: {
+    justifyContent: 'flex-end',
+  },
+  smallLikedDescription: {
+    justifyContent: 'space-between',
   },
 });

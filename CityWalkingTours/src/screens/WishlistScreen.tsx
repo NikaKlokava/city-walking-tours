@@ -1,17 +1,41 @@
 import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils';
-import {View} from 'react-native';
+import {WISHLIST_DATA, colors} from '../utils';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {CategoryItem} from '../components/CategoryItem';
+import {Line} from '../components/Line';
 
 export const WishlistScreen = () => {
   return (
     <AppWrapper>
-      <View style={{flex: 1}}>
-        <Text type={'primary'} color={colors.primary3} center>
-          Wishlist
-        </Text>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text type={'primary'} color={colors.primary3} center>
+            Wishlist
+          </Text>
+          <View style={styles.itemsContainer}>
+            {WISHLIST_DATA.map(item => {
+              return (
+                <View style={styles.itemsContainer}>
+                  <CategoryItem category={item} city={'Vilno'} liked />
+                  <Line white />
+                </View>
+              );
+            })}
+          </View>
+        </View>
+      </ScrollView>
     </AppWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    rowGap: 20,
+    alignItems: 'center',
+  },
+  itemsContainer: {
+    rowGap: 20,
+  },
+});

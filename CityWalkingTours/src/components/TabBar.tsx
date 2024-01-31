@@ -3,14 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Icon} from './base/Icon';
 import {tabs} from '../navigation';
-import { colors, flexRow } from '../utils';
-
-const icons = {
-  [tabs.HOME]: require('../assets/home.png'),
-  [tabs.WISHES]: require('../assets/wishlist.png'),
-  [tabs.MAP]: require('../assets/map.png'),
-  [tabs.SETTINGS]: require('../assets/settings.png'),
-};
+import {colors, flexRow, tabBarIcons} from '../utils';
 
 export const TabBar = ({state, navigation}: BottomTabBarProps) => {
   return (
@@ -36,8 +29,8 @@ export const TabBar = ({state, navigation}: BottomTabBarProps) => {
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             onPress={onPress}
-            style={[isFocused && styles.active]}>
-            <Icon size="xxlarge" source={icons[route.name]} />
+            style={[styles.tab, isFocused && styles.active]}>
+            <Icon size="xxlarge" source={tabBarIcons[route.name]} />
           </TouchableOpacity>
         );
       })}
@@ -54,9 +47,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     height: 90,
   },
+  tab: {
+    opacity: 0.4,
+    paddingBottom: 5,
+    borderBottomColor: colors.primary3,
+    borderBottomWidth: 0,
+  },
   active: {
-    shadowColor: colors.primary3,
-    shadowOpacity: 1,
-    shadowRadius: 15,
+    opacity: 1,
+    borderBottomWidth: 2,
   },
 });
