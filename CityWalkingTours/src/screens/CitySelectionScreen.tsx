@@ -31,12 +31,12 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
         {!modalVisible && (
           <>
             <View style={styles.selectBlock}>
-              <Text type="primary" color={colors.primary3} center>
+              <Text type="primary" color={colors.active_bright} center>
                 Select your city
               </Text>
               <StyledBtn title="SELECT" onClick={() => setModalVisible(true)} />
               {currentCity && (
-                <Text type="primary" color={colors.primary3} center>
+                <Text type="primary" color={colors.active_bright} center>
                   {currentCity}
                 </Text>
               )}

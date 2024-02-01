@@ -8,7 +8,7 @@ export const SettingsScreen = () => {
   return (
     <AppWrapper>
       <View style={{flex: 1}}>
-        <Text type={'primary'} color={colors.primary3} center>
+        <Text type={'primary'} color={colors.active_bright} center>
           Settings
         </Text>
       </View>

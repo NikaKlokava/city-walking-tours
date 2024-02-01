@@ -14,7 +14,7 @@ import {
   DATA,
   colors,
   getIndex,
-  flexRow,
+  commonStyles,
 } from '../utils';
 import {Text} from './base/Text';
 import {Line} from './Line';
@@ -53,7 +53,7 @@ export const Onboarding = ({onSubmit}: Props) => {
                       {item.title}
                     </Text>
                     <Line />
-                    <Text type="tertiary" color={colors.primary4} center>
+                    <Text type="tertiary" color={colors.semi_grey} center>
                       {item.description}
                     </Text>
                   </View>
@@ -62,7 +62,7 @@ export const Onboarding = ({onSubmit}: Props) => {
             }}
           />
         </View>
-        <View style={[styles.dottsContainer, flexRow]}>
+        <View style={StyleSheet.flatten([styles.dottsContainer, commonStyles.flexRow])}>
           {currentIndex === DATA.length - 1 ? (
             <StyledBtn
               title="Get Started"

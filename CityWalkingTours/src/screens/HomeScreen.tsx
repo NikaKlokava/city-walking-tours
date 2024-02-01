@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
-import {SECTIONS, colors, flexRow} from '../utils';
+import {SECTIONS, colors, commonStyles} from '../utils';
 import {Text} from '../components/base/Text';
 import {Line} from '../components/Line';
 import {SearchBar} from '../components/SearchBar';
@@ -29,12 +29,8 @@ export const HomeScreen = ({navigation}: Props) => {
     <AppWrapper>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <View style={[styles.cityContainer, flexRow]}>
-            <Text
-              type="tertiary"
-              center
-              color={colors.primary1}
-              style={styles.opacity}>
+          <View style={StyleSheet.flatten([styles.cityContainer, commonStyles.flexRow])}>
+            <Text type="tertiary" center color={colors.semi_primary1}>
               city:
             </Text>
             <Text type="primary" center color={colors.primary1}>
@@ -45,11 +41,11 @@ export const HomeScreen = ({navigation}: Props) => {
         <Line />
         <ScrollView>
           <View style={styles.scrollContainer}>
-            <View style={[styles.inputContainer, flexRow]}>
+            <View style={StyleSheet.flatten([styles.inputContainer, commonStyles.flexRow])}>
               <TextInput
                 style={styles.searchInput}
                 placeholder="What do you want to find?"
-                placeholderTextColor={`rgba(250,250,250,0.7)`}
+                placeholderTextColor={colors.semi_primary1}
               />
               <Icon icon={SEARCH_ICON} size="medium" />
             </View>
@@ -85,15 +81,12 @@ const styles = StyleSheet.create({
   cityContainer: {columnGap: 10, justifyContent: 'flex-end'},
   inputContainer: {
     padding: 15,
-    backgroundColor: '#263238', // !!!
+    backgroundColor: colors.input_background,
     borderRadius: 10,
     justifyContent: 'space-between',
   },
   searchInput: {
     color: colors.primary1,
     fontSize: 15,
-  },
-  opacity: {
-    opacity: 0.7,
   },
 });

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {DEVICE_HEIGHT, DEVICE_WIDTH, flexRow, getIndex} from '../utils';
+import {DEVICE_HEIGHT, DEVICE_WIDTH, commonStyles, getIndex} from '../utils';
 import {ProgressBar} from './ProgressBar';
 
 const image: ImageSourcePropType = require('../assets/images/gedim.png');
@@ -31,7 +31,7 @@ export const Gallery = () => {
         onScroll={e => handleImageScroll(e)}
         renderItem={({item}) => <Image source={item} style={styles.image} />}
       />
-      <View style={[styles.progressContainer, flexRow]}>
+      <View style={StyleSheet.flatten([styles.progressContainer, commonStyles.flexRow])}>
         <ProgressBar index={imageIndex} dataLength={images.length} />
       </View>
     </View>

@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {DEVICE_HEIGHT, DEVICE_WIDTH, colors, flexRow} from '../utils';
+import {DEVICE_HEIGHT, DEVICE_WIDTH, colors, commonStyles} from '../utils';
 import {Rating} from './Rating';
 import {Icon} from './base/Icon';
 import {
@@ -34,38 +34,45 @@ export const CategoryItem = ({
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(routes.DETAILS, {city})}
-      style={[
+      style={StyleSheet.flatten([
         styles.container,
         verticalScroll && styles.containerV,
         liked && styles.likedContainer,
-      ]}>
+      ])}>
       <ImageBackground
         source={category.image}
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
-        <TouchableOpacity style={[styles.iconContainer, liked && styles.liked]}>
+        <TouchableOpacity
+          style={StyleSheet.flatten([
+            styles.iconContainer,
+            liked && styles.liked,
+          ])}>
           <Icon icon={HEART_ICON} size="xlarge" style={styles.icon} />
         </TouchableOpacity>
       </ImageBackground>
       <View
-        style={[styles.descriptionContainer, liked && styles.likedDescription]}>
-        <Text type="fifth" color={colors.primary5} center={liked}>
+        style={StyleSheet.flatten([
+          styles.descriptionContainer,
+          liked && styles.likedDescription,
+        ])}>
+        <Text type="quaternary" color={colors.active_dark} center={liked}>
           {category.title}
         </Text>
         {liked && (
-          <Text type="fifth" color={colors.primary5} style={{opacity: 0.4}}>
+          <Text type="quaternary" color={colors.semi_primary2}>
             {category.description.slice(0, 90) + `...`}
           </Text>
         )}
 
         <View
-          style={[
+          style={StyleSheet.flatten([
             styles.smallDescription,
             liked && styles.smallLikedDescription,
-            flexRow,
-          ]}>
+            commonStyles.flexRow,
+          ])}>
           {liked && (
-            <Text type="fifth" color={colors.primary5}>
+            <Text type="quaternary" color={colors.active_dark}>
               {category.details.location}
             </Text>
           )}
@@ -93,12 +100,12 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     margin: 5,
-    backgroundColor: 'rgba(20, 20, 20, 0.6)',
+    backgroundColor: colors.semi_grey,
     borderRadius: 20,
     alignSelf: 'flex-end',
   },
   liked: {
-    backgroundColor: 'rgba(255, 85, 110, 0.8)',
+    backgroundColor: colors.semi_pink,
   },
   icon: {
     margin: 5,

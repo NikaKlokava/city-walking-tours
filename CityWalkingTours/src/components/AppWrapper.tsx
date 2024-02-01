@@ -12,7 +12,10 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
   return (
     <LinearGradient
       colors={colors.gradient}
-      style={[styles.main, noPaddingTop && styles.noPadding]}>
+      style={StyleSheet.flatten([
+        styles.main,
+        noPaddingTop && styles.noPadding,
+      ])}>
       {children}
     </LinearGradient>
   );

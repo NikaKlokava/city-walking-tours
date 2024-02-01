@@ -3,11 +3,11 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Icon} from './base/Icon';
 import {tabs} from '../navigation';
-import {colors, flexRow, tabBarIcons} from '../utils';
+import {colors, commonStyles, tabBarIcons} from '../utils';
 
 export const TabBar = ({state, navigation}: BottomTabBarProps) => {
   return (
-    <View style={[styles.container, flexRow]}>
+    <View style={StyleSheet.flatten([styles.container, commonStyles.flexRow])}>
       {state.routes.map((route: any, index: any) => {
         const isFocused = state.index === index;
 
@@ -29,7 +29,10 @@ export const TabBar = ({state, navigation}: BottomTabBarProps) => {
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             onPress={onPress}
-            style={[styles.tab, isFocused && styles.active]}>
+            style={StyleSheet.flatten([
+              styles.tab,
+              isFocused && styles.active,
+            ])}>
             <Icon size="xxlarge" icon={tabBarIcons[route.name]} />
           </TouchableOpacity>
         );
@@ -40,8 +43,8 @@ export const TabBar = ({state, navigation}: BottomTabBarProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary5,
-    shadowColor: colors.primary5,
+    backgroundColor: colors.active_dark,
+    shadowColor: colors.active_dark,
     shadowOpacity: 1,
     shadowRadius: 7,
     justifyContent: 'space-around',
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
   tab: {
     opacity: 0.4,
     paddingBottom: 5,
-    borderBottomColor: colors.primary3,
+    borderBottomColor: colors.active_bright,
     borderBottomWidth: 0,
   },
   active: {

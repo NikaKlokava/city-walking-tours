@@ -19,19 +19,19 @@ export const SearchBar = ({title, onSelect}: Props) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            style={[
+            style={StyleSheet.flatten([
               styles.categoryItem,
               title === item.category && styles.active,
               !title &&
                 CATEGORIES[0].category === item.category &&
                 styles.active,
-            ]}
+            ])}
             onPress={() => {
               onSelect(item.category);
             }}
             key={index}>
             <Icon icon={item.icon} size="xxxlarge" />
-            <Text type="fifth" color={colors.primary1}>
+            <Text type="quaternary" color={colors.primary1}>
               {item.category}
             </Text>
           </TouchableOpacity>
@@ -52,5 +52,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
     borderBottomColor: 'transparent',
   },
-  active: {borderBottomColor: colors.primary3},
+  active: {borderBottomColor: colors.active_bright},
 });

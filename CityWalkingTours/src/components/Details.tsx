@@ -1,6 +1,6 @@
 import React from 'react';
 import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {colors, detailsDescription, detailsSvgs, flexRow} from '../utils';
+import {colors, detailsDescription, detailsSvgs, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import {Text} from './base/Text';
 
@@ -11,13 +11,13 @@ type Props = {
 
 export const Details = ({type, title}: Props) => {
   return (
-    <View style={[styles.container, flexRow]}>
+    <View style={StyleSheet.flatten([styles.container, commonStyles.flexRow])}>
       <View style={styles.iconContainer}>
         <Icon icon={detailsSvgs[type]} size={'xlarge'} />
       </View>
       <TouchableOpacity
         onPress={() => detailsDescription['site'] && Linking.openURL(title)}>
-        <Text type="fifth" color={colors.primary1} style={styles.opacity}>
+        <Text type="quaternary" color={colors.semi_primary1}>
           {detailsDescription[type]}
         </Text>
         <Text type="secondary" color={colors.primary1}>
@@ -35,9 +35,6 @@ const styles = StyleSheet.create({
   iconContainer: {
     padding: 5,
     borderRadius: 10,
-    backgroundColor: colors.primary3,
-  },
-  opacity: {
-    opacity: 0.7,
+    backgroundColor: colors.active_bright,
   },
 });

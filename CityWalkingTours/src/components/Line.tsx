@@ -3,13 +3,15 @@ import {StyleSheet, View} from 'react-native';
 import {colors} from '../utils';
 
 export const Line = ({white}: {white?: boolean}) => {
-  return <View style={[styles.line, white && styles.white]} />;
+  return (
+    <View style={StyleSheet.flatten([styles.line, white && styles.white])} />
+  );
 };
 
 const styles = StyleSheet.create({
   line: {
     borderWidth: 0.7,
-    borderColor: colors.primary3,
+    borderColor: colors.active_bright,
   },
   white: {
     borderColor: colors.primary1,

@@ -4,10 +4,11 @@ import {
   ImageBackground,
   ScrollView,
   StyleSheet,
+  TextStyle,
   View,
 } from 'react-native';
 import {Text} from '../components/base/Text';
-import {DEVICE_HEIGHT, SECTIONS, flexRow, colors} from '../utils';
+import {DEVICE_HEIGHT, SECTIONS, commonStyles, colors} from '../utils';
 import {BackBtn} from '../components/BackBtn';
 import {Rating} from '../components/Rating';
 import {Line} from '../components/Line';
@@ -44,15 +45,16 @@ export const DetailsScreen = ({navigation}: Props) => {
         <Animated.View style={{height: animatedHeaderHeight}}>
           <ImageBackground source={image} style={styles.headerContainer}>
             <View style={styles.backBtnContainer}>
-              <BackBtn isEmpty onClick={() => navigation.goBack()} />
+              <BackBtn onClick={() => navigation.goBack()} />
             </View>
             <View style={styles.headerDescription}>
               <Text type="primary" color={colors.primary1}>
                 {place.title}
               </Text>
-              <View style={[styles.locationContainer, flexRow]}>
+              <View
+                style={StyleSheet.flatten([styles.locationContainer, commonStyles.flexRow])}>
                 <Icon icon={SVG_LOCATION} size="small" />
-                <Text type="fifth" color={colors.primary1}>
+                <Text type="quaternary" color={colors.primary1}>
                   {place.details.location}
                 </Text>
               </View>
@@ -69,10 +71,7 @@ export const DetailsScreen = ({navigation}: Props) => {
           )}>
           <View style={styles.generalInfo}>
             <Line white />
-            <Text
-              type="tertiary"
-              color={colors.primary1}
-              style={styles.placeDescription}>
+            <Text type="tertiary" color={colors.semi_primary1}>
               {place.description}
             </Text>
             <Line />
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   headerDescription: {
-    backgroundColor: 'rgba(0,0,0,0.7)', // !!
+    backgroundColor: colors.semi_primary2,
     paddingHorizontal: 10,
     paddingVertical: 5,
     rowGap: 5,
@@ -113,9 +112,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 20,
     rowGap: 20,
-  },
-  placeDescription: {
-    opacity: 0.7,
   },
   detailsContainer: {margin: 30, rowGap: 20},
 });
