@@ -12,35 +12,33 @@ type Props = {
 
 export const SearchBar = ({title, onSelect}: Props) => {
   return (
-    <View>
+    <>
       <FlatList
         data={CATEGORIES}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({item, index}) => {
-          return (
-            <TouchableOpacity
-              style={[
-                styles.categoryItem,
-                title === item.category && styles.active,
-                !title &&
-                  CATEGORIES[0].category === item.category &&
-                  styles.active,
-              ]}
-              onPress={() => {
-                onSelect(item.category);
-              }}
-              key={index}>
-              <Icon source={item.icon} size="xxxlarge" />
-              <Text type="fifth" color={colors.primary1}>
-                {item.category}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
+        renderItem={({item, index}) => (
+          <TouchableOpacity
+            style={[
+              styles.categoryItem,
+              title === item.category && styles.active,
+              !title &&
+                CATEGORIES[0].category === item.category &&
+                styles.active,
+            ]}
+            onPress={() => {
+              onSelect(item.category);
+            }}
+            key={index}>
+            <Icon icon={item.icon} size="xxxlarge" />
+            <Text type="fifth" color={colors.primary1}>
+              {item.category}
+            </Text>
+          </TouchableOpacity>
+        )}
       />
       <Line />
-    </View>
+    </>
   );
 };
 

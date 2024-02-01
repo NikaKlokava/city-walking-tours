@@ -9,8 +9,7 @@ import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
-const icon = require('../assets/search.png');
+import SEARCH_ICON from '../assets/icons/search.svg';
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
@@ -52,7 +51,7 @@ export const HomeScreen = ({navigation}: Props) => {
                 placeholder="What do you want to find?"
                 placeholderTextColor={`rgba(250,250,250,0.7)`}
               />
-              <Icon source={icon} size="medium" />
+              <Icon icon={SEARCH_ICON} size="medium" />
             </View>
             <SearchBar
               onSelect={handleCategorySelect}

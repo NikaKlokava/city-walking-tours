@@ -11,7 +11,7 @@ import {
 import {DEVICE_HEIGHT, DEVICE_WIDTH, flexRow, getIndex} from '../utils';
 import {ProgressBar} from './ProgressBar';
 
-const image: ImageSourcePropType = require('../assets/gedim.png');
+const image: ImageSourcePropType = require('../assets/images/gedim.png');
 
 export const Gallery = () => {
   const [imageIndex, setImageIndex] = useState(1);

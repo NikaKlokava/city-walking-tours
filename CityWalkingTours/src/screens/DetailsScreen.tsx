@@ -16,9 +16,9 @@ import {Details} from '../components/Details';
 import {Gallery} from '../components/Gallery';
 import {AppWrapper} from '../components/AppWrapper';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import SVG_LOCATION from '../assets/icons/location.svg';
 
-const image = require('../assets/sodas.png');
-const icon1 = require('../assets/location.png');
+const image = require('../assets/images/sodas.png');
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
@@ -51,7 +51,7 @@ export const DetailsScreen = ({navigation}: Props) => {
                 {place.title}
               </Text>
               <View style={[styles.locationContainer, flexRow]}>
-                <Icon source={icon1} size="small" />
+                <Icon icon={SVG_LOCATION} size="small" />
                 <Text type="fifth" color={colors.primary1}>
                   {place.details.location}
                 </Text>

@@ -3,8 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
 import {colors, flexRow} from '../utils';
 import {Icon} from './base/Icon';
-
-const image = require('../assets/back_icon.png');
+import SVG_BACK from '../assets/icons/back.svg';
 
 type Props = {
   isEmpty?: boolean;
@@ -16,7 +15,7 @@ export const BackBtn = ({isEmpty, onClick}: Props) => {
     <TouchableOpacity
       style={[styles.backBtn, flexRow, isEmpty && styles.emptyBtn]}
       onPress={onClick}>
-      <Icon source={image} size="medium" />
+      <Icon icon={SVG_BACK} size="medium" />
       {!isEmpty && (
         <Text type="tertiary" color={colors.primary3}>
           Change city

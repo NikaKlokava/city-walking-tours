@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  ImageSourcePropType,
-  Linking,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {colors, flexRow} from '../utils';
+import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {colors, detailsDescription, detailsSvgs, flexRow} from '../utils';
 import {Icon} from './base/Icon';
 import {Text} from './base/Text';
-
-const icon1 = require('../assets/location.png');
-const icon2 = require('../assets/hours.png');
-const icon3 = require('../assets/web.png');
 
 type Props = {
   type: 'location' | 'hours' | 'site';
@@ -20,22 +10,18 @@ type Props = {
 };
 
 export const Details = ({type, title}: Props) => {
-  const location = type === 'location';
-  const site = type === 'site';
   return (
     <View style={[styles.container, flexRow]}>
       <View style={styles.iconContainer}>
-        <Icon
-          source={location ? icon1 : site ? icon3 : icon2}
-          size={'xlarge'}
-        />
+        <Icon icon={detailsSvgs[type]} size={'xlarge'} />
       </View>
-      <TouchableOpacity onPress={() => site && Linking.openURL(title)}>
+      <TouchableOpacity
+        onPress={() => detailsDescription['site'] && Linking.openURL(title)}>
         <Text type="fifth" color={colors.primary1} style={styles.opacity}>
-          {location ? 'location' : site ? 'site' : 'open'}
+          {detailsDescription[type]}
         </Text>
         <Text type="secondary" color={colors.primary1}>
-          {site ? 'Site' : title}
+          {title}
         </Text>
       </TouchableOpacity>
     </View>

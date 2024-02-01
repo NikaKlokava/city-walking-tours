@@ -6,7 +6,7 @@ import {colors} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
 
-const image = require('../assets/city.png');
+const image = require('../assets/images/city.png');
 
 type Props = {
   onSelect: (city: string) => void;

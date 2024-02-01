@@ -30,7 +30,7 @@ export const TabBar = ({state, navigation}: BottomTabBarProps) => {
             accessibilityState={isFocused ? {selected: true} : {}}
             onPress={onPress}
             style={[styles.tab, isFocused && styles.active]}>
-            <Icon size="xxlarge" source={tabBarIcons[route.name]} />
+            <Icon size="xxlarge" icon={tabBarIcons[route.name]} />
           </TouchableOpacity>
         );
       })}

@@ -15,8 +15,7 @@ import {
   NavigationProp,
 } from '@react-navigation/native';
 import {routes} from '../navigation';
-
-const icon1 = require('../assets/heart_icon.png');
+import HEART_ICON from '../assets/icons/heart.svg';
 
 type Props = {
   category: CategotyItemType;
@@ -45,7 +44,7 @@ export const CategoryItem = ({
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
         <TouchableOpacity style={[styles.iconContainer, liked && styles.liked]}>
-          <Icon source={icon1} size="xlarge" style={styles.icon} />
+          <Icon icon={HEART_ICON} size="xlarge" style={styles.icon} />
         </TouchableOpacity>
       </ImageBackground>
       <View
