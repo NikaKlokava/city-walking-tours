@@ -1,7 +1,7 @@
 export const fonts = {
   primary: {
     fontSize: 25,
-    fontFamily: 'Georgia',
+    fontFamily: 'Montserrat Alternates',
   },
   secondary: {
     fontSize: 20,
@@ -9,12 +9,12 @@ export const fonts = {
   },
   tertiary: {
     fontSize: 16,
-    fontFamily: 'Georgia',
+    fontFamily: 'Montserrat Alternates',
     letterSpacing: 1,
   },
   quaternary: {
-    fontSize: 14,
-    fontFamily: 'Georgia',
-    letterSpacing: 1,
+    fontSize: 18,
+    fontFamily: 'Cormorant Garamond',
+    letterSpacing: 0.3,
   },
 };
