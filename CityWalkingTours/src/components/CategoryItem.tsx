@@ -57,7 +57,7 @@ export const CategoryItem = ({
           commonStyles.container,
           liked && styles.likedDescription,
         ])}>
-        <Text type="quaternary" color={colors.active_dark} center={liked}>
+        <Text type="tertiary" color={colors.active_dark} center={liked}>
           {category.title}
         </Text>
         {liked && (
@@ -73,7 +73,7 @@ export const CategoryItem = ({
             commonStyles.flexRow,
           ])}>
           {liked && (
-            <Text type="quaternary" color={colors.active_dark}>
+            <Text type="tertiary" color={colors.active_dark}>
               {category.details.location}
             </Text>
           )}
