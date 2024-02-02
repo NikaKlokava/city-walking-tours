@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
 
@@ -27,7 +27,9 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
 
   return (
     <AppWrapper>
-      <ImageBackground source={image} style={styles.container}>
+      <ImageBackground
+        source={image}
+        style={StyleSheet.flatten([styles.container, commonStyles.container])}>
         {!modalVisible && (
           <>
             <View style={styles.selectBlock}>
@@ -58,7 +60,6 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 80,
     justifyContent: 'space-between',
   },

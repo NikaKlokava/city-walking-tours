@@ -16,6 +16,7 @@ export const SearchBar = ({title, onSelect}: Props) => {
       <FlatList
         data={CATEGORIES}
         horizontal
+        keyExtractor={(_, index) => index.toString()}
         showsHorizontalScrollIndicator={false}
         renderItem={({item, index}) => (
           <TouchableOpacity

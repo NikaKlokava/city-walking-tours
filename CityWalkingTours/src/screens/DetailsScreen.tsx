@@ -4,11 +4,10 @@ import {
   ImageBackground,
   ScrollView,
   StyleSheet,
-  TextStyle,
   View,
 } from 'react-native';
 import {Text} from '../components/base/Text';
-import {DEVICE_HEIGHT, SECTIONS, commonStyles, colors} from '../utils';
+import {commonStyles, colors, PLACE, DEVICE_HEIGHT} from '../utils';
 import {BackBtn} from '../components/BackBtn';
 import {Rating} from '../components/Rating';
 import {Line} from '../components/Line';
@@ -25,23 +24,28 @@ type Props = {
   navigation: NativeStackNavigationProp<any, any>;
 };
 
-export const DetailsScreen = ({navigation}: Props) => {
-  const place = SECTIONS[0].data[0];
-  const Max_Header_Height = DEVICE_HEIGHT * 0.4;
-  const Min_Header_Height = DEVICE_HEIGHT * 0.3;
-  const Scroll_Distance = Max_Header_Height - Min_Header_Height;
+const MAX_HEADER_HEIGHT = DEVICE_HEIGHT * 0.4;
+const MIN_HEADER_HEIGHT = DEVICE_HEIGHT * 0.3;
+const SCROLL_DiISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 
+export const DetailsScreen = ({navigation}: Props) => {
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
 
   const animatedHeaderHeight = scrollOffsetY.interpolate({
-    inputRange: [0, Scroll_Distance],
-    outputRange: [Max_Header_Height, Min_Header_Height],
+    inputRange: [0, SCROLL_DiISTANCE],
+    outputRange: [MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT],
     extrapolate: 'clamp',
   });
 
+  const onHandleScroll = () => {
+    Animated.event([{nativeEvent: {contentOffset: {y: scrollOffsetY}}}], {
+      useNativeDriver: false,
+    });
+  };
+
   return (
     <AppWrapper noPaddingTop>
-      <View style={styles.container}>
+      <View style={StyleSheet.flatten([commonStyles.container])}>
         <Animated.View style={{height: animatedHeaderHeight}}>
           <ImageBackground source={image} style={styles.headerContainer}>
             <View style={styles.backBtnContainer}>
@@ -49,37 +53,35 @@ export const DetailsScreen = ({navigation}: Props) => {
             </View>
             <View style={styles.headerDescription}>
               <Text type="primary" color={colors.primary1}>
-                {place.title}
+                {PLACE.title}
               </Text>
               <View
-                style={StyleSheet.flatten([styles.locationContainer, commonStyles.flexRow])}>
+                style={StyleSheet.flatten([
+                  styles.locationContainer,
+                  commonStyles.flexRow,
+                ])}>
                 <Icon icon={SVG_LOCATION} size="small" />
                 <Text type="quaternary" color={colors.primary1}>
-                  {place.details.location}
+                  {PLACE.details.location}
                 </Text>
               </View>
-              <Rating rating={place.rating} white />
+              <Rating rating={PLACE.rating} white />
             </View>
           </ImageBackground>
         </Animated.View>
 
-        <ScrollView
-          scrollEventThrottle={16}
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
-            {useNativeDriver: false},
-          )}>
+        <ScrollView scrollEventThrottle={16} onScroll={onHandleScroll}>
           <View style={styles.generalInfo}>
             <Line white />
             <Text type="tertiary" color={colors.semi_primary1}>
-              {place.description}
+              {PLACE.description}
             </Text>
             <Line />
           </View>
           <View style={styles.detailsContainer}>
-            <Details title={place.details.location} type="location" />
-            <Details title={place.details.workingHours} type="hours" />
-            <Details title={place.details.site} type="site" />
+            <Details title={PLACE.details.location} type="location" />
+            <Details title={PLACE.details.workingHours} type="hours" />
+            <Details title={PLACE.details.site} type="site" />
           </View>
           <Gallery />
         </ScrollView>
@@ -89,9 +91,6 @@ export const DetailsScreen = ({navigation}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headerContainer: {
     height: '100%',
     justifyContent: 'space-between',

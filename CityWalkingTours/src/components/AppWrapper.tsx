@@ -1,6 +1,6 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {StyleSheet} from 'react-native';
 
 type Props = {
@@ -14,6 +14,7 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
       colors={colors.gradient}
       style={StyleSheet.flatten([
         styles.main,
+        commonStyles.container,
         noPaddingTop && styles.noPadding,
       ])}>
       {children}
@@ -23,7 +24,6 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
     paddingTop: 80,
   },
   noPadding: {

@@ -16,7 +16,11 @@ export const Categories = ({categories, onSelect, city}: Props) => {
     <>
       {categories.map((caregory, index) => (
         <View style={styles.container} key={index}>
-          <View style={StyleSheet.flatten([styles.titleContainer, commonStyles.flexRow])}>
+          <View
+            style={StyleSheet.flatten([
+              styles.titleContainer,
+              commonStyles.flexRow,
+            ])}>
             <Text type="primary" color={colors.primary1}>
               {caregory.title}
             </Text>
@@ -30,6 +34,7 @@ export const Categories = ({categories, onSelect, city}: Props) => {
           <FlatList
             data={caregory.data}
             horizontal
+            keyExtractor={(_, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <CategoryItem category={item} city={city} />

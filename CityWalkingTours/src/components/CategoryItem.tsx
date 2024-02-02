@@ -54,6 +54,7 @@ export const CategoryItem = ({
       <View
         style={StyleSheet.flatten([
           styles.descriptionContainer,
+          commonStyles.container,
           liked && styles.likedDescription,
         ])}>
         <Text type="quaternary" color={colors.active_dark} center={liked}>
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   descriptionContainer: {
-    flex: 1,
     padding: 5,
     paddingHorizontal: 15,
     justifyContent: 'space-around',

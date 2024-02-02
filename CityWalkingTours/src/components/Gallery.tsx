@@ -28,6 +28,7 @@ export const Gallery = () => {
         horizontal
         data={images}
         pagingEnabled
+        keyExtractor={(_, index) => index.toString()}
         onScroll={e => handleImageScroll(e)}
         renderItem={({item}) => <Image source={item} style={styles.image} />}
       />

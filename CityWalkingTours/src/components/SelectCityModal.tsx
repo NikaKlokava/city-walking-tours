@@ -27,7 +27,11 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
       visible={visible}
       onRequestClose={onClose}>
       <View style={styles.modalContainer}>
-        <View style={StyleSheet.flatten([styles.pressContainer, commonStyles.flexRow])}>
+        <View
+          style={StyleSheet.flatten([
+            styles.pressContainer,
+            commonStyles.flexRow,
+          ])}>
           <TouchableOpacity onPress={onClose}>
             <Icon icon={CLOSE_ICON} size="xlarge" />
           </TouchableOpacity>
@@ -36,35 +40,41 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
           </Text>
         </View>
         <FlatList
+          keyExtractor={(_, index) => index.toString()}
           data={CITIES}
-          renderItem={({item}) => {
-            return (
-              <Pressable
-                onPress={() => {
-                  onSelect(item.city);
-                }}>
-                <ImageBackground
-                  style={styles.cityContainer}
-                  source={item.photo}>
-                  <View
-                    style={StyleSheet.flatten([
-                      styles.cityDescription,
-                      commonStyles.flexRow,
-                    ])}>
-                    <Text type={'primary'} color={colors.primary1}>
-                      {item.city}
-                    </Text>
-                    <Text type={'tertiary'} color={colors.primary1}>
-                      {item.country}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </Pressable>
-            );
-          }}
+          renderItem={({item}) => <CityItem item={item} onSelect={onSelect} />}
         />
       </View>
     </Modal>
+  );
+};
+
+type CityType = {
+  item: {city: string; country: string; photo: any};
+  onSelect: (city: string) => void;
+};
+
+const CityItem = ({item, onSelect}: CityType) => {
+  return (
+    <Pressable
+      onPress={() => {
+        onSelect(item.city);
+      }}>
+      <ImageBackground style={styles.cityContainer} source={item.photo}>
+        <View
+          style={StyleSheet.flatten([
+            styles.cityDescription,
+            commonStyles.flexRow,
+          ])}>
+          <Text type={'primary'} color={colors.primary1}>
+            {item.city}
+          </Text>
+          <Text type={'tertiary'} color={colors.primary1}>
+            {item.country}
+          </Text>
+        </View>
+      </ImageBackground>
+    </Pressable>
   );
 };
 

@@ -35,8 +35,12 @@ export const Onboarding = ({onSubmit}: Props) => {
 
   return (
     <AppWrapper>
-      <View style={styles.mainContainer}>
-        <View style={styles.imageContainer}>
+      <View
+        style={StyleSheet.flatten([
+          styles.mainContainer,
+          commonStyles.container,
+        ])}>
+        <View style={StyleSheet.flatten([commonStyles.container])}>
           <FlatList
             data={DATA}
             horizontal
@@ -62,7 +66,11 @@ export const Onboarding = ({onSubmit}: Props) => {
             }}
           />
         </View>
-        <View style={StyleSheet.flatten([styles.dottsContainer, commonStyles.flexRow])}>
+        <View
+          style={StyleSheet.flatten([
+            styles.dottsContainer,
+            commonStyles.flexRow,
+          ])}>
           {currentIndex === DATA.length - 1 ? (
             <StyledBtn
               title="Get Started"
@@ -82,11 +90,7 @@ export const Onboarding = ({onSubmit}: Props) => {
 };
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
     marginTop: 110,
-  },
-  imageContainer: {
-    flex: 1,
   },
   listContainer: {
     width: DEVICE_WIDTH,

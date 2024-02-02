@@ -15,6 +15,7 @@ import SVG_SETTINGS from '../assets/icons/settings.svg';
 import SVG_HOURS from '../assets/icons/hours.svg';
 import SVG_WEB from '../assets/icons/web.svg';
 import SVG_LOCATION from '../assets/icons/location.svg';
+import {DEVICE_HEIGHT} from '.';
 
 const icons = {
   ICON_0: 'ICON_0',
@@ -160,3 +161,5 @@ export const detailsDescription = {
   [svgs.hours]: 'open',
   [svgs.site]: 'site',
 };
+
+export const PLACE = SECTIONS[0].data[0];

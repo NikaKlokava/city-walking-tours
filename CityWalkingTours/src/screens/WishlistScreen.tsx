@@ -15,9 +15,9 @@ export const WishlistScreen = () => {
             Wishlist
           </Text>
           <View style={styles.itemsContainer}>
-            {WISHLIST_DATA.map(item => {
+            {WISHLIST_DATA.map((item, index) => {
               return (
-                <View style={styles.itemsContainer}>
+                <View style={styles.itemsContainer} key={index}>
                   <CategoryItem category={item} city={'Vilno'} liked />
                   <Line white />
                 </View>

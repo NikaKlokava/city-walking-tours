@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {SECTIONS, colors, commonStyles} from '../utils';
 import {Text} from '../components/base/Text';
@@ -8,14 +8,9 @@ import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
 import {AppWrapper} from '../components/AppWrapper';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import SEARCH_ICON from '../assets/icons/search.svg';
 
-type Props = {
-  navigation: NativeStackNavigationProp<any, any>;
-};
-
-export const HomeScreen = ({navigation}: Props) => {
+export const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
 
   const {city}: {city: string} = {city: 'Vilnius'};
@@ -27,9 +22,14 @@ export const HomeScreen = ({navigation}: Props) => {
 
   return (
     <AppWrapper>
-      <View style={styles.container}>
+      <View
+        style={StyleSheet.flatten([styles.container, commonStyles.container])}>
         <View style={styles.headerContainer}>
-          <View style={StyleSheet.flatten([styles.cityContainer, commonStyles.flexRow])}>
+          <View
+            style={StyleSheet.flatten([
+              styles.cityContainer,
+              commonStyles.flexRow,
+            ])}>
             <Text type="tertiary" center color={colors.semi_primary1}>
               city:
             </Text>
@@ -41,7 +41,11 @@ export const HomeScreen = ({navigation}: Props) => {
         <Line />
         <ScrollView>
           <View style={styles.scrollContainer}>
-            <View style={StyleSheet.flatten([styles.inputContainer, commonStyles.flexRow])}>
+            <View
+              style={StyleSheet.flatten([
+                styles.inputContainer,
+                commonStyles.flexRow,
+              ])}>
               <TextInput
                 style={styles.searchInput}
                 placeholder="What do you want to find?"
@@ -71,7 +75,6 @@ export const HomeScreen = ({navigation}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 10,
   },
   headerContainer: {
