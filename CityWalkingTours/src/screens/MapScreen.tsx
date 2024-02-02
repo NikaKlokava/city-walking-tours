@@ -1,14 +1,14 @@
 import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from '../components/base/Text';
-import {colors} from '../utils';
+import {colors, commonStyles} from '../utils';
 
 export const MapScreen = () => {
   return (
     <AppWrapper>
-      <View style={{flex: 1}}>
-        <Text type={'primary'} color={colors.primary3} center>
+      <View style={StyleSheet.flatten([commonStyles.container])}>
+        <Text type={'primary'} color={colors.active_bright} center>
           Map
         </Text>
       </View>

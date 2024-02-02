@@ -5,12 +5,12 @@ import {Text} from './base/Text';
 
 type Props = {
   title: string;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 export const StyledBtn = ({title, onClick}: Props) => (
   <TouchableOpacity style={styles.btnContainer} onPress={onClick}>
-    <Text type="quaternary" style={styles.btnStyle} color={colors.primary3}>
+    <Text type="primary" style={styles.btnStyle} color={colors.active_bright}>
       {title}
     </Text>
   </TouchableOpacity>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     borderWidth: 1,
-    borderColor: colors.primary3,
+    borderColor: colors.active_bright,
     borderRadius: 10,
   },
 });

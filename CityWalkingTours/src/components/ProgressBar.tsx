@@ -13,7 +13,13 @@ export const ProgressBar = ({index, dataLength}: Props) => {
   return (
     <>
       {emptyArray.map((_, i) => (
-        <View key={i} style={[styles.dott, index === i && styles.active]} />
+        <View
+          key={i}
+          style={StyleSheet.flatten([
+            styles.dott,
+            index === i && styles.active,
+          ])}
+        />
       ))}
     </>
   );
@@ -24,7 +30,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderRadius: 10,
-    backgroundColor: colors.primary3,
+    backgroundColor: colors.active_bright,
     opacity: 0.4,
   },
   active: {

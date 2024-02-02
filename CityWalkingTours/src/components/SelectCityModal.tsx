@@ -9,10 +9,9 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {CITIES, colors, flexRow} from '../utils';
+import {CITIES, colors, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
-
-const image2 = require('../assets/close.png');
+import CLOSE_ICON from '../assets/icons/close.svg';
 
 type Props = {
   visible: boolean;
@@ -28,40 +27,54 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
       visible={visible}
       onRequestClose={onClose}>
       <View style={styles.modalContainer}>
-        <View style={[styles.pressContainer, flexRow]}>
+        <View
+          style={StyleSheet.flatten([
+            styles.pressContainer,
+            commonStyles.flexRow,
+          ])}>
           <TouchableOpacity onPress={onClose}>
-            <Icon source={image2} size="xlarge" />
+            <Icon icon={CLOSE_ICON} size="xlarge" />
           </TouchableOpacity>
           <Text type="primary" color={colors.primary1} center>
             Select your city
           </Text>
         </View>
         <FlatList
+          keyExtractor={(_, index) => index.toString()}
           data={CITIES}
-          renderItem={({item}) => {
-            return (
-              <Pressable
-                onPress={() => {
-                  onSelect(item.city);
-                }}>
-                <ImageBackground
-                  style={styles.cityContainer}
-                  source={item.photo}>
-                  <View style={[styles.cityDescription, flexRow]}>
-                    <Text type={'primary'} color={colors.primary1}>
-                      {item.city}
-                    </Text>
-                    <Text type={'tertiary'} color={colors.primary1}>
-                      {item.country}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </Pressable>
-            );
-          }}
+          renderItem={({item}) => <CityItem item={item} onSelect={onSelect} />}
         />
       </View>
     </Modal>
+  );
+};
+
+type CityType = {
+  item: {city: string; country: string; photo: any};
+  onSelect: (city: string) => void;
+};
+
+const CityItem = ({item, onSelect}: CityType) => {
+  return (
+    <Pressable
+      onPress={() => {
+        onSelect(item.city);
+      }}>
+      <ImageBackground style={styles.cityContainer} source={item.photo}>
+        <View
+          style={StyleSheet.flatten([
+            styles.cityDescription,
+            commonStyles.flexRow,
+          ])}>
+          <Text type={'primary'} color={colors.primary1}>
+            {item.city}
+          </Text>
+          <Text type={'tertiary'} color={colors.primary1}>
+            {item.country}
+          </Text>
+        </View>
+      </ImageBackground>
+    </Pressable>
   );
 };
 
@@ -73,9 +86,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     rowGap: 10,
-    borderColor: colors.primary3,
+    borderColor: colors.active_bright,
     borderRadius: 20,
-    backgroundColor: colors.primary5,
+    backgroundColor: colors.active_dark,
   },
   cityContainer: {
     marginVertical: 10,
@@ -84,7 +97,7 @@ const styles = StyleSheet.create({
   },
   cityDescription: {
     justifyContent: 'space-between',
-    backgroundColor: colors.primary5,
+    backgroundColor: colors.active_dark,
   },
   pressContainer: {
     columnGap: 20,

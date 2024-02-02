@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
-import {colors, flexRow} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {Line} from './Line';
 import {CategoryItem} from './CategoryItem';
 
@@ -16,18 +16,16 @@ export const Categories = ({categories, onSelect, city}: Props) => {
     <>
       {categories.map((caregory, index) => (
         <View style={styles.container} key={index}>
-          <View style={[styles.titleContainer, flexRow]}>
+          <View
+            style={StyleSheet.flatten([
+              styles.titleContainer,
+              commonStyles.flexRow,
+            ])}>
             <Text type="primary" color={colors.primary1}>
               {caregory.title}
             </Text>
-            <TouchableOpacity
-              onPress={e => {
-                onSelect(caregory.title);
-              }}>
-              <Text
-                type="secondary"
-                color={colors.primary1}
-                style={styles.opacity}>
+            <TouchableOpacity onPress={() => onSelect(caregory.title)}>
+              <Text type="secondary" color={colors.semi_primary1}>
                 see all
               </Text>
             </TouchableOpacity>
@@ -36,6 +34,7 @@ export const Categories = ({categories, onSelect, city}: Props) => {
           <FlatList
             data={caregory.data}
             horizontal
+            keyExtractor={(_, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <CategoryItem category={item} city={city} />
@@ -52,5 +51,4 @@ const styles = StyleSheet.create({
     rowGap: 25,
   },
   titleContainer: {justifyContent: 'space-between'},
-  opacity: {opacity: 0.7},
 });

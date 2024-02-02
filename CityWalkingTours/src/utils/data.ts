@@ -1,18 +1,21 @@
-import { tabs } from "../navigation";
+import {tabs} from '../navigation';
 
-const image1 = require('../assets/home_welcome.png');
-const image2 = require('../assets/home_attract.png');
-const image3 = require('../assets/home_food.png');
-const image4 = require('../assets/home_shopping.png');
-const image5 = require('../assets/home_get_started.png');
+import SVG_SEE_ALL from '../assets/icons/see_all.svg';
+import SVG_CAMERA from '../assets/icons/camera.svg';
+import SVG_CAFE from '../assets/icons/cafe.svg';
+import SVG_MUSEUM from '../assets/icons/museum.svg';
+import SVG_PARK from '../assets/icons/park.svg';
+import SVG_SHOPPING from '../assets/icons/shopping.svg';
 
-const photo1 = require('../assets/viln.png');
-const photo2 = require('../assets/wars.png');
-const photo3 = require('../assets/riga.png');
-const photo4 = require('../assets/tallinn.png');
-const photo5 = require('../assets/hrod.png');
+import SVG_HOME from '../assets/icons/home.svg';
+import SVG_WISHLIST from '../assets/icons/wishlist.svg';
+import SVG_MAP from '../assets/icons/map.svg';
+import SVG_SETTINGS from '../assets/icons/settings.svg';
 
-const sodas = require('../assets/sodas.png');
+import SVG_HOURS from '../assets/icons/hours.svg';
+import SVG_WEB from '../assets/icons/web.svg';
+import SVG_LOCATION from '../assets/icons/location.svg';
+import {DEVICE_HEIGHT} from '.';
 
 const icons = {
   ICON_0: 'ICON_0',
@@ -27,47 +30,44 @@ const icons = {
 };
 
 const searchBarIcons = {
-  [icons.ICON_0]: require('../assets/all_icon.png'),
-  [icons.ICON_1]: require('../assets/attract_icon.png'),
-  [icons.ICON_2]: require('../assets/museum_icon.png'),
-  [icons.ICON_3]: require('../assets/shop_icon.png'),
-  [icons.ICON_4]: require('../assets/park_icon.png'),
-  [icons.ICON_5]: require('../assets/cafe_icon.png'),
-  [icons.ICON_6]: require('../assets/cafe_icon.png'),
-  [icons.ICON_7]: require('../assets/cafe_icon.png'),
-  [icons.ICON_8]: require('../assets/cafe_icon.png'),
+  [icons.ICON_0]: SVG_SEE_ALL,
+  [icons.ICON_1]: SVG_CAMERA,
+  [icons.ICON_2]: SVG_CAFE,
+  [icons.ICON_3]: SVG_MUSEUM,
+  [icons.ICON_4]: SVG_PARK,
+  [icons.ICON_5]: SVG_SHOPPING,
 };
 
 export const DATA = [
   {
-    image: image1,
+    image: require('../assets/images/home_welcome.png'),
     title: 'Welcome to \n CITY WALKING TOURS!',
     description: "We'll make your trip bright and comfortable!",
     key: 1,
   },
   {
-    image: image2,
+    image: require('../assets/images/home_attract.png'),
     title: 'Explore new horizons',
     description:
       'Discover the best and most popular attractions and capture those moments!',
     key: 2,
   },
   {
-    image: image3,
+    image: require('../assets/images/home_food.png'),
     title: 'Feel the best tastes',
     description:
       'Choose for yourself the best cafes and restaurants that will leave the most pleasant aftertaste!',
     key: 3,
   },
   {
-    image: image4,
+    image: require('../assets/images/home_shopping.png'),
     title: 'Make your shopping experience enjoyable',
     description:
       'Explore the most popular shopping centers that will make your shopping faster and easier.!',
     key: 4,
   },
   {
-    image: image5,
+    image: require('../assets/images/home_get_started.png'),
     title: 'Escape the ordinary life',
     description:
       'Discover great experiences around you and make you live interesting!',
@@ -76,20 +76,40 @@ export const DATA = [
 ];
 
 export const CITIES = [
-  {city: 'VILNIUS', country: 'Lithuania', photo: photo1},
-  {city: 'WARSAW', country: 'Poland', photo: photo2},
-  {city: 'RIGA', country: 'Latvia', photo: photo3},
-  {city: 'TALLINN', country: 'Estonia', photo: photo4},
-  {city: 'HRODNA', country: 'Belarus', photo: photo5},
+  {
+    city: 'VILNIUS',
+    country: 'Lithuania',
+    photo: require('../assets/images/viln.png'),
+  },
+  {
+    city: 'WARSAW',
+    country: 'Poland',
+    photo: require('../assets/images/wars.png'),
+  },
+  {
+    city: 'RIGA',
+    country: 'Latvia',
+    photo: require('../assets/images/riga.png'),
+  },
+  {
+    city: 'TALLINN',
+    country: 'Estonia',
+    photo: require('../assets/images/tallinn.png'),
+  },
+  {
+    city: 'HRODNA',
+    country: 'Belarus',
+    photo: require('../assets/images/hrod.png'),
+  },
 ];
 
-export const SECTIONS: CategoriesType = Array.from({length: 8}, (_, i) => {
+export const SECTIONS: CategoriesType = Array.from({length: 5}, (_, i) => {
   return {
     title: `Category ${i + 1}`,
     data: Array.from({length: 10}, () => {
       return {
         title: 'Item title',
-        image: sodas,
+        image: require('../assets/images/sodas.png'),
         rating: '4.8',
         details: {
           location: 'Location str, 34',
@@ -118,8 +138,28 @@ export const WISHLIST_DATA = SECTIONS[0].data.reduce(
 );
 
 export const tabBarIcons = {
-  [tabs.HOME]: require('../assets/home.png'),
-  [tabs.WISHES]: require('../assets/wishlist.png'),
-  [tabs.MAP]: require('../assets/map.png'),
-  [tabs.SETTINGS]: require('../assets/settings.png'),
+  [tabs.HOME]: SVG_HOME,
+  [tabs.WISHES]: SVG_WISHLIST,
+  [tabs.MAP]: SVG_MAP,
+  [tabs.SETTINGS]: SVG_SETTINGS,
 };
+
+const svgs = {
+  location: 'location',
+  hours: 'hours',
+  site: 'site',
+};
+
+export const detailsSvgs = {
+  [svgs.location]: SVG_LOCATION,
+  [svgs.hours]: SVG_HOURS,
+  [svgs.site]: SVG_WEB,
+};
+
+export const detailsDescription = {
+  [svgs.location]: 'location',
+  [svgs.hours]: 'open',
+  [svgs.site]: 'site',
+};
+
+export const PLACE = SECTIONS[0].data[0];

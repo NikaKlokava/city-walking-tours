@@ -11,13 +11,13 @@ export const WishlistScreen = () => {
     <AppWrapper>
       <ScrollView>
         <View style={styles.container}>
-          <Text type={'primary'} color={colors.primary3} center>
+          <Text type={'primary'} color={colors.active_bright} center>
             Wishlist
           </Text>
           <View style={styles.itemsContainer}>
-            {WISHLIST_DATA.map(item => {
+            {WISHLIST_DATA.map((item, index) => {
               return (
-                <View style={styles.itemsContainer}>
+                <View style={styles.itemsContainer} key={index}>
                   <CategoryItem category={item} city={'Vilno'} liked />
                   <Line white />
                 </View>

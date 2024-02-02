@@ -1,17 +1,16 @@
 import React from 'react';
 import {Image, ImageSourcePropType, ImageProps, StyleSheet} from 'react-native';
 import {iconSize} from '../../utils';
+import {SvgProps} from 'react-native-svg';
 
 type Props = {
-  source: ImageSourcePropType;
+  icon: React.FC<SvgProps>;
   size: 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge' | 'xxxlarge';
 } & ImageProps;
 
 export const Icon = (props: Props) => {
+  const SVG = props.icon;
   return (
-    <Image
-      source={props.source}
-      style={StyleSheet.flatten([props.style, iconSize[props.size]])}
-    />
+    <SVG style={StyleSheet.flatten([props.style, iconSize[props.size]])} />
   );
 };
