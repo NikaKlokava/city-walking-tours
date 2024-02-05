@@ -1,16 +1,26 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
+import {AppWrapper} from '../components/AppWrapper';
+
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {SECTIONS, colors, commonStyles} from '../utils';
-import {Text} from '../components/base/Text';
-import {Line} from '../components/Line';
-import {SearchBar} from '../components/SearchBar';
+import {lazy, useState} from 'react';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
 import {Icon} from '../components/base/Icon';
-import {AppWrapper} from '../components/AppWrapper';
+import {Line} from '../components/Line';
+import {SearchBar} from '../components/SearchBar';
+import {Text} from '../components/base/Text';
 import SEARCH_ICON from '../assets/icons/search.svg';
 
 export const HomeScreen = () => {
+  return (
+    <AppWrapper>
+      <LazyHomeContent />
+    </AppWrapper>
+  );
+};
+
+const HomeContent = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
 
   const {city}: {city: string} = {city: 'Vilnius'};
@@ -19,59 +29,58 @@ export const HomeScreen = () => {
     const category = SECTIONS.find(section => section.title === title);
     setSelectedCategory(category);
   };
-
   return (
-    <AppWrapper>
-      <View
-        style={StyleSheet.flatten([styles.container, commonStyles.container])}>
-        <View style={styles.headerContainer}>
+    <View
+      style={StyleSheet.flatten([styles.container, commonStyles.container])}>
+      <View style={styles.headerContainer}>
+        <View
+          style={StyleSheet.flatten([
+            styles.cityContainer,
+            commonStyles.flexRow,
+          ])}>
+          <Text type="tertiary" center color={colors.semi_primary1}>
+            city:
+          </Text>
+          <Text type="primary" center color={colors.primary1}>
+            {city}
+          </Text>
+        </View>
+      </View>
+      <Line />
+      <ScrollView>
+        <View style={styles.scrollContainer}>
           <View
             style={StyleSheet.flatten([
-              styles.cityContainer,
+              styles.inputContainer,
               commonStyles.flexRow,
             ])}>
-            <Text type="tertiary" center color={colors.semi_primary1}>
-              city:
-            </Text>
-            <Text type="primary" center color={colors.primary1}>
-              {city}
-            </Text>
-          </View>
-        </View>
-        <Line />
-        <ScrollView>
-          <View style={styles.scrollContainer}>
-            <View
-              style={StyleSheet.flatten([
-                styles.inputContainer,
-                commonStyles.flexRow,
-              ])}>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="What do you want to find?"
-                placeholderTextColor={colors.semi_primary1}
-              />
-              <Icon icon={SEARCH_ICON} size="medium" />
-            </View>
-            <SearchBar
-              onSelect={handleCategorySelect}
-              title={selectedCategory?.title}
+            <TextInput
+              style={styles.searchInput}
+              placeholder="What do you want to find?"
+              placeholderTextColor={colors.semi_primary1}
             />
-            {selectedCategory ? (
-              <SelectedCategory category={selectedCategory} city={city} />
-            ) : (
-              <Categories
-                city={city}
-                categories={SECTIONS}
-                onSelect={handleCategorySelect}
-              />
-            )}
+            <Icon icon={SEARCH_ICON} size="medium" />
           </View>
-        </ScrollView>
-      </View>
-    </AppWrapper>
+          <SearchBar
+            onSelect={handleCategorySelect}
+            title={selectedCategory?.title}
+          />
+          {selectedCategory ? (
+            <SelectedCategory category={selectedCategory} city={city} />
+          ) : (
+            <Categories
+              city={city}
+              categories={SECTIONS}
+              onSelect={handleCategorySelect}
+            />
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
+
+const LazyHomeContent = lazy(async () => ({default: HomeContent}));
 
 const styles = StyleSheet.create({
   container: {

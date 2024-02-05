@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -7,7 +7,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {StyledBtn} from './StyledBtn';
+import SplashScreen from 'react-native-splash-screen';
+import {StyledBtn} from '../components/StyledBtn';
 import {
   DEVICE_HEIGHT,
   DEVICE_WIDTH,
@@ -16,10 +17,10 @@ import {
   getIndex,
   commonStyles,
 } from '../utils';
-import {Text} from './base/Text';
-import {Line} from './Line';
-import {ProgressBar} from './ProgressBar';
-import {AppWrapper} from './AppWrapper';
+import {Text} from '../components/base/Text';
+import {Line} from '../components/Line';
+import {ProgressBar} from '../components/ProgressBar';
+import {AppWrapper} from '../components/AppWrapper';
 
 type Props = {
   onSubmit: () => void;
@@ -32,6 +33,10 @@ export const Onboarding = ({onSubmit}: Props) => {
     const index = getIndex(e);
     setCurrentIndex(index);
   };
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <AppWrapper>
