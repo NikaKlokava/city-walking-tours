@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {lazy, useRef} from 'react';
 import {
   Animated,
   ImageBackground,
@@ -29,6 +29,18 @@ const MIN_HEADER_HEIGHT = DEVICE_HEIGHT * 0.3;
 const SCROLL_DiISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 
 export const DetailsScreen = ({navigation}: Props) => {
+  return (
+    <AppWrapper noPaddingTop>
+      <LazyDetailsContent navigation={navigation} />
+    </AppWrapper>
+  );
+};
+
+const DetailsContent = ({
+  navigation,
+}: {
+  navigation: NativeStackNavigationProp<any, any>;
+}) => {
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
 
   const animatedHeaderHeight = scrollOffsetY.interpolate({
@@ -44,51 +56,51 @@ export const DetailsScreen = ({navigation}: Props) => {
   };
 
   return (
-    <AppWrapper noPaddingTop>
-      <View style={StyleSheet.flatten([commonStyles.container])}>
-        <Animated.View style={{height: animatedHeaderHeight}}>
-          <ImageBackground source={image} style={styles.headerContainer}>
-            <View style={styles.backBtnContainer}>
-              <BackBtn onClick={() => navigation.goBack()} />
-            </View>
-            <View style={styles.headerDescription}>
-              <Text type="primary" color={colors.primary1}>
-                {PLACE.title}
-              </Text>
-              <View
-                style={StyleSheet.flatten([
-                  styles.locationContainer,
-                  commonStyles.flexRow,
-                ])}>
-                <Icon icon={SVG_LOCATION} size="small" />
-                <Text type="quaternary" color={colors.primary1}>
-                  {PLACE.details.location}
-                </Text>
-              </View>
-              <Rating rating={PLACE.rating} white />
-            </View>
-          </ImageBackground>
-        </Animated.View>
-
-        <ScrollView scrollEventThrottle={16} onScroll={onHandleScroll}>
-          <View style={styles.generalInfo}>
-            <Line white />
-            <Text type="tertiary" color={colors.semi_primary1}>
-              {PLACE.description}
+    <View style={StyleSheet.flatten([commonStyles.container])}>
+      <Animated.View style={{height: animatedHeaderHeight}}>
+        <ImageBackground source={image} style={styles.headerContainer}>
+          <View style={styles.backBtnContainer}>
+            <BackBtn onClick={() => navigation.goBack()} />
+          </View>
+          <View style={styles.headerDescription}>
+            <Text type="primary" color={colors.primary1}>
+              {PLACE.title}
             </Text>
-            <Line />
+            <View
+              style={StyleSheet.flatten([
+                styles.locationContainer,
+                commonStyles.flexRow,
+              ])}>
+              <Icon icon={SVG_LOCATION} size="small" />
+              <Text type="quaternary" color={colors.primary1}>
+                {PLACE.details.location}
+              </Text>
+            </View>
+            <Rating rating={PLACE.rating} white />
           </View>
-          <View style={styles.detailsContainer}>
-            <Details title={PLACE.details.location} type="location" />
-            <Details title={PLACE.details.workingHours} type="hours" />
-            <Details title={PLACE.details.site} type="site" />
-          </View>
-          <Gallery />
-        </ScrollView>
-      </View>
-    </AppWrapper>
+        </ImageBackground>
+      </Animated.View>
+
+      <ScrollView scrollEventThrottle={16} onScroll={onHandleScroll}>
+        <View style={styles.generalInfo}>
+          <Line white />
+          <Text type="tertiary" color={colors.semi_primary1}>
+            {PLACE.description}
+          </Text>
+          <Line />
+        </View>
+        <View style={styles.detailsContainer}>
+          <Details title={PLACE.details.location} type="location" />
+          <Details title={PLACE.details.workingHours} type="hours" />
+          <Details title={PLACE.details.site} type="site" />
+        </View>
+        <Gallery />
+      </ScrollView>
+    </View>
   );
 };
+
+const LazyDetailsContent = lazy(async () => ({default: DetailsContent}));
 
 const styles = StyleSheet.create({
   headerContainer: {

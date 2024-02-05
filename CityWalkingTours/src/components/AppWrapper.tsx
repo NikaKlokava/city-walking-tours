@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Suspense} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Loader} from './Loader';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors, commonStyles} from '../utils';
-import {StyleSheet} from 'react-native';
+import {colors} from '../utils';
 
 type Props = {
   children: any;
@@ -14,16 +15,16 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
       colors={colors.gradient}
       style={StyleSheet.flatten([
         styles.main,
-        commonStyles.container,
         noPaddingTop && styles.noPadding,
       ])}>
-      {children}
+      <Suspense fallback={<Loader />}>{children}</Suspense>
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
+    flex: 1,
     paddingTop: 80,
   },
   noPadding: {

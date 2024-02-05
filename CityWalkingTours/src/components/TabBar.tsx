@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Icon} from './base/Icon';
-import {tabs} from '../navigation';
 import {colors, commonStyles, tabBarIcons} from '../utils';
 
 export const TabBar = ({state, navigation}: BottomTabBarProps) => {
