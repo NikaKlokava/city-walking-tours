@@ -6,7 +6,7 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   category: CategotyType;
-  city: string;
+  city: string | null;
 };
 export const SelectedCategory = ({category, city}: Props) => {
   return (

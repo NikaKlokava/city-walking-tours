@@ -21,7 +21,7 @@ type Props = {
   category: CategotyItemType;
   verticalScroll?: boolean;
   liked?: boolean;
-  city: string;
+  city: string | null;
 };
 
 export const CategoryItem = ({

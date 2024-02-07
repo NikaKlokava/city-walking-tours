@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
@@ -11,6 +11,8 @@ import {Line} from '../components/Line';
 import {SearchBar} from '../components/SearchBar';
 import {Text} from '../components/base/Text';
 import SEARCH_ICON from '../assets/icons/search.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSettingsContext} from '../context/settings-context';
 
 export const HomeScreen = () => {
   return (
@@ -21,9 +23,9 @@ export const HomeScreen = () => {
 };
 
 const HomeContent = () => {
-  const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
+  const context = useSettingsContext();
 
-  const {city}: {city: string} = {city: 'Vilnius'};
+  const [selectedCategory, setSelectedCategory] = useState<CategotyType>();
 
   const handleCategorySelect = (title: string) => {
     const category = SECTIONS.find(section => section.title === title);
@@ -42,7 +44,7 @@ const HomeContent = () => {
             city:
           </Text>
           <Text type="primary" center color={colors.primary1}>
-            {city}
+            {context.data.city}
           </Text>
         </View>
       </View>
@@ -66,10 +68,13 @@ const HomeContent = () => {
             title={selectedCategory?.title}
           />
           {selectedCategory ? (
-            <SelectedCategory category={selectedCategory} city={city} />
+            <SelectedCategory
+              category={selectedCategory}
+              city={context.data.city}
+            />
           ) : (
             <Categories
-              city={city}
+              city={context.data.city}
               categories={SECTIONS}
               onSelect={handleCategorySelect}
             />

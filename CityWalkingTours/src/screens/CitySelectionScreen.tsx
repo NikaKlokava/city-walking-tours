@@ -1,18 +1,24 @@
-import React, {useState} from 'react';
+import React, {lazy, useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
 import {colors, commonStyles} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
+import {useSettingsContext} from '../context/settings-context';
 
 const image = require('../assets/images/city.png');
 
-type Props = {
-  onSelect: (city: string) => void;
+export const CitySelectionScreen = () => {
+  return (
+    <AppWrapper>
+      <LazyCitySelectionContent />
+    </AppWrapper>
+  );
 };
+const CitySelectionContent = () => {
+  const context = useSettingsContext();
 
-export const CitySelectionScreen = ({onSelect}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCity, setCurrentCity] = useState<string>('');
 
@@ -26,7 +32,7 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
   };
 
   return (
-    <AppWrapper>
+    <>
       <ImageBackground
         source={image}
         style={StyleSheet.flatten([styles.container, commonStyles.container])}>
@@ -44,7 +50,10 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
               )}
             </View>
             {currentCity && (
-              <StyledBtn title="NEXT" onClick={() => onSelect(currentCity)} />
+              <StyledBtn
+                title="NEXT"
+                onClick={() => context.updateCity?.(currentCity)}
+              />
             )}
           </>
         )}
@@ -54,13 +63,18 @@ export const CitySelectionScreen = ({onSelect}: Props) => {
         onClose={handleModalClose}
         onSelect={handleSelectCity}
       />
-    </AppWrapper>
+    </>
   );
 };
 
+const LazyCitySelectionContent = lazy(async () => ({
+  default: CitySelectionContent,
+}));
+
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 80,
+    paddingTop: 20,
+    paddingBottom: 50,
     justifyContent: 'space-between',
   },
   selectBlock: {
