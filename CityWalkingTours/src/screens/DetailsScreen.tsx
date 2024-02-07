@@ -26,7 +26,7 @@ type Props = {
 
 const MAX_HEADER_HEIGHT = DEVICE_HEIGHT * 0.4;
 const MIN_HEADER_HEIGHT = DEVICE_HEIGHT * 0.3;
-const SCROLL_DiISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
+const SCROLL_DISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 
 export const DetailsScreen = ({navigation}: Props) => {
   return (
@@ -44,16 +44,10 @@ const DetailsContent = ({
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
 
   const animatedHeaderHeight = scrollOffsetY.interpolate({
-    inputRange: [0, SCROLL_DiISTANCE],
+    inputRange: [0, SCROLL_DISTANCE],
     outputRange: [MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT],
     extrapolate: 'clamp',
   });
-
-  const onHandleScroll = () => {
-    Animated.event([{nativeEvent: {contentOffset: {y: scrollOffsetY}}}], {
-      useNativeDriver: false,
-    });
-  };
 
   return (
     <View style={StyleSheet.flatten([commonStyles.container])}>
@@ -81,7 +75,15 @@ const DetailsContent = ({
         </ImageBackground>
       </Animated.View>
 
-      <ScrollView scrollEventThrottle={16} onScroll={onHandleScroll}>
+      <ScrollView
+        style={{flex: 1}}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
+          {
+            useNativeDriver: false,
+          },
+        )}>
         <View style={styles.generalInfo}>
           <Line white />
           <Text type="tertiary" color={colors.semi_primary1}>

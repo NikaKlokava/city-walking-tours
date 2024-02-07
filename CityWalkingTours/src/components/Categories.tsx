@@ -7,7 +7,7 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   categories: CategoriesType;
-  city: string;
+  city: string | null;
   onSelect: (title: string) => void;
 };
 

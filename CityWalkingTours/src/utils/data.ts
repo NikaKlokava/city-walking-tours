@@ -37,7 +37,7 @@ const searchBarIcons = {
   [icons.ICON_5]: SVG_SHOPPING,
 };
 
-export const DATA = [
+export const ONBOARDING = [
   {
     image: require('../assets/images/home_welcome.png'),
     title: 'Welcome to \n CITY WALKING TOURS!',
@@ -136,6 +136,11 @@ export const WISHLIST_DATA = SECTIONS[0].data.reduce(
   [],
 );
 
+export const SETTINGS = [
+  {name: 'city', description: 'Vilnius'},
+  {name: 'theme', description: 'bright' || 'dark'},
+];
+
 export const tabBarIcons = {
   [tabs.HOME]: SVG_HOME,
   [tabs.WISHES]: SVG_WISHLIST,
@@ -162,3 +167,13 @@ export const detailsDescription = {
 };
 
 export const PLACE = SECTIONS[0].data[0];
+
+const settings = {
+  city: 'city',
+  theme: 'theme',
+};
+
+export const settingsItems = {
+  [settings.city]: 'City',
+  [settings.theme]: 'Theme',
+};
