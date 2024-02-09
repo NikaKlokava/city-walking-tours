@@ -177,3 +177,42 @@ export const settingsItems = {
   [settings.city]: 'City',
   [settings.theme]: 'Theme',
 };
+export const GEOLOCATION_DATA = [
+  {
+    latitude: 54.7113866218967,
+    longitude: 25.261684612317406,
+  },
+  {
+    latitude: 54.71485735297425,
+    longitude: 25.275846675028085,
+  },
+  {
+    latitude: 54.71567408155064,
+    longitude: 25.296793336550085,
+  },
+  {
+    latitude: 54.702582885171516,
+    longitude: 25.267440418804828,
+  },
+  {
+    latitude: 54.688526938246895,
+    longitude: 25.291504051115773,
+  },
+  {
+    latitude: 54.6910448968174,
+    longitude: 25.263778507200954,
+  },
+  {
+    latitude: 54.693445647809085,
+    longitude: 25.27251762356423,
+  },
+];
+const places = {
+  akropolis: 'akropolis',
+  ozas: 'ozas',
+  outlet: 'outlet',
+  japan_park: 'japan_park',
+  gedimin_tower: 'gedimin_tower',
+  national_library: 'national_library',
+  white_bridge: 'white_bridge',
+};
