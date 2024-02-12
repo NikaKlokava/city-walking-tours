@@ -136,11 +136,6 @@ export const WISHLIST_DATA = SECTIONS[0].data.reduce(
   [],
 );
 
-export const SETTINGS = [
-  {name: 'city', description: 'Vilnius'},
-  {name: 'theme', description: 'bright' || 'dark'},
-];
-
 export const tabBarIcons = {
   [tabs.HOME]: SVG_HOME,
   [tabs.WISHES]: SVG_WISHLIST,
@@ -168,15 +163,6 @@ export const detailsDescription = {
 
 export const PLACE = SECTIONS[0].data[0];
 
-const settings = {
-  city: 'city',
-  theme: 'theme',
-};
-
-export const settingsItems = {
-  [settings.city]: 'City',
-  [settings.theme]: 'Theme',
-};
 export const GEOLOCATION_DATA = [
   {
     latitude: 54.7113866218967,
@@ -215,4 +201,14 @@ const places = {
   gedimin_tower: 'gedimin_tower',
   national_library: 'national_library',
   white_bridge: 'white_bridge',
+};
+
+export const settingsItem = {
+  city: 'city',
+  theme: 'Theme',
+};
+
+export const SETTINGS = {
+  [settingsItem.city]: {name: 'City', description: 'Vilnius'},
+  [settingsItem.theme]: {name: 'Theme', description: 'bright' || 'dark'},
 };

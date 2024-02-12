@@ -51,7 +51,7 @@ const DetailsContent = ({
 
   return (
     <View style={StyleSheet.flatten([commonStyles.container])}>
-      <Animated.View style={{height: animatedHeaderHeight}}>
+      <Animated.View style={StyleSheet.flatten({height: animatedHeaderHeight})}>
         <ImageBackground source={image} style={styles.headerContainer}>
           <View style={styles.backBtnContainer}>
             <BackBtn onClick={() => navigation.goBack()} />
@@ -76,7 +76,7 @@ const DetailsContent = ({
       </Animated.View>
 
       <ScrollView
-        style={{flex: 1}}
+        style={StyleSheet.flatten([commonStyles.container])}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
