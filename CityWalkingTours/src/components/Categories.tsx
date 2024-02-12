@@ -36,9 +36,7 @@ export const Categories = ({categories, onSelect, city}: Props) => {
             horizontal
             keyExtractor={(_, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <CategoryItem category={item} city={city} />
-            )}
+            renderItem={({item}) => <CategoryItem category={item} />}
           />
           <Line white />
         </View>

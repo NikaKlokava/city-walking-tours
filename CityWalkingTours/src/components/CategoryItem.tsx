@@ -21,19 +21,13 @@ type Props = {
   category: CategotyItemType;
   verticalScroll?: boolean;
   liked?: boolean;
-  city: string | null;
 };
 
-export const CategoryItem = ({
-  category,
-  verticalScroll,
-  liked,
-  city,
-}: Props) => {
+export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(routes.DETAILS, {city})}
+      onPress={() => navigation.navigate(routes.DETAILS)}
       style={StyleSheet.flatten([
         styles.container,
         verticalScroll && styles.containerV,

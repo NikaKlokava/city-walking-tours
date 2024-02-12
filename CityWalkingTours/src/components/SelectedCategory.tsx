@@ -16,12 +16,7 @@ export const SelectedCategory = ({category, city}: Props) => {
       </Text>
       <View style={styles.itemContainer}>
         {category.data.map((item, index) => (
-          <CategoryItem
-            category={item}
-            key={index}
-            verticalScroll
-            city={city}
-          />
+          <CategoryItem category={item} key={index} verticalScroll />
         ))}
       </View>
     </>
