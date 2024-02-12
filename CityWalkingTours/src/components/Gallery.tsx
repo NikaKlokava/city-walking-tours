@@ -3,6 +3,7 @@ import {
   FlatList,
   Image,
   ImageSourcePropType,
+  LayoutAnimation,
   NativeScrollEvent,
   NativeSyntheticEvent,
   StyleSheet,
@@ -14,10 +15,11 @@ import {ProgressBar} from './ProgressBar';
 const image: ImageSourcePropType = require('../assets/images/gedim.png');
 
 export const Gallery = () => {
-  const [imageIndex, setImageIndex] = useState(1);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const handleImageScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = getIndex(e);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setImageIndex(index);
   };
 
@@ -30,9 +32,20 @@ export const Gallery = () => {
         pagingEnabled
         keyExtractor={(_, index) => index.toString()}
         onScroll={e => handleImageScroll(e)}
-        renderItem={({item}) => <Image source={item} style={styles.image} />}
+        renderItem={({item, index}) => (
+          <View style={styles.imageContainer}>
+            <Image
+              source={item}
+              style={[styles.image, imageIndex === index && styles.other]}
+            />
+          </View>
+        )}
       />
-      <View style={StyleSheet.flatten([styles.progressContainer, commonStyles.flexRow])}>
+      <View
+        style={StyleSheet.flatten([
+          styles.progressContainer,
+          commonStyles.flexRow,
+        ])}>
         <ProgressBar index={imageIndex} dataLength={images.length} />
       </View>
     </View>
@@ -44,12 +57,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     rowGap: 20,
   },
-  image: {
+  imageContainer: {
     height: DEVICE_HEIGHT * 0.3,
     width: DEVICE_WIDTH,
+    justifyContent: 'center',
+  },
+  image: {
+    height: '50%',
+    width: '50%',
+    alignSelf: 'center',
+    opacity: 0.2,
   },
   progressContainer: {
     justifyContent: 'center',
     columnGap: 10,
+  },
+  other: {
+    height: '100%',
+    width: '100%',
+    opacity: 1,
   },
 });
