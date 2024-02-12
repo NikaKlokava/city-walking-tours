@@ -39,7 +39,7 @@ export const MapScreen = () => {
     <AppWrapper noPaddingTop>
       <View style={StyleSheet.flatten([commonStyles.container])}>
         <MapView
-          style={{flex: 1}}
+          style={StyleSheet.flatten([commonStyles.container])}
           initialRegion={{
             latitude: 54.687157,
             longitude: 25.279652,

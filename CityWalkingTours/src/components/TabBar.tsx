@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     height: 90,
   },
   tab: {
+    alignSelf: 'flex-start',
+    paddingVertical: 10,
     opacity: 0.4,
-    paddingBottom: 5,
     borderBottomColor: colors.active_bright,
     borderBottomWidth: 0,
   },
   active: {
     opacity: 1,
-    borderBottomWidth: 2,
+    borderBottomWidth: 3,
   },
 });

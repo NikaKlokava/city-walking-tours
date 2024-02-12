@@ -1,17 +1,16 @@
 import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Text} from '../components/base/Text';
-import {SETTINGS, colors, commonStyles, settingsItems} from '../utils';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {SETTINGS, colors, commonStyles, settingsItem} from '../utils';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon} from '../components/base/Icon';
 import SVG_RIGHT_ARROW from '../assets/icons/right_arrow.svg';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSettingsContext} from '../context/settings-context';
 
 export const SettingsScreen = () => {
   const context = useSettingsContext();
-  const handleSettingsItemPress = async (item: string) => {
 
+  const handleChangeCityPress = async () => {
     context.updateCity?.('');
   };
   return (
@@ -21,28 +20,18 @@ export const SettingsScreen = () => {
         <Text type={'primary'} color={colors.active_bright} center>
           Settings
         </Text>
-        <FlatList
-          keyExtractor={(_, index) => index.toString()}
-          data={SETTINGS}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => handleSettingsItemPress(item.name)}
-              style={StyleSheet.flatten([
-                styles.settingsItem,
-                commonStyles.flexRow,
-              ])}>
-              <Text type="primary" color={colors.primary1}>
-                {settingsItems[item.name]}
-              </Text>
-              <View style={StyleSheet.flatten([commonStyles.flexRow])}>
-                <Text type="quaternary" color={colors.semi_primary1}>
-                  {item.description}
-                </Text>
-                <Icon icon={SVG_RIGHT_ARROW} size={'xlarge'} />
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+        <ScrollView>
+          <SettingsItem
+            title={SETTINGS[settingsItem.city].name}
+            description={context.data.city}
+            onPress={handleChangeCityPress}
+          />
+          <SettingsItem
+            title={SETTINGS[settingsItem.theme].name}
+            description={SETTINGS[settingsItem.theme].description}
+            onPress={() => {}}
+          />
+        </ScrollView>
       </View>
     </AppWrapper>
   );
@@ -59,3 +48,27 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
 });
+
+type Props = {
+  title: string;
+  description: string | null;
+  onPress: () => void;
+};
+
+const SettingsItem = ({title, description, onPress}: Props) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={StyleSheet.flatten([styles.settingsItem, commonStyles.flexRow])}>
+      <Text type="primary" color={colors.primary1}>
+        {title}
+      </Text>
+      <View style={StyleSheet.flatten([commonStyles.flexRow])}>
+        <Text type="quaternary" color={colors.semi_primary1}>
+          {description}
+        </Text>
+        <Icon icon={SVG_RIGHT_ARROW} size={'xlarge'} />
+      </View>
+    </TouchableOpacity>
+  );
+};

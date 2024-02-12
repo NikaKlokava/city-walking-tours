@@ -8,7 +8,8 @@ import {MapStack} from './map';
 import {SettingsStack} from './settings';
 import {TabBar} from '../components/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors} from '../utils';
+import {colors, commonStyles} from '../utils';
+import {StyleSheet} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,13 +17,15 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: 'transparent', // #031F2B
+    background: 'transparent',
   },
 };
 
 export const RootNavigator = () => {
   return (
-    <LinearGradient colors={colors.gradient} style={{flex: 1}}>
+    <LinearGradient
+      colors={colors.gradient}
+      style={StyleSheet.flatten([commonStyles.container])}>
       <NavigationContainer theme={MyTheme}>
         <Tab.Navigator
           tabBar={props => <TabBar {...props} />}
