@@ -4,7 +4,13 @@ import {StyleSheet, View} from 'react-native';
 import {GEOLOCATION_DATA, colors, commonStyles} from '../utils';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import {
+  useNavigation,
+  ParamListBase,
+  NavigationProp,
+} from '@react-navigation/native';
 import {Text} from '../components/base/Text';
+import {routes} from '../navigation';
 
 type LocationType = {
   latitude: number;
@@ -17,6 +23,8 @@ type LocationType = {
 };
 
 export const MapScreen = () => {
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
+
   const [currentLocation, setCurrentLocation] = useState<LocationType>();
 
   useEffect(() => {
@@ -55,9 +63,10 @@ export const MapScreen = () => {
               coordinate={{latitude: item.latitude, longitude: item.longitude}}
               image={{uri: 'location'}}
               title="Location">
-              <Callout>
-                {/* need for onPress*/}
-                <Text type="tertiary" color={colors.semi_primary2}>
+              <Callout
+                style={styles.description}
+                onPress={() => navigation.navigate(routes.DETAILS)}>
+                <Text type="quaternary" color={colors.semi_primary2}>
                   Read more...
                 </Text>
               </Callout>
@@ -68,3 +77,10 @@ export const MapScreen = () => {
     </AppWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  description: {
+    // padding: 10,
+    // backgroundColor: 'pink',
+  },
+});

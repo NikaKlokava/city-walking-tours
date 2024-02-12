@@ -18,4 +18,4 @@ export const MapStack = () => {
       <Stack.Screen name={routes.DETAILS} component={DetailsScreen} />
     </Stack.Navigator>
   );
-}; // map, details
+};
