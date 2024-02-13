@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageSourcePropType, ImageProps, StyleSheet} from 'react-native';
+import {ImageProps, StyleSheet} from 'react-native';
 import {iconSize} from '../../utils';
 import {SvgProps} from 'react-native-svg';
 
