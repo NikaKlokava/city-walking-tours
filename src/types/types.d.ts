@@ -13,3 +13,12 @@ declare type CategotyType = {
 };
 
 declare type CategoriesType = CategotyType[];
+
+
+declare type CityType = {
+  city: string,
+  country: string,
+  photo: string
+}
+
+declare type CitiesType = CityType[]

@@ -11,7 +11,6 @@ import {Line} from '../components/Line';
 import {SearchBar} from '../components/SearchBar';
 import {Text} from '../components/base/Text';
 import SEARCH_ICON from '../assets/icons/search.svg';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSettingsContext} from '../context/settings-context';
 
 export const HomeScreen = () => {

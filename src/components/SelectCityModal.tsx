@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   ImageBackground,
@@ -12,6 +12,10 @@ import {Text} from './base/Text';
 import {CITIES, colors, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import CLOSE_ICON from '../assets/icons/close.svg';
+import firestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
+import uploadBytes from '@react-native-firebase/storage';
 
 type Props = {
   visible: boolean;
@@ -20,6 +24,19 @@ type Props = {
 };
 
 export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
+  const [data, setData] = useState<FirebaseFirestoreTypes.DocumentData[]>();
+
+  useEffect(() => {
+    const getData = async () => {
+      const snapshot = await firestore().collection('cities').get();
+      return snapshot.docs.map(doc => doc.data());
+    };
+    getData().then(res => setData(res));
+    
+    // const reference = storage()
+    //   .ref(data?.[0].photo)
+    
+  }, []);
   return (
     <Modal
       animationType="slide"
