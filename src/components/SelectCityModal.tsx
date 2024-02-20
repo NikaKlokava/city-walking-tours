@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   ImageBackground,
   Modal,
@@ -9,62 +10,53 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {CITIES, colors, commonStyles} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import CLOSE_ICON from '../assets/icons/close.svg';
-import firestore, {
-  FirebaseFirestoreTypes,
-} from '@react-native-firebase/firestore';
-import uploadBytes from '@react-native-firebase/storage';
+import {observer} from 'mobx-react';
+import {useSelectCityStore} from '../context/store';
+import {Loader} from './Loader';
 
 type Props = {
   visible: boolean;
+  data: CitiesType;
   onClose: () => void;
   onSelect: (city: string) => void;
 };
 
-export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
-  const [data, setData] = useState<FirebaseFirestoreTypes.DocumentData[]>();
-
-  useEffect(() => {
-    const getData = async () => {
-      const snapshot = await firestore().collection('cities').get();
-      return snapshot.docs.map(doc => doc.data());
-    };
-    getData().then(res => setData(res));
-    
-    // const reference = storage()
-    //   .ref(data?.[0].photo)
-    
-  }, []);
-  return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}>
-      <View style={styles.modalContainer}>
-        <View
-          style={StyleSheet.flatten([
-            styles.pressContainer,
-            commonStyles.flexRow,
-          ])}>
-          <TouchableOpacity onPress={onClose}>
-            <Icon icon={CLOSE_ICON} size="xlarge" />
-          </TouchableOpacity>
-          <Text type="primary" color={colors.primary1} center>
-            Select your city
-          </Text>
+export const SelectCityModal = observer(
+  ({visible, data, onClose, onSelect}: Props) => {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={visible}
+        onRequestClose={onClose}>
+        <View style={styles.modalContainer}>
+          <View
+            style={StyleSheet.flatten([
+              styles.pressContainer,
+              commonStyles.flexRow,
+            ])}>
+            <TouchableOpacity onPress={onClose}>
+              <Icon icon={CLOSE_ICON} size="xlarge" />
+            </TouchableOpacity>
+            <Text type="primary" color={colors.primary1} center>
+              Select your city
+            </Text>
+          </View>
+          <FlatList
+            keyExtractor={(_, index) => index.toString()}
+            data={data}
+            renderItem={({item}) => (
+              <CityItem item={item} onSelect={onSelect} />
+            )}
+          />
         </View>
-        <FlatList
-          keyExtractor={(_, index) => index.toString()}
-          data={CITIES}
-          renderItem={({item}) => <CityItem item={item} onSelect={onSelect} />}
-        />
-      </View>
-    </Modal>
-  );
-};
+      </Modal>
+    );
+  },
+);
 
 type CityType = {
   item: {city: string; country: string; photo: any};
@@ -77,7 +69,11 @@ const CityItem = ({item, onSelect}: CityType) => {
       onPress={() => {
         onSelect(item.city);
       }}>
-      <ImageBackground style={styles.cityContainer} source={item.photo}>
+      <ImageBackground style={styles.cityContainer} src={item.photo}>
+        {/* <ActivityIndicator
+          style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
+          animating={true}
+        /> */}
         <View
           style={StyleSheet.flatten([
             styles.cityDescription,
