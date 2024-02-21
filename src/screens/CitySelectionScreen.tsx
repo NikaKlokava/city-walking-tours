@@ -1,4 +1,4 @@
-import React, {lazy, useEffect, useState} from 'react';
+import React, {lazy, useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
@@ -6,7 +6,6 @@ import {colors, commonStyles} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
 import {useSettingsContext} from '../context/settings-context';
-import { useSelectCityStore } from '../context/store';
 
 const image = require('../assets/images/city.png');
 
@@ -18,12 +17,6 @@ export const CitySelectionScreen = () => {
   );
 };
 const CitySelectionContent = () => {
-  const {data, isLoading, uploadData} = useSelectCityStore();
-
-  useEffect(() => {
-    uploadData();
-  }, []);
-
   const context = useSettingsContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -69,7 +62,6 @@ const CitySelectionContent = () => {
         visible={modalVisible}
         onClose={handleModalClose}
         onSelect={handleSelectCity}
-        data={data}
       />
     </>
   );

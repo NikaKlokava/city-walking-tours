@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   ImageBackground,
   Modal,
@@ -15,17 +14,24 @@ import {Icon} from './base/Icon';
 import CLOSE_ICON from '../assets/icons/close.svg';
 import {observer} from 'mobx-react';
 import {useSelectCityStore} from '../context/store';
-import {Loader} from './Loader';
+import {BlurView} from '@react-native-community/blur';
+
+const image = require('../assets/images/viln.png');
 
 type Props = {
   visible: boolean;
-  data: CitiesType;
   onClose: () => void;
   onSelect: (city: string) => void;
 };
 
 export const SelectCityModal = observer(
-  ({visible, data, onClose, onSelect}: Props) => {
+  ({visible, onClose, onSelect}: Props) => {
+    const {data, uploadData} = useSelectCityStore();
+
+    useEffect(() => {
+      uploadData();
+    }, []);
+
     return (
       <Modal
         animationType="slide"
@@ -64,16 +70,25 @@ type CityType = {
 };
 
 const CityItem = ({item, onSelect}: CityType) => {
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <Pressable
       onPress={() => {
         onSelect(item.city);
       }}>
-      <ImageBackground style={styles.cityContainer} src={item.photo}>
-        {/* <ActivityIndicator
-          style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
-          animating={true}
-        /> */}
+      <ImageBackground
+        style={styles.cityContainer}
+        src={item.photo}
+        defaultSource={image}
+        onLoadEnd={() => setIsLoading(false)}>
+        {isLoading && (
+          <BlurView
+            style={styles.absolute}
+            blurType="light"
+            blurAmount={10}
+            reducedTransparencyFallbackColor="white"
+          />
+        )}
         <View
           style={StyleSheet.flatten([
             styles.cityDescription,
@@ -114,5 +129,12 @@ const styles = StyleSheet.create({
   },
   pressContainer: {
     columnGap: 20,
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });
