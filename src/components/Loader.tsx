@@ -5,9 +5,11 @@ import {colors} from '../utils';
 
 type Props = {
   absolute?: boolean;
+  white?: boolean;
+  withText?: boolean;
 };
 
-export const Loader = ({absolute}: Props) => {
+export const Loader = ({absolute, white, withText}: Props) => {
   return (
     <View
       style={StyleSheet.flatten([
@@ -15,11 +17,11 @@ export const Loader = ({absolute}: Props) => {
         absolute && styles.absolute,
       ])}>
       <ActivityIndicator
-        color={colors.active_bright}
+        color={white ? colors.semi_primary1 : colors.active_bright}
         size={'large'}
         style={styles.indicator}
       />
-      {!absolute && (
+      {withText && (
         <Text type="primary" color={colors.active_bright}>
           Loading...
         </Text>

@@ -11,18 +11,20 @@ import React, {
 type SettingsContextValueType = {
   data: {
     city: string | null;
+    cityUid: string | null;
     isOnboardingPassed: string | null;
     isLoading: boolean;
   };
 };
 type SettingsContextType = SettingsContextValueType & {
-  updateCity?: (city: string) => void;
+  updateCity?: (city: string, cityUid: string) => void;
   updateOnboarding?: (value: string) => void;
 };
 
 const defaultSettingsValues: SettingsContextValueType = {
   data: {
     city: null,
+    cityUid: null,
     isOnboardingPassed: null,
     isLoading: true,
   },
@@ -56,6 +58,18 @@ export const SettingsContextProvider = ({
       )
       .catch(err => console.log(err));
 
+    AsyncStorage.getItem('CITYUID')
+      .then(result =>
+        setSettings(prev => ({
+          data: {
+            ...prev.data,
+            cityUid: result,
+            isLoading: result ? true : false,
+          },
+        })),
+      )
+      .catch(err => console.log(err));
+
     AsyncStorage.getItem('CITY')
       .then(result =>
         setSettings(prev => ({
@@ -77,7 +91,7 @@ export const SettingsContextProvider = ({
       );
   }, []);
 
-  const updateCity = useCallback((city: string) => {
+  const updateCity = useCallback((city: string, cityUid: string) => {
     setSettings(prev => ({
       data: {
         ...prev.data,
@@ -86,6 +100,7 @@ export const SettingsContextProvider = ({
     }));
 
     AsyncStorage.setItem('CITY', city).catch(err => console.log(err));
+    AsyncStorage.setItem('CITYUID', cityUid).catch(err => console.log(err));
   }, []);
 
   const updateOnboarding = (value: string) => {

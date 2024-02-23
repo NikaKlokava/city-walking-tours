@@ -6,9 +6,8 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   category: CategotyType;
-  city: string | null;
 };
-export const SelectedCategory = ({category, city}: Props) => {
+export const SelectedCategory = ({category}: Props) => {
   return (
     <>
       <Text type="primary" color={colors.primary1} center>

@@ -1,13 +1,19 @@
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {makeObservable, runInAction} from 'mobx';
+import {action, makeObservable, observable, runInAction} from 'mobx';
 
 export class CityStore {
   data: CitiesType = [];
   isLoading = true;
 
   constructor() {
-    makeObservable(this);
+    makeObservable(this, {
+      data: observable,
+      isLoading: observable,
+      uploadCitiesData: action,
+      setData: action,
+      setIsLoading: action,
+    });
   }
 
   uploadCitiesData = async () => {

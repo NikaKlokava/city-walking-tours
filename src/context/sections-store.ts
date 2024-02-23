@@ -1,17 +1,26 @@
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {makeObservable} from 'mobx';
+import {action, makeObservable, observable, runInAction} from 'mobx';
 
 const collectionRef = (uid: string) =>
   firestore().collection('cities').doc(uid).collection('sections');
 
 class SectionsStore {
   sectionsData: any = [];
-  categories: any = [];
+  categories: CategoriesType = [];
   isLoading = true;
 
   constructor() {
-    makeObservable(this);
+    makeObservable(this, {
+      categories: observable,
+      isLoading: observable,
+      sectionsData: observable,
+      uploadCategories: action,
+      uploadSectionsData: action,
+      setCategories: action,
+      setSectionsData: action,
+      setIsLoading: action,
+    });
   }
 
   uploadCategories = async (uid: string) => {
@@ -19,15 +28,24 @@ class SectionsStore {
       const collection = await collectionRef(uid).get();
       const res = collection.docs.map(elem => elem.data());
       const uids = collection.docs.map(elem => elem.id);
-      // this.categories = res as Categories;
+      this.setCategories(res as CategoriesType);
 
       for (let i = 0; i < this.categories.length; i++) {
         const iconRef = storage().ref(this.categories[i].icon);
         const url = await iconRef.getDownloadURL();
-        this.categories[i] = {...this.categories[i], icon: url, uid: uids[i]};
+        runInAction(
+          () =>
+            (this.categories[i] = {
+              ...this.categories[i],
+              icon: url,
+              uid: uids[i],
+            }),
+        );
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      this.setIsLoading(false);
     }
   };
 
@@ -40,6 +58,9 @@ class SectionsStore {
   };
   setSectionsData = (sectionsData: any) => {
     this.sectionsData = sectionsData;
+  };
+  setIsLoading = (value: boolean) => {
+    this.isLoading = value;
   };
 }
 

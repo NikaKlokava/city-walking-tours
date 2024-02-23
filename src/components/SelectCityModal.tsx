@@ -52,7 +52,7 @@ export const SelectCityModal = ({
           </Text>
         </View>
         {isLoading ? (
-          <Loader />
+          <Loader withText/>
         ) : (
           <FlatList
             keyExtractor={(_, index) => index.toString()}

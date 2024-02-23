@@ -7,11 +7,10 @@ import {CategoryItem} from './CategoryItem';
 
 type Props = {
   categories: CategoriesType;
-  city: string | null;
   onSelect: (title: string) => void;
 };
 
-export const Categories = ({categories, onSelect, city}: Props) => {
+export const Categories = ({categories, onSelect}: Props) => {
   return (
     <>
       {categories.map((caregory, index) => (

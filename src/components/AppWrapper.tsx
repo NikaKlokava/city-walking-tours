@@ -25,7 +25,7 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
         styles.main,
         noPaddingTop && styles.noPadding,
       ])}>
-      {context.data.isLoading ? <Loader /> : children}
+      {context.data.isLoading ? <Loader withText /> : children}
     </LinearGradient>
   );
 };

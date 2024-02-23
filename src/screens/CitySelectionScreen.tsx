@@ -16,12 +16,11 @@ export const CitySelectionScreen = observer(({store}: {store: CityStore}) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCity, setCurrentCity] = useState<string>('');
+  const [currentCityUid, setCurrentCityUid] = useState<string>('');
 
   useEffect(() => {
     store.uploadCitiesData();
   }, []);
-
-  console.log(store.data);
 
   const handleModalClose = () => {
     setModalVisible(false);
@@ -30,6 +29,8 @@ export const CitySelectionScreen = observer(({store}: {store: CityStore}) => {
   const handleSelectCity = (city: string) => {
     setCurrentCity(city);
     setModalVisible(false);
+    const cityUid = store.data.find(item => item.city === city)?.uid;
+    cityUid && setCurrentCityUid(cityUid);
   };
 
   return (
@@ -53,7 +54,9 @@ export const CitySelectionScreen = observer(({store}: {store: CityStore}) => {
             {currentCity && (
               <StyledBtn
                 title="NEXT"
-                onClick={() => context.updateCity?.(currentCity)}
+                onClick={() =>
+                  context.updateCity?.(currentCity, currentCityUid)
+                }
               />
             )}
           </>

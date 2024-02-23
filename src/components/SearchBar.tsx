@@ -4,40 +4,50 @@ import {Text} from './base/Text';
 import {CATEGORIES, colors} from '../utils';
 import {Line} from './Line';
 import {Icon} from './base/Icon';
+import {Loader} from './Loader';
 
 type Props = {
   title: string | undefined;
+  categories: CategoriesType;
+  isLoading: boolean;
   onSelect: (title: string) => void;
 };
 
-export const SearchBar = ({title, onSelect}: Props) => {
+export const SearchBar = ({title, isLoading, categories, onSelect}: Props) => {
   return (
     <>
-      <FlatList
-        data={CATEGORIES}
-        horizontal
-        keyExtractor={(_, index) => index.toString()}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({item, index}) => (
-          <TouchableOpacity
-            style={StyleSheet.flatten([
-              styles.categoryItem,
-              title === item.category && styles.active,
-              !title &&
-                CATEGORIES[0].category === item.category &&
-                styles.active,
-            ])}
-            onPress={() => {
-              onSelect(item.category);
-            }}
-            key={index}>
-            <Icon icon={item.icon} size="xxxlarge" />
-            <Text type="quaternary" color={colors.primary1}>
-              {item.category}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <Loader white />
+        </View>
+      ) : (
+        <FlatList
+          data={categories}
+          horizontal
+          keyExtractor={(_, index) => index.toString()}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item, index}) => (
+            <TouchableOpacity
+              style={StyleSheet.flatten([
+                styles.categoryItem,
+                title === item.title && styles.active,
+                !title &&
+                  CATEGORIES[0].category === item.title &&
+                  styles.active,
+              ])}
+              onPress={() => {
+                console.log(item.icon);
+                onSelect(item.title);
+              }}
+              key={index}>
+              <Icon icon={item.icon} size="xxxlarge" />
+              <Text type="quaternary" color={colors.primary1}>
+                {item.title}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+      )}
       <Line />
     </>
   );
@@ -49,9 +59,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginLeft: 0,
     alignItems: 'center',
-    rowGap: 10,
+    rowGap: 6,
     borderBottomWidth: 5,
     borderBottomColor: 'transparent',
+    minHeight: 100,
   },
   active: {borderBottomColor: colors.active_bright},
+  loaderContainer: {minHeight: 100, width: '100%', position: 'relative'},
 });
