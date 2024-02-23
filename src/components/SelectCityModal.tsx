@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   ImageBackground,
@@ -12,45 +12,48 @@ import {Text} from './base/Text';
 import {colors, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import CLOSE_ICON from '../assets/icons/close.svg';
-import {observer} from 'mobx-react';
-import {useSelectCityStore} from '../context/store';
 import {BlurView} from '@react-native-community/blur';
+import {Loader} from './Loader';
 
 const image = require('../assets/images/viln.png');
 
 type Props = {
   visible: boolean;
+  data: CitiesType;
+  isLoading: boolean;
   onClose: () => void;
   onSelect: (city: string) => void;
 };
 
-export const SelectCityModal = observer(
-  ({visible, onClose, onSelect}: Props) => {
-    const {data, uploadData} = useSelectCityStore();
-
-    useEffect(() => {
-      uploadData();
-    }, []);
-
-    return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={visible}
-        onRequestClose={onClose}>
-        <View style={styles.modalContainer}>
-          <View
-            style={StyleSheet.flatten([
-              styles.pressContainer,
-              commonStyles.flexRow,
-            ])}>
-            <TouchableOpacity onPress={onClose}>
-              <Icon icon={CLOSE_ICON} size="xlarge" />
-            </TouchableOpacity>
-            <Text type="primary" color={colors.primary1} center>
-              Select your city
-            </Text>
-          </View>
+export const SelectCityModal = ({
+  visible,
+  data,
+  isLoading,
+  onClose,
+  onSelect,
+}: Props) => {
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onClose}>
+      <View style={styles.modalContainer}>
+        <View
+          style={StyleSheet.flatten([
+            styles.pressContainer,
+            commonStyles.flexRow,
+          ])}>
+          <TouchableOpacity onPress={onClose}>
+            <Icon icon={CLOSE_ICON} size="xlarge" />
+          </TouchableOpacity>
+          <Text type="primary" color={colors.primary1} center>
+            Select your city
+          </Text>
+        </View>
+        {isLoading ? (
+          <Loader />
+        ) : (
           <FlatList
             keyExtractor={(_, index) => index.toString()}
             data={data}
@@ -58,18 +61,18 @@ export const SelectCityModal = observer(
               <CityItem item={item} onSelect={onSelect} />
             )}
           />
-        </View>
-      </Modal>
-    );
-  },
-);
+        )}
+      </View>
+    </Modal>
+  );
+};
 
-type CityType = {
+type CityProps = {
   item: {city: string; country: string; photo: any};
   onSelect: (city: string) => void;
 };
 
-const CityItem = ({item, onSelect}: CityType) => {
+const CityItem = ({item, onSelect}: CityProps) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
     <Pressable

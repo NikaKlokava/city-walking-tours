@@ -14,11 +14,11 @@ declare type CategotyType = {
 
 declare type CategoriesType = CategotyType[];
 
-
 declare type CityType = {
-  city: string,
-  country: string,
-  photo: string
-}
+  city: string;
+  country: string;
+  photo: string;
+  uid: string;
+};
 
-declare type CitiesType = CityType[]
+declare type CitiesType = CityType[];

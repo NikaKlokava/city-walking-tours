@@ -1,8 +1,10 @@
-import React, {Suspense} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {Loader} from './Loader';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors} from '../utils';
+import SplashScreen from 'react-native-splash-screen';
+import {useSettingsContext} from '../context/settings-context';
 
 type Props = {
   children: any;
@@ -10,6 +12,12 @@ type Props = {
 };
 
 export const AppWrapper = ({children, noPaddingTop}: Props) => {
+  const context = useSettingsContext();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <LinearGradient
       colors={colors.gradient}
@@ -17,7 +25,7 @@ export const AppWrapper = ({children, noPaddingTop}: Props) => {
         styles.main,
         noPaddingTop && styles.noPadding,
       ])}>
-      <Suspense fallback={<Loader />}>{children}</Suspense>
+      {context.data.isLoading ? <Loader /> : children}
     </LinearGradient>
   );
 };

@@ -8,6 +8,7 @@ import {
   SettingsContextProvider,
   useSettingsContext,
 } from './src/context/settings-context';
+import { selectCityStore } from './src/context/cities-store';
 
 function App(): React.JSX.Element {
   return (
@@ -25,7 +26,7 @@ const ContextComponent = () => {
   }
 
   if (!context.data.city) {
-    return <CitySelectionScreen />;
+    return <CitySelectionScreen store={selectCityStore}/>;
   }
 
   return <RootNavigator />;
