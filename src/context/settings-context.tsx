@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
   createContext,
-  memo,
   useCallback,
   useContext,
   useEffect,
@@ -13,6 +12,7 @@ type SettingsContextValueType = {
   data: {
     city: string | null;
     isOnboardingPassed: string | null;
+    isLoading: boolean;
   };
 };
 type SettingsContextType = SettingsContextValueType & {
@@ -24,6 +24,7 @@ const defaultSettingsValues: SettingsContextValueType = {
   data: {
     city: null,
     isOnboardingPassed: null,
+    isLoading: true,
   },
 };
 
@@ -49,6 +50,7 @@ export const SettingsContextProvider = ({
           data: {
             ...prev.data,
             isOnboardingPassed: result,
+            isLoading: result ? true : false,
           },
         })),
       )
@@ -60,10 +62,19 @@ export const SettingsContextProvider = ({
           data: {
             ...prev.data,
             city: result,
+            isLoading: result ? true : false,
           },
         })),
       )
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() =>
+        setSettings(prev => ({
+          data: {
+            ...prev.data,
+            isLoading: false,
+          },
+        })),
+      );
   }, []);
 
   const updateCity = useCallback((city: string) => {
