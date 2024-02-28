@@ -19,8 +19,11 @@ export class CityStore {
   uploadCitiesData = async () => {
     try {
       const collection = await firestore().collection('cities').get();
-      const citiesData = collection.docs.map(doc => doc.data());
+      const data = collection.docs.map(doc => doc.data());
       const uids = collection.docs.map(doc => doc.id);
+      const citiesData = data.reduce((accum: CitiesType, curr) => {
+        return [...accum, curr.city];
+      }, []);
       this.setData(citiesData as CitiesType);
 
       for (let i = 0; i < this.data.length; i++) {

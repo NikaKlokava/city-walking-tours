@@ -20,7 +20,7 @@ export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>();
 
   useEffect(() => {
-    context.data.cityUid && store.uploadCategories(context.data.cityUid);
+    context.data.cityUid && store.uploadData(context.data.cityUid);
   }, []);
 
   const handleCategorySelect = (title: string) => {
@@ -69,10 +69,7 @@ export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
             {selectedCategory ? (
               <SelectedCategory category={selectedCategory} />
             ) : (
-              <Categories
-                categories={SECTIONS}
-                onSelect={handleCategorySelect}
-              />
+              <Categories data={store.data} onSelect={handleCategorySelect} isLoading={store.isLoading}/>
             )}
           </View>
         </ScrollView>

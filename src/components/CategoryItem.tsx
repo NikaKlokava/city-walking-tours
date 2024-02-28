@@ -18,7 +18,7 @@ import {routes} from '../navigation';
 import HEART_ICON from '../assets/icons/heart.svg';
 
 type Props = {
-  category: CategotyItemType;
+  category: DataType;
   verticalScroll?: boolean;
   liked?: boolean;
 };
@@ -34,7 +34,7 @@ export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
         liked && styles.likedContainer,
       ])}>
       <ImageBackground
-        source={category.image}
+        src={category.image}
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
         <TouchableOpacity

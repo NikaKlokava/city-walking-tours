@@ -102,21 +102,25 @@ export const CITIES = [
   },
 ];
 
-export const SECTIONS: CategoriesType = Array.from({length: 5}, (_, i) => {
+export const SECTIONS: SectionsDataType = Array.from({length: 5}, (_, i) => {
   return {
-    title: `Category ${i + 1}`,
+    category: {icon: 'lala', title: `Category ${i + 1}`},
     data: Array.from({length: 10}, () => {
       return {
         title: 'Item title',
         image: require('../assets/images/sodas.png'),
         rating: '4.8',
+        liked: false,
         details: {
           location: 'Location str, 34',
-          workingHours: '09:00 AM',
+          hours: '09:00 AM',
           site: 'https://ozas.lt/',
+          coordinates: {
+            latitude: 123,
+            longitude: 234,
+          },
         },
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
-        liked: false,
       };
     }),
   };
@@ -130,7 +134,7 @@ export const CATEGORIES = Array.from({length: SECTIONS.length + 1}, (_, i) => {
 });
 
 export const WISHLIST_DATA = SECTIONS[0].data.reduce(
-  (accum: CategotyItemType[], curr: CategotyItemType) => {
+  (accum: DataType[], curr: DataType) => {
     return [...accum, {...curr, liked: true}];
   },
   [],

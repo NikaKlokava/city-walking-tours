@@ -1,29 +1,45 @@
 // .......................................................... //
+declare type CitiesType = CityType[];
+
 declare type CityType = {
   city: string;
   country: string;
   photo: string;
   uid: string;
 };
-
-declare type CitiesType = CityType[];
-
-// .......................................................... //
-
-declare type CategoryType = {title: string; icon: string; uid: string};
-
-declare type CategoriesType = CategoryType[];
-
 // .......................................................... //
 
 declare type SectionsStore = {
   categories: CategoriesType;
+  data:SectionsDataType;
   isLoading: boolean;
-  sectionsData: [];
-  uploadCategories: (uid: string) => void;
-  uploadSectionsData: (uid: string) => void;
+  uploadData: (uid: string) => void;
 };
+// .......................................................... //
+declare type CategoriesType = CategoryType[];
 
-declare type SectionsData = {}[];
+declare type CategoryType = {icon: string; title: string};
 
 // .......................................................... //
+
+declare type DataType = {
+  title: string;
+  rating: string;
+  liked: boolean;
+  image: string;
+  description: string;
+  details: {
+    location: string;
+    hours: string;
+    site: string;
+    coordinates: {
+      latitude: number;
+      longitude: number;
+    };
+  };
+};
+
+declare type SectionsDataType = {
+  category: CategoryType;
+  data: DataType[];
+}[];
