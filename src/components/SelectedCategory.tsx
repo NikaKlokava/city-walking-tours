@@ -5,13 +5,13 @@ import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
 
 type Props = {
-  category: CategotyType;
+  category: SectionDataType;
 };
 export const SelectedCategory = ({category}: Props) => {
   return (
     <>
       <Text type="primary" color={colors.primary1} center>
-        {category.title}
+        {category.category.title}
       </Text>
       <View style={styles.itemContainer}>
         {category.data.map((item, index) => (

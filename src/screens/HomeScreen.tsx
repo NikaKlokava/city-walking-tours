@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
-import {SECTIONS, colors, commonStyles} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {useState} from 'react';
 import {Categories} from '../components/Categories';
 import {SelectedCategory} from '../components/SelectedCategory';
@@ -13,19 +13,21 @@ import {Text} from '../components/base/Text';
 import SEARCH_ICON from '../assets/icons/search.svg';
 import {useSettingsContext} from '../context/settings-context';
 import {observer} from 'mobx-react';
+import {Loader} from '../components/Loader';
 
 export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
   const context = useSettingsContext();
 
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType>();
+  const [selectedCategory, setSelectedCategory] = useState<SectionDataType>();
 
   useEffect(() => {
     context.data.cityUid && store.uploadData(context.data.cityUid);
   }, []);
 
   const handleCategorySelect = (title: string) => {
-    const category = store.categories.find(item => item.title === title);
-    category && setSelectedCategory(category);
+    const category = store.data.find(item => item.category.title === title);
+    if (!category) setSelectedCategory(undefined);
+    setSelectedCategory(category);
   };
   return (
     <AppWrapper>
@@ -46,33 +48,40 @@ export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
           </View>
         </View>
         <Line />
-        <ScrollView>
-          <View style={styles.scrollContainer}>
-            <View
-              style={StyleSheet.flatten([
-                styles.inputContainer,
-                commonStyles.flexRow,
-              ])}>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="What do you want to find?"
-                placeholderTextColor={colors.semi_primary1}
+        {store.isLoading ? (
+          <Loader />
+        ) : (
+          <ScrollView>
+            <View style={styles.scrollContainer}>
+              <View
+                style={StyleSheet.flatten([
+                  styles.inputContainer,
+                  commonStyles.flexRow,
+                ])}>
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder="What do you want to find?"
+                  placeholderTextColor={colors.semi_primary1}
+                />
+                <Icon icon={SEARCH_ICON} size="medium" />
+              </View>
+              <SearchBar
+                onSelect={handleCategorySelect}
+                title={selectedCategory?.category.title}
+                categories={store.categories}
               />
-              <Icon icon={SEARCH_ICON} size="medium" />
+              {selectedCategory ? (
+                <SelectedCategory category={selectedCategory} />
+              ) : (
+                <Categories
+                  data={store.data}
+                  onSelect={handleCategorySelect}
+                  isLoading={store.isLoading}
+                />
+              )}
             </View>
-            <SearchBar
-              onSelect={handleCategorySelect}
-              title={selectedCategory?.title}
-              categories={store.categories}
-              isLoading={store.isLoading}
-            />
-            {selectedCategory ? (
-              <SelectedCategory category={selectedCategory} />
-            ) : (
-              <Categories data={store.data} onSelect={handleCategorySelect} isLoading={store.isLoading}/>
-            )}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        )}
       </View>
     </AppWrapper>
   );

@@ -11,14 +11,14 @@ declare type CityType = {
 
 declare type SectionsStore = {
   categories: CategoriesType;
-  data:SectionsDataType;
+  data: SectionsDataType;
   isLoading: boolean;
   uploadData: (uid: string) => void;
 };
 // .......................................................... //
 declare type CategoriesType = CategoryType[];
 
-declare type CategoryType = {icon: string; title: string};
+declare type CategoryType = {icon: string | FC<SvgProps>; title: string};
 
 // .......................................................... //
 
@@ -38,8 +38,9 @@ declare type DataType = {
     };
   };
 };
-
-declare type SectionsDataType = {
+declare type SectionDataType = {
   category: CategoryType;
   data: DataType[];
-}[];
+};
+
+declare type SectionsDataType = SectionDataType[];
