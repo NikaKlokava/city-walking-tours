@@ -24,6 +24,7 @@ type Props = {
 };
 
 export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
+  console.log(category);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
     <TouchableOpacity
@@ -56,23 +57,10 @@ export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
         </Text>
         {liked && (
           <Text type="quaternary" color={colors.semi_primary2}>
-            {category.description.slice(0, 90) + `...`}
+            {category.description.slice(0, 70) + `...`}
           </Text>
         )}
-
-        <View
-          style={StyleSheet.flatten([
-            styles.smallDescription,
-            liked && styles.smallLikedDescription,
-            commonStyles.flexRow,
-          ])}>
-          {liked && (
-            <Text type="tertiary" color={colors.active_dark}>
-              {category.details.location}
-            </Text>
-          )}
-          <Rating rating={category.rating} />
-        </View>
+        <Rating rating={category.rating} />
       </View>
     </TouchableOpacity>
   );
@@ -120,11 +108,5 @@ const styles = StyleSheet.create({
   },
   likedDescription: {
     flex: 3,
-  },
-  smallDescription: {
-    justifyContent: 'flex-end',
-  },
-  smallLikedDescription: {
-    justifyContent: 'space-between',
   },
 });
