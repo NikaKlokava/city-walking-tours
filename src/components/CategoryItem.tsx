@@ -24,7 +24,6 @@ type Props = {
 };
 
 export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
-  console.log(category);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   return (
     <TouchableOpacity
