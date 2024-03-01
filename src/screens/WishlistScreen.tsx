@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 import {CategoryItem} from '../components/CategoryItem';
 import {colors} from '../utils';
 import {Text} from '../components/base/Text';
-import {inject, observer} from 'mobx-react';
+import {observer} from 'mobx-react';
+import {sectionsStore} from '../context/sections-store';
 
-export const WishlistComponent = ({store}: {store: SectionsStore}) => {
+const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
   const wishlistData = store.data.reduce((accum: DataType[], curr) => {
     return [...accum, ...curr.data.filter(elem => elem.liked)];
   }, []);
@@ -37,9 +38,9 @@ export const WishlistComponent = ({store}: {store: SectionsStore}) => {
       )}
     </AppWrapper>
   );
-};
+});
 
-export const WishlistScreen = inject('store')(observer(WishlistComponent));
+export const WishlistScreen = () => <WishlistComponent store={sectionsStore} />;
 
 const styles = StyleSheet.create({
   itemsContainer: {

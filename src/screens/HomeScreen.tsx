@@ -14,8 +14,9 @@ import SEARCH_ICON from '../assets/icons/search.svg';
 import {useSettingsContext} from '../context/settings-context';
 import {observer} from 'mobx-react';
 import {Loader} from '../components/Loader';
+import {sectionsStore} from '../context/sections-store';
 
-export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
+const HomeScreenComponent = observer(({store}: {store: SectionsStore}) => {
   const context = useSettingsContext();
 
   const [selectedCategory, setSelectedCategory] = useState<SectionDataType>();
@@ -86,6 +87,8 @@ export const HomeScreen = observer(({store}: {store: SectionsStore}) => {
     </AppWrapper>
   );
 });
+
+export const HomeScreen = () => <HomeScreenComponent store={sectionsStore} />;
 
 const styles = StyleSheet.create({
   container: {
