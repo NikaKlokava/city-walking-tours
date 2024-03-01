@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
 import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
+import {inject, observer} from 'mobx-react';
 
 type Props = {
   category: SectionDataType;
@@ -15,12 +16,18 @@ export const SelectedCategory = ({category}: Props) => {
       </Text>
       <View style={styles.itemContainer}>
         {category.data.map((item, index) => (
-          <CategoryItem category={item} key={index} verticalScroll />
+          <CategoryItem
+            category={item}
+            key={index}
+            verticalScroll
+            isLiked={item.liked}
+          />
         ))}
       </View>
     </>
   );
 };
+
 const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',

@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {action, makeObservable, observable, runInAction} from 'mobx';
+import {action, observable, runInAction, makeAutoObservable} from 'mobx';
 import ICON_SEE_ALL from '../assets/icons/see_all.svg';
 
 const collectionRef = (uid: string) =>
@@ -9,40 +9,46 @@ const collectionRef = (uid: string) =>
 class SectionsStore {
   categories: CategoriesType = [];
   data: SectionsDataType = [];
-  isLoading = true;
+  isLoading = false;
 
   constructor() {
-    makeObservable(this, {
+    makeAutoObservable(this, {
       categories: observable,
       isLoading: observable,
       data: observable,
       uploadData: action,
       setCategories: action,
-      updateData: action,
+      updateUrlData: action,
       setData: action,
       setIsLoading: action,
+      updateLikeStatus: action,
     });
   }
 
-  uploadData = (uid: string) => {
+  uploadData = async (uid: string) => {
+    this.setIsLoading(true);
     try {
-      collectionRef(uid).onSnapshot(snap => {
-        const sectionsData: SectionsDataType = snap.data()?.sections;
-        this.setData(sectionsData);
+      const collection = await collectionRef(uid).collection('sections').get();
 
-        const categoriesData: CategoriesType = sectionsData.reduce(
-          (accum: CategoriesType, curr) => [...accum, curr.category],
-          [],
-        );
+      const sectionsData = collection.docs.map(doc =>
+        doc.data(),
+      ) as SectionsDataType;
 
-        this.setCategories(categoriesData);
-        this.updateData();
-      });
+      this.setData(sectionsData);
+
+      const categoriesData: CategoriesType = sectionsData.reduce(
+        (accum: CategoriesType, curr) => [...accum, curr.category],
+        [],
+      );
+
+      this.setCategories(categoriesData);
+      this.updateUrlData();
     } catch (error) {
       console.log({error});
     }
   };
-  updateData = async () => {
+
+  updateUrlData = async () => {
     for (let i = 0; i < this.categories.length; i++) {
       const iconRef = storage().ref(this.categories[i].icon);
       const url = await iconRef.getDownloadURL();
@@ -56,12 +62,17 @@ class SectionsStore {
     }
 
     runInAction(() =>
-      this.categories.unshift({icon: ICON_SEE_ALL, title: 'See All'}),
+      this.categories.unshift({
+        icon: ICON_SEE_ALL,
+        title: 'See All',
+        uid: 'see_all_1',
+      }),
     );
 
     for (let i = 0; i < this.data.length; i++) {
       for (let k = 0; k < this.data[i].data.length; k++) {
         const dataInside = this.data[i].data;
+        if (dataInside[k].image.startsWith('https')) continue;
         const iconRef = storage().ref(dataInside[k].image);
         const url = await iconRef.getDownloadURL();
         runInAction(
@@ -76,6 +87,39 @@ class SectionsStore {
 
     this.setIsLoading(false);
   };
+
+  updateLikeStatus = async (uid: string, category: DataType) => {
+    const dataToUpdate = this.data.map(elem => {
+      if (elem.category.uid === category.uid) {
+        return {
+          ...elem,
+          data: elem.data.map(val => {
+            if (val.title === category.title) {
+              const likedVal = {...val, liked: !val.liked};
+              return likedVal;
+            }
+            return val;
+          }),
+        };
+      }
+      return elem;
+    });
+
+    const dataWithChanges = dataToUpdate.find(
+      elem => elem.category.uid === category.uid,
+    )?.data;
+
+    this.setData(dataToUpdate);
+
+    const reff = collectionRef(uid).collection('sections').doc(category.uid);
+    dataWithChanges &&
+      (await reff
+        .update({
+          data: dataWithChanges,
+        })
+        .then(() => console.log('good')));
+  };
+
   setCategories = (categories: CategoriesType) => {
     this.categories = categories;
   };

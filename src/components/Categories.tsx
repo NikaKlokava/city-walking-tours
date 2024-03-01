@@ -38,7 +38,9 @@ export const Categories = ({data, isLoading, onSelect}: Props) => {
             horizontal
             keyExtractor={(_, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <CategoryItem category={item} />}
+            renderItem={({item}) => (
+              <CategoryItem category={item} isLiked={item.liked} />
+            )}
           />
           <Line white />
         </View>

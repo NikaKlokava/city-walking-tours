@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 import {CategoryItem} from '../components/CategoryItem';
 import {colors} from '../utils';
 import {Text} from '../components/base/Text';
+import {inject, observer} from 'mobx-react';
 
-export const WishlistScreen = ({store}: {store: SectionsStore}) => {
+export const WishlistComponent = ({store}: {store: SectionsStore}) => {
   const wishlistData = store.data.reduce((accum: DataType[], curr) => {
     return [...accum, ...curr.data.filter(elem => elem.liked)];
   }, []);
-  console.log(wishlistData);
 
   return (
     <AppWrapper>
@@ -30,7 +30,7 @@ export const WishlistScreen = ({store}: {store: SectionsStore}) => {
           data={wishlistData}
           renderItem={({item, index}) => (
             <View key={index} style={styles.itemsContainer}>
-              <CategoryItem category={item} liked />
+              <CategoryItem category={item} isLiked={item.liked} inWishlist />
             </View>
           )}
         />
@@ -38,6 +38,8 @@ export const WishlistScreen = ({store}: {store: SectionsStore}) => {
     </AppWrapper>
   );
 };
+
+export const WishlistScreen = inject('store')(observer(WishlistComponent));
 
 const styles = StyleSheet.create({
   itemsContainer: {
