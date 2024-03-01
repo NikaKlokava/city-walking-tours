@@ -102,43 +102,43 @@ export const CITIES = [
   },
 ];
 
-export const SECTIONS: SectionsDataType = Array.from({length: 5}, (_, i) => {
-  return {
-    category: {icon: 'lala', title: `Category ${i + 1}`},
-    data: Array.from({length: 10}, () => {
-      return {
-        title: 'Item title',
-        image: require('../assets/images/sodas.png'),
-        rating: '4.8',
-        liked: false,
-        details: {
-          location: 'Location str, 34',
-          hours: '09:00 AM',
-          site: 'https://ozas.lt/',
-          coordinates: {
-            latitude: 123,
-            longitude: 234,
-          },
-        },
-        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
-      };
-    }),
-  };
-});
+// export const SECTIONS: SectionsDataType = Array.from({length: 5}, (_, i) => {
+//   return {
+//     category: {icon: 'lala', title: `Category ${i + 1}`},
+//     data: Array.from({length: 10}, () => {
+//       return {
+//         title: 'Item title',
+//         image: require('../assets/images/sodas.png'),
+//         rating: '4.8',
+//         liked: false,
+//         details: {
+//           location: 'Location str, 34',
+//           hours: '09:00 AM',
+//           site: 'https://ozas.lt/',
+//           coordinates: {
+//             latitude: 123,
+//             longitude: 234,
+//           },
+//         },
+//         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel risus eget sapien ullamcorper ultricies. Sed lobortis cursus dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce aliquam auctor odio. Phasellus lobortis, elit vitae tristique tincidunt, nibh elit vehicula elit, a facilisis dui leo ac felis. `,
+//       };
+//     }),
+//   };
+// });
 
-export const CATEGORIES = Array.from({length: SECTIONS.length + 1}, (_, i) => {
-  return {
-    category: i === 0 ? `See all` : `Category ${i}`,
-    icon: searchBarIcons[`ICON_${i}`],
-  };
-});
+// export const CATEGORIES = Array.from({length: SECTIONS.length + 1}, (_, i) => {
+//   return {
+//     category: i === 0 ? `See all` : `Category ${i}`,
+//     icon: searchBarIcons[`ICON_${i}`],
+//   };
+// });
 
-export const WISHLIST_DATA = SECTIONS[0].data.reduce(
-  (accum: DataType[], curr: DataType) => {
-    return [...accum, {...curr, liked: true}];
-  },
-  [],
-);
+// export const WISHLIST_DATA = SECTIONS[0].data.reduce(
+//   (accum: DataType[], curr: DataType) => {
+//     return [...accum, {...curr, liked: true}];
+//   },
+//   [],
+// );
 
 export const tabBarIcons = {
   [tabs.HOME]: SVG_HOME,
@@ -165,7 +165,7 @@ export const detailsDescription = {
   [svgs.site]: 'site',
 };
 
-export const PLACE = SECTIONS[0].data[0];
+// export const PLACE = SECTIONS[0].data[0];
 
 export const GEOLOCATION_DATA = [
   {
@@ -197,6 +197,13 @@ export const GEOLOCATION_DATA = [
     longitude: 25.27251762356423,
   },
 ];
+
+export const INITIAL_REGION = {
+  latitude: 54.687157,
+  longitude: 25.279652,
+  latitudeDelta: 0.0955,
+  longitudeDelta: 0.0421,
+};
 const places = {
   akropolis: 'akropolis',
   ozas: 'ozas',

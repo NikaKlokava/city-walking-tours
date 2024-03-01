@@ -18,6 +18,7 @@ import {routes} from '../navigation';
 import HEART_ICON from '../assets/icons/heart.svg';
 import {useSettingsContext} from '../context/settings-context';
 import {sectionsStore} from '../context/sections-store';
+import {observer} from 'mobx-react';
 
 type Props = {
   category: DataType;
@@ -27,58 +28,54 @@ type Props = {
   inWishlist?: boolean;
 };
 
-export const Category = ({
-  category,
-  verticalScroll,
-  store,
-  isLiked,
-  inWishlist,
-}: Props) => {
-  const navigation: NavigationProp<ParamListBase> = useNavigation();
-  const context = useSettingsContext();
+export const Category = observer(
+  ({category, verticalScroll, store, isLiked, inWishlist}: Props) => {
+    const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const context = useSettingsContext();
 
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(routes.DETAILS)}
-      style={StyleSheet.flatten([
-        styles.container,
-        verticalScroll && styles.containerV,
-        inWishlist && styles.likedContainer,
-      ])}>
-      <ImageBackground
-        src={category.image}
-        style={styles.image}
-        imageStyle={styles.imageBackgorund}>
-        <TouchableOpacity
-          style={StyleSheet.flatten([
-            styles.iconContainer,
-            isLiked && styles.liked,
-          ])}
-          onPress={() =>
-            store?.updateLikeStatus(context.data.cityUid!, category)
-          }>
-          <Icon icon={HEART_ICON} size="xlarge" style={styles.icon} />
-        </TouchableOpacity>
-      </ImageBackground>
-      <View
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate(routes.DETAILS, category)}
         style={StyleSheet.flatten([
-          styles.descriptionContainer,
-          commonStyles.container,
-          inWishlist && styles.likedDescription,
+          styles.container,
+          verticalScroll && styles.containerV,
+          inWishlist && styles.likedContainer,
         ])}>
-        <Text type="tertiary" color={colors.active_dark} center={inWishlist}>
-          {category.title}
-        </Text>
-        {inWishlist && (
-          <Text type="quaternary" color={colors.semi_primary2}>
-            {category.description.slice(0, 70) + `...`}
+        <ImageBackground
+          src={category.image}
+          style={styles.image}
+          imageStyle={styles.imageBackgorund}>
+          <TouchableOpacity
+            style={StyleSheet.flatten([
+              styles.iconContainer,
+              isLiked && styles.liked,
+            ])}
+            onPress={() =>
+              store?.updateLikeStatus(context.data.cityUid!, category)
+            }>
+            <Icon icon={HEART_ICON} size="xlarge" style={styles.icon} />
+          </TouchableOpacity>
+        </ImageBackground>
+        <View
+          style={StyleSheet.flatten([
+            styles.descriptionContainer,
+            commonStyles.container,
+            inWishlist && styles.likedDescription,
+          ])}>
+          <Text type="tertiary" color={colors.active_dark} center={inWishlist}>
+            {category.title}
           </Text>
-        )}
-        <Rating rating={category.rating} />
-      </View>
-    </TouchableOpacity>
-  );
-};
+          {inWishlist && (
+            <Text type="quaternary" color={colors.semi_primary2}>
+              {category.description.slice(0, 70) + `...`}
+            </Text>
+          )}
+          <Rating rating={category.rating} />
+        </View>
+      </TouchableOpacity>
+    );
+  },
+);
 
 export const CategoryItem = ({
   category,
