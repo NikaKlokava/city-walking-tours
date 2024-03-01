@@ -1,26 +1,31 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Text} from './base/Text';
-import SplashScreen from 'react-native-splash-screen';
 import {StyleSheet, ActivityIndicator, View} from 'react-native';
 import {colors} from '../utils';
 
-export const Loader = () => {
-  useEffect(
-    () => () => {
-      SplashScreen.hide();
-    },
-    [],
-  );
+type Props = {
+  absolute?: boolean;
+  white?: boolean;
+  withText?: boolean;
+};
+
+export const Loader = ({absolute, white, withText}: Props) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={StyleSheet.flatten([
+        styles.container,
+        absolute && styles.absolute,
+      ])}>
       <ActivityIndicator
-        color={colors.active_bright}
+        color={white ? colors.semi_primary1 : colors.active_bright}
         size={'large'}
         style={styles.indicator}
       />
-      <Text type="primary" color={colors.active_bright}>
-        Loading...
-      </Text>
+      {withText && (
+        <Text type="primary" color={colors.active_bright}>
+          Loading...
+        </Text>
+      )}
     </View>
   );
 };
@@ -28,6 +33,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   indicator: {
     width: 100,

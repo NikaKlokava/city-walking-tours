@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   ImageBackground,
@@ -9,17 +9,29 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {CITIES, colors, commonStyles} from '../utils';
+import {colors, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import CLOSE_ICON from '../assets/icons/close.svg';
+import {BlurView} from '@react-native-community/blur';
+import {Loader} from './Loader';
+
+const image = require('../assets/images/viln.png');
 
 type Props = {
   visible: boolean;
+  data: CitiesType;
+  isLoading: boolean;
   onClose: () => void;
   onSelect: (city: string) => void;
 };
 
-export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
+export const SelectCityModal = ({
+  visible,
+  data,
+  isLoading,
+  onClose,
+  onSelect,
+}: Props) => {
   return (
     <Modal
       animationType="slide"
@@ -39,28 +51,47 @@ export const SelectCityModal = ({visible, onClose, onSelect}: Props) => {
             Select your city
           </Text>
         </View>
-        <FlatList
-          keyExtractor={(_, index) => index.toString()}
-          data={CITIES}
-          renderItem={({item}) => <CityItem item={item} onSelect={onSelect} />}
-        />
+        {isLoading ? (
+          <Loader withText/>
+        ) : (
+          <FlatList
+            keyExtractor={(_, index) => index.toString()}
+            data={data}
+            renderItem={({item}) => (
+              <CityItem item={item} onSelect={onSelect} />
+            )}
+          />
+        )}
       </View>
     </Modal>
   );
 };
 
-type CityType = {
+type CityProps = {
   item: {city: string; country: string; photo: any};
   onSelect: (city: string) => void;
 };
 
-const CityItem = ({item, onSelect}: CityType) => {
+const CityItem = ({item, onSelect}: CityProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <Pressable
       onPress={() => {
         onSelect(item.city);
       }}>
-      <ImageBackground style={styles.cityContainer} source={item.photo}>
+      <ImageBackground
+        style={styles.cityContainer}
+        src={item.photo}
+        defaultSource={image}
+        onLoadEnd={() => setIsLoading(false)}>
+        {isLoading && (
+          <BlurView
+            style={styles.absolute}
+            blurType="light"
+            blurAmount={10}
+            reducedTransparencyFallbackColor="white"
+          />
+        )}
         <View
           style={StyleSheet.flatten([
             styles.cityDescription,
@@ -101,5 +132,12 @@ const styles = StyleSheet.create({
   },
   pressContainer: {
     columnGap: 20,
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

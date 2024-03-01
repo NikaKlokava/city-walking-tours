@@ -16,32 +16,47 @@ import {
 } from '@react-navigation/native';
 import {routes} from '../navigation';
 import HEART_ICON from '../assets/icons/heart.svg';
+import {useSettingsContext} from '../context/settings-context';
+import {sectionsStore} from '../context/sections-store';
 
 type Props = {
-  category: CategotyItemType;
+  category: DataType;
   verticalScroll?: boolean;
-  liked?: boolean;
+  isLiked: boolean;
+  store?: SectionsStore;
+  inWishlist?: boolean;
 };
 
-export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
+export const Category = ({
+  category,
+  verticalScroll,
+  store,
+  isLiked,
+  inWishlist,
+}: Props) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
+  const context = useSettingsContext();
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(routes.DETAILS)}
       style={StyleSheet.flatten([
         styles.container,
         verticalScroll && styles.containerV,
-        liked && styles.likedContainer,
+        inWishlist && styles.likedContainer,
       ])}>
       <ImageBackground
-        source={category.image}
+        src={category.image}
         style={styles.image}
         imageStyle={styles.imageBackgorund}>
         <TouchableOpacity
           style={StyleSheet.flatten([
             styles.iconContainer,
-            liked && styles.liked,
-          ])}>
+            isLiked && styles.liked,
+          ])}
+          onPress={() =>
+            store?.updateLikeStatus(context.data.cityUid!, category)
+          }>
           <Icon icon={HEART_ICON} size="xlarge" style={styles.icon} />
         </TouchableOpacity>
       </ImageBackground>
@@ -49,34 +64,36 @@ export const CategoryItem = ({category, verticalScroll, liked}: Props) => {
         style={StyleSheet.flatten([
           styles.descriptionContainer,
           commonStyles.container,
-          liked && styles.likedDescription,
+          inWishlist && styles.likedDescription,
         ])}>
-        <Text type="tertiary" color={colors.active_dark} center={liked}>
+        <Text type="tertiary" color={colors.active_dark} center={inWishlist}>
           {category.title}
         </Text>
-        {liked && (
+        {inWishlist && (
           <Text type="quaternary" color={colors.semi_primary2}>
-            {category.description.slice(0, 90) + `...`}
+            {category.description.slice(0, 70) + `...`}
           </Text>
         )}
-
-        <View
-          style={StyleSheet.flatten([
-            styles.smallDescription,
-            liked && styles.smallLikedDescription,
-            commonStyles.flexRow,
-          ])}>
-          {liked && (
-            <Text type="tertiary" color={colors.active_dark}>
-              {category.details.location}
-            </Text>
-          )}
-          <Rating rating={category.rating} />
-        </View>
+        <Rating rating={category.rating} />
       </View>
     </TouchableOpacity>
   );
 };
+
+export const CategoryItem = ({
+  category,
+  verticalScroll,
+  isLiked,
+  inWishlist,
+}: Props) => (
+  <Category
+    category={category}
+    verticalScroll={verticalScroll}
+    isLiked={isLiked}
+    store={sectionsStore}
+    inWishlist={inWishlist}
+  />
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -120,11 +137,5 @@ const styles = StyleSheet.create({
   },
   likedDescription: {
     flex: 3,
-  },
-  smallDescription: {
-    justifyContent: 'flex-end',
-  },
-  smallLikedDescription: {
-    justifyContent: 'space-between',
   },
 });

@@ -3,25 +3,31 @@ import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
 import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
+import {inject, observer} from 'mobx-react';
 
 type Props = {
-  category: CategotyType;
-  city: string | null;
+  category: SectionDataType;
 };
-export const SelectedCategory = ({category, city}: Props) => {
+export const SelectedCategory = ({category}: Props) => {
   return (
     <>
       <Text type="primary" color={colors.primary1} center>
-        {category.title}
+        {category.category.title}
       </Text>
       <View style={styles.itemContainer}>
         {category.data.map((item, index) => (
-          <CategoryItem category={item} key={index} verticalScroll />
+          <CategoryItem
+            category={item}
+            key={index}
+            verticalScroll
+            isLiked={item.liked}
+          />
         ))}
       </View>
     </>
   );
 };
+
 const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',

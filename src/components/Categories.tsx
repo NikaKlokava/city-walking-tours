@@ -4,17 +4,19 @@ import {Text} from './base/Text';
 import {colors, commonStyles} from '../utils';
 import {Line} from './Line';
 import {CategoryItem} from './CategoryItem';
+import {Loader} from './Loader';
 
 type Props = {
-  categories: CategoriesType;
-  city: string | null;
+  data: SectionsDataType;
+  isLoading: boolean;
   onSelect: (title: string) => void;
 };
 
-export const Categories = ({categories, onSelect, city}: Props) => {
+export const Categories = ({data, isLoading, onSelect}: Props) => {
+  if (isLoading) return <Loader white withText />;
   return (
     <>
-      {categories.map((caregory, index) => (
+      {data.map((caregory, index) => (
         <View style={styles.container} key={index}>
           <View
             style={StyleSheet.flatten([
@@ -22,9 +24,9 @@ export const Categories = ({categories, onSelect, city}: Props) => {
               commonStyles.flexRow,
             ])}>
             <Text type="primary" color={colors.primary1}>
-              {caregory.title}
+              {caregory.category.title}
             </Text>
-            <TouchableOpacity onPress={() => onSelect(caregory.title)}>
+            <TouchableOpacity onPress={() => onSelect(caregory.category.title)}>
               <Text type="secondary" color={colors.semi_primary1}>
                 see all
               </Text>
@@ -36,7 +38,9 @@ export const Categories = ({categories, onSelect, city}: Props) => {
             horizontal
             keyExtractor={(_, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => <CategoryItem category={item} />}
+            renderItem={({item}) => (
+              <CategoryItem category={item} isLiked={item.liked} />
+            )}
           />
           <Line white />
         </View>

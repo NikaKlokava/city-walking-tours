@@ -1,4 +1,4 @@
-import React, {lazy, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
@@ -6,21 +6,21 @@ import {colors, commonStyles} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
 import {useSettingsContext} from '../context/settings-context';
+import {CityStore} from '../context/cities-store';
+import {observer} from 'mobx-react';
 
 const image = require('../assets/images/city.png');
 
-export const CitySelectionScreen = () => {
-  return (
-    <AppWrapper>
-      <LazyCitySelectionContent />
-    </AppWrapper>
-  );
-};
-const CitySelectionContent = () => {
+export const CitySelectionScreen = observer(({store}: {store: CityStore}) => {
   const context = useSettingsContext();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCity, setCurrentCity] = useState<string>('');
+  const [currentCityUid, setCurrentCityUid] = useState<string>('');
+
+  useEffect(() => {
+    store.uploadCitiesData();
+  }, []);
 
   const handleModalClose = () => {
     setModalVisible(false);
@@ -29,10 +29,12 @@ const CitySelectionContent = () => {
   const handleSelectCity = (city: string) => {
     setCurrentCity(city);
     setModalVisible(false);
+    const cityUid = store.data.find(item => item.city === city)?.uid;
+    cityUid && setCurrentCityUid(cityUid);
   };
 
   return (
-    <>
+    <AppWrapper>
       <ImageBackground
         source={image}
         style={StyleSheet.flatten([styles.container, commonStyles.container])}>
@@ -52,7 +54,9 @@ const CitySelectionContent = () => {
             {currentCity && (
               <StyledBtn
                 title="NEXT"
-                onClick={() => context.updateCity?.(currentCity)}
+                onClick={() =>
+                  context.updateCity?.(currentCity, currentCityUid)
+                }
               />
             )}
           </>
@@ -62,14 +66,12 @@ const CitySelectionContent = () => {
         visible={modalVisible}
         onClose={handleModalClose}
         onSelect={handleSelectCity}
+        data={store.data}
+        isLoading={store.isLoading}
       />
-    </>
+    </AppWrapper>
   );
-};
-
-const LazyCitySelectionContent = lazy(async () => ({
-  default: CitySelectionContent,
-}));
+});
 
 const styles = StyleSheet.create({
   container: {
