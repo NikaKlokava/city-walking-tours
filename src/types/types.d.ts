@@ -34,6 +34,7 @@ declare type DataType = {
   liked: boolean;
   image: string;
   description: string;
+  gallery: string[];
   details: {
     location: string;
     hours: string;

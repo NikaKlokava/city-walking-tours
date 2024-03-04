@@ -1,4 +1,4 @@
-import React, {lazy, useRef} from 'react';
+import React, {useRef} from 'react';
 import {
   Animated,
   ImageBackground,
@@ -11,7 +11,6 @@ import {
   commonStyles,
   colors,
   DEVICE_HEIGHT,
-  INITIAL_REGION,
   DEVICE_WIDTH,
   getInitialRegion,
 } from '../utils';
@@ -24,21 +23,13 @@ import {Gallery} from '../components/Gallery';
 import {AppWrapper} from '../components/AppWrapper';
 import SVG_LOCATION from '../assets/icons/location.svg';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {observer} from 'mobx-react';
-import {sectionsStore} from '../context/sections-store';
-import MapView, {Callout, Marker} from 'react-native-maps';
-
-const image = require('../assets/images/sodas.png');
-
-type Props = {
-  store: SectionsStore;
-};
+import MapView, {Marker} from 'react-native-maps';
 
 const MAX_HEADER_HEIGHT = DEVICE_HEIGHT * 0.4;
 const MIN_HEADER_HEIGHT = DEVICE_HEIGHT * 0.3;
 const SCROLL_DISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 
-const DetailsComponent = observer(({store}: Props) => {
+export const DetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -56,6 +47,7 @@ const DetailsComponent = observer(({store}: Props) => {
     outputRange: [MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT],
     extrapolate: 'clamp',
   });
+  
   return (
     <AppWrapper noPaddingTop>
       <View style={StyleSheet.flatten([commonStyles.container])}>
@@ -105,6 +97,7 @@ const DetailsComponent = observer(({store}: Props) => {
             <Details title={data.details.hours} type="hours" />
             <Details title={data.details.site} type="site" />
           </View>
+          <Gallery images={data.gallery} />
           <MapView
             style={StyleSheet.flatten([
               commonStyles.container,
@@ -120,14 +113,11 @@ const DetailsComponent = observer(({store}: Props) => {
               title="Location"
             />
           </MapView>
-          {/* <Gallery /> */}
         </ScrollView>
       </View>
     </AppWrapper>
   );
-});
-
-export const DetailsScreen = () => <DetailsComponent store={sectionsStore} />;
+};
 
 const styles = StyleSheet.create({
   headerContainer: {

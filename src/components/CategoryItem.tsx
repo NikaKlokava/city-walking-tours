@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -19,6 +19,7 @@ import HEART_ICON from '../assets/icons/heart.svg';
 import {useSettingsContext} from '../context/settings-context';
 import {sectionsStore} from '../context/sections-store';
 import {observer} from 'mobx-react';
+import {BlurView} from '@react-native-community/blur';
 
 type Props = {
   category: DataType;
@@ -33,6 +34,8 @@ export const Category = observer(
     const navigation: NavigationProp<ParamListBase> = useNavigation();
     const context = useSettingsContext();
 
+    const [isLoading, setIsLoading] = useState(true);
+
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(routes.DETAILS, category)}
@@ -44,7 +47,16 @@ export const Category = observer(
         <ImageBackground
           src={category.image}
           style={styles.image}
+          onLoadEnd={() => setIsLoading(false)}
           imageStyle={styles.imageBackgorund}>
+          {isLoading && (
+            <BlurView
+              style={StyleSheet.flatten([commonStyles.absolute])}
+              blurType="regular"
+              blurAmount={10}
+              reducedTransparencyFallbackColor="white"
+            />
+          )}
           <TouchableOpacity
             style={StyleSheet.flatten([
               styles.iconContainer,
