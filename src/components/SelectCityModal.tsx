@@ -52,7 +52,7 @@ export const SelectCityModal = ({
           </Text>
         </View>
         {isLoading ? (
-          <Loader withText/>
+          <Loader withText />
         ) : (
           <FlatList
             keyExtractor={(_, index) => index.toString()}
@@ -86,7 +86,7 @@ const CityItem = ({item, onSelect}: CityProps) => {
         onLoadEnd={() => setIsLoading(false)}>
         {isLoading && (
           <BlurView
-            style={styles.absolute}
+            style={StyleSheet.flatten([commonStyles.absolute])}
             blurType="light"
             blurAmount={10}
             reducedTransparencyFallbackColor="white"
@@ -132,12 +132,5 @@ const styles = StyleSheet.create({
   },
   pressContainer: {
     columnGap: 20,
-  },
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
   },
 });

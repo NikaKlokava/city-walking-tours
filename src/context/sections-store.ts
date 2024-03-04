@@ -19,6 +19,7 @@ class SectionsStore {
       uploadData: action,
       setCategories: action,
       updateUrlData: action,
+      updateCategoriesUrlData: action,
       setData: action,
       setIsLoading: action,
       updateLikeStatus: action,
@@ -42,13 +43,14 @@ class SectionsStore {
       );
 
       this.setCategories(categoriesData);
+      this.updateCategoriesUrlData();
       this.updateUrlData();
     } catch (error) {
       console.log({error});
     }
   };
 
-  updateUrlData = async () => {
+  updateCategoriesUrlData = async () => {
     for (let i = 0; i < this.categories.length; i++) {
       const iconRef = storage().ref(this.categories[i].icon);
       const url = await iconRef.getDownloadURL();
@@ -68,13 +70,25 @@ class SectionsStore {
         uid: 'see_all_1',
       }),
     );
+  };
 
+  updateUrlData = async () => {
     for (let i = 0; i < this.data.length; i++) {
       for (let k = 0; k < this.data[i].data.length; k++) {
         const dataInside = this.data[i].data;
         if (dataInside[k].image.startsWith('https')) continue;
         const iconRef = storage().ref(dataInside[k].image);
         const url = await iconRef.getDownloadURL();
+
+        for (let l = 0; l < dataInside[k].gallery.length; l++) {
+          const imageRef = storage().ref(dataInside[k].gallery[l]);
+          const url = await imageRef.getDownloadURL();
+
+          runInAction(() => {
+            dataInside[k].gallery[l] = url;
+          });
+        }
+
         runInAction(
           () =>
             (dataInside[k] = {
