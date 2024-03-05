@@ -1,24 +1,24 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
-import {inject, observer} from 'mobx-react';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   category: SectionDataType;
 };
 export const SelectedCategory = ({category}: Props) => {
+  const {theme} = useThemeContext();
   return (
     <>
-      <Text type="primary" color={colors.primary1} center>
+      <Text type="primary" color={theme.colors.primary1} center>
         {category.category.title}
       </Text>
       <View style={styles.itemContainer}>
-        {category.data.map((item, index) => (
+        {category.data.map(item => (
           <CategoryItem
             category={item}
-            key={index}
+            key={item.title}
             verticalScroll
             isLiked={item.liked}
           />

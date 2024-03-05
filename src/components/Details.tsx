@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Linking, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {colors, detailsDescription, detailsSvgs, commonStyles} from '../utils';
+import {detailsDescription, detailsSvgs, commonStyles} from '../utils';
 import {Icon} from './base/Icon';
 import {Text} from './base/Text';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   type: 'location' | 'hours' | 'site';
@@ -10,6 +11,9 @@ type Props = {
 };
 
 export const Details = ({type, title}: Props) => {
+  const {theme} = useThemeContext();
+
+  const styles = useMemo(() => createStyles(theme), [theme]);
   return (
     <View style={StyleSheet.flatten([styles.container, commonStyles.flexRow])}>
       <View style={styles.iconContainer}>
@@ -17,10 +21,10 @@ export const Details = ({type, title}: Props) => {
       </View>
       <TouchableOpacity
         onPress={() => detailsDescription['site'] && Linking.openURL(title)}>
-        <Text type="quaternary" color={colors.semi_primary1}>
+        <Text type="quaternary" color={theme.colors.semi_primary1}>
           {detailsDescription[type]}
         </Text>
-        <Text type="secondary" color={colors.primary1}>
+        <Text type="secondary" color={theme.colors.primary1}>
           {title}
         </Text>
       </TouchableOpacity>
@@ -28,13 +32,14 @@ export const Details = ({type, title}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    columnGap: 20,
-  },
-  iconContainer: {
-    padding: 5,
-    borderRadius: 10,
-    backgroundColor: colors.active_bright,
-  },
-});
+const createStyles = (theme: ThemeType) =>
+  StyleSheet.create({
+    container: {
+      columnGap: 20,
+    },
+    iconContainer: {
+      padding: 5,
+      borderRadius: 10,
+      backgroundColor: theme.colors.active_bright,
+    },
+  });

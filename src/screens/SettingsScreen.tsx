@@ -1,74 +1,98 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Text} from '../components/base/Text';
-import {SETTINGS, colors, commonStyles, settingsItem} from '../utils';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  DEVICE_WIDTH,
+  SETTINGS,
+  commonStyles,
+  ids,
+  settingsItem,
+} from '../utils';
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Icon} from '../components/base/Icon';
 import SVG_RIGHT_ARROW from '../assets/icons/right_arrow.svg';
-import {useSettingsContext} from '../context/settings-context';
+import {settingsStore} from '../context/settings-store';
+import {observer} from 'mobx-react';
+import {useThemeContext} from '../context/theme-context';
 
 export const SettingsScreen = () => {
-  const context = useSettingsContext();
+  const {theme} = useThemeContext();
 
-  const handleChangeCityPress = async () => {
-    context.updateCity?.('');
-  };
+  const styles = useMemo(() => createStyles(theme), [theme]);
   return (
     <AppWrapper>
       <View
         style={StyleSheet.flatten([styles.container, commonStyles.container])}>
-        <Text type={'primary'} color={colors.active_bright} center>
+        <Text type={'primary'} color={theme.colors.active_bright} center>
           Settings
         </Text>
         <ScrollView>
-          <SettingsItem
-            title={SETTINGS[settingsItem.city].name}
-            description={context.data.city}
-            onPress={handleChangeCityPress}
-          />
-          <SettingsItem
-            title={SETTINGS[settingsItem.theme].name}
-            description={SETTINGS[settingsItem.theme].description}
-            onPress={() => {}}
-          />
+          <CitySettings />
+          <ThemeSettings />
         </ScrollView>
       </View>
     </AppWrapper>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {rowGap: 20, paddingHorizontal: 20},
-  settingsItem: {
-    backgroundColor: colors.semi_grey,
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    minHeight: 50,
-    marginVertical: 5,
-  },
-});
+const CitySettingItem = observer(({store}: {store: SettingsStore}) => {
+  const {theme} = useThemeContext();
 
-type Props = {
-  title: string;
-  description: string | null;
-  onPress: () => void;
-};
-
-const SettingsItem = ({title, description, onPress}: Props) => {
+  const styles = useMemo(() => createStyles(theme), [theme]);
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={() => store.updateCity?.('', '')}
       style={StyleSheet.flatten([styles.settingsItem, commonStyles.flexRow])}>
-      <Text type="primary" color={colors.primary1}>
-        {title}
+      <Text type="primary" color={theme.colors.primary1}>
+        {SETTINGS[settingsItem.city].name}
       </Text>
       <View style={StyleSheet.flatten([commonStyles.flexRow])}>
-        <Text type="quaternary" color={colors.semi_primary1}>
-          {description}
+        <Text type="quaternary" color={theme.colors.semi_primary1}>
+          {store.city}
+        </Text>
+        <Icon icon={SVG_RIGHT_ARROW} size={'xlarge'} />
+      </View>
+    </TouchableOpacity>
+  );
+});
+
+const CitySettings = () => <CitySettingItem store={settingsStore} />;
+
+const ThemeSettings = () => {
+  const {theme, updateTheme} = useThemeContext();
+
+  const styles = useMemo(() => createStyles(theme), [theme]);
+  return (
+    <TouchableOpacity
+      onPress={() => updateTheme?.()}
+      style={StyleSheet.flatten([styles.settingsItem, commonStyles.flexRow])}>
+      <Text type="primary" color={theme.colors.primary1}>
+        {SETTINGS[settingsItem.theme].name}
+      </Text>
+      <View style={StyleSheet.flatten([commonStyles.flexRow])}>
+        <Text type="quaternary" color={theme.colors.semi_primary1}>
+          {theme.id}
         </Text>
         <Icon icon={SVG_RIGHT_ARROW} size={'xlarge'} />
       </View>
     </TouchableOpacity>
   );
 };
+const createStyles = (theme: ThemeType) =>
+  StyleSheet.create({
+    container: {rowGap: 20, paddingHorizontal: 20},
+    settingsItem: {
+      backgroundColor: theme.colors.input_background,
+      justifyContent: 'space-between',
+      paddingHorizontal: 10,
+      borderRadius: 10,
+      minHeight: 50,
+      marginVertical: 5,
+    },
+  });

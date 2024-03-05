@@ -1,35 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {RootNavigator} from './src/navigation';
 
 import {Onboarding} from './src/screens/Onboarding';
 import {CitySelectionScreen} from './src/screens/CitySelectionScreen';
-import {
-  SettingsContextProvider,
-  useSettingsContext,
-} from './src/context/settings-context';
-import { selectCityStore } from './src/context/cities-store';
+import {selectCityStore} from './src/context/cities-store';
+import {observer} from 'mobx-react';
+import {settingsStore} from './src/context/settings-store';
+import {ThemeContextProvider} from './src/context/theme-context';
 
 function App(): React.JSX.Element {
   return (
-    <SettingsContextProvider>
-      <ContextComponent />
-    </SettingsContextProvider>
+    <ThemeContextProvider>
+      <MainComponent />
+    </ThemeContextProvider>
   );
 }
 
-const ContextComponent = () => {
-  const context = useSettingsContext();
+const ContextComponent = observer(({store}: {store: SettingsStore}) => {
+  useEffect(() => {
+    store.uploadSettingsData();
+  }, []);
 
-  if (!context.data.isOnboardingPassed) {
-    return <Onboarding />;
+  if (!store.isOnboardingPassed) {
+    return <Onboarding store={settingsStore} />;
   }
-
-  if (!context.data.city) {
-    return <CitySelectionScreen store={selectCityStore}/>;
+  
+  if (!store.city) {
+    return (
+      <CitySelectionScreen
+        cityStore={selectCityStore}
+        settingsStore={settingsStore}
+      />
+    );
   }
 
   return <RootNavigator />;
-};
+});
+
+const MainComponent = () => <ContextComponent store={settingsStore} />;
 
 export default App;

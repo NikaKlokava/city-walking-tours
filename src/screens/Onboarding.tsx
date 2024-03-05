@@ -20,10 +20,9 @@ import {Text} from '../components/base/Text';
 import {Line} from '../components/Line';
 import {ProgressBar} from '../components/ProgressBar';
 import {AppWrapper} from '../components/AppWrapper';
-import {useSettingsContext} from '../context/settings-context';
+import {observer} from 'mobx-react';
 
-export const Onboarding = () => {
-  const context = useSettingsContext();
+export const Onboarding = observer(({store}: {store: SettingsStore}) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleScreenScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -71,7 +70,7 @@ export const Onboarding = () => {
           {currentIndex === ONBOARDING.length - 1 ? (
             <StyledBtn
               title="Get Started"
-              onClick={() => context.updateOnboarding?.('true')}
+              onClick={() => store.updateOnboarding?.('true')}
             />
           ) : (
             <ProgressBar index={currentIndex} dataLength={ONBOARDING.length} />
@@ -80,7 +79,7 @@ export const Onboarding = () => {
       </View>
     </AppWrapper>
   );
-};
+});
 
 const styles = StyleSheet.create({
   mainContainer: {

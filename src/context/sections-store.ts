@@ -43,10 +43,13 @@ class SectionsStore {
       );
 
       this.setCategories(categoriesData);
-      this.updateCategoriesUrlData();
-      this.updateUrlData();
+
+      await this.updateCategoriesUrlData();
+      await this.updateUrlData();
     } catch (error) {
       console.log({error});
+    } finally {
+      this.setIsLoading(false);
     }
   };
 
@@ -54,6 +57,7 @@ class SectionsStore {
     for (let i = 0; i < this.categories.length; i++) {
       const iconRef = storage().ref(this.categories[i].icon);
       const url = await iconRef.getDownloadURL();
+
       runInAction(
         () =>
           (this.categories[i] = {
@@ -98,8 +102,6 @@ class SectionsStore {
         );
       }
     }
-
-    this.setIsLoading(false);
   };
 
   updateLikeStatus = async (uid: string, category: DataType) => {
