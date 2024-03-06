@@ -3,25 +3,27 @@ import {AppWrapper} from '../components/AppWrapper';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 import {CategoryItem} from '../components/CategoryItem';
-import {colors} from '../utils';
 import {Text} from '../components/base/Text';
 import {observer} from 'mobx-react';
 import {sectionsStore} from '../context/sections-store';
+import {useThemeContext} from '../context/theme-context';
 
 const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
+  const {theme} = useThemeContext();
+
   const wishlistData = store.data.reduce((accum: DataType[], curr) => {
     return [...accum, ...curr.data.filter(elem => elem.liked)];
   }, []);
 
   return (
     <AppWrapper>
-      <Text type={'primary'} color={colors.active_bright} center>
+      <Text type={'primary'} color={theme.colors.active_bright} center>
         Wishlist
       </Text>
       {wishlistData.length === 0 ? (
         <Text
           type="primary"
-          color={colors.semi_pink}
+          color={theme.colors.semi_pink}
           center
           style={styles.noFav}>
           no favorites...
@@ -29,8 +31,9 @@ const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
       ) : (
         <FlatList
           data={wishlistData}
-          renderItem={({item, index}) => (
-            <View key={index} style={styles.itemsContainer}>
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <View key={item.title} style={styles.itemsContainer}>
               <CategoryItem category={item} isLiked={item.liked} inWishlist />
             </View>
           )}

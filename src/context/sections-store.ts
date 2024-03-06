@@ -17,12 +17,12 @@ class SectionsStore {
       isLoading: observable,
       data: observable,
       uploadData: action,
-      setCategories: action,
+      updateLikeStatus: action,
       updateUrlData: action,
       updateCategoriesUrlData: action,
       setData: action,
       setIsLoading: action,
-      updateLikeStatus: action,
+      setCategories: action,
     });
   }
 
@@ -43,10 +43,13 @@ class SectionsStore {
       );
 
       this.setCategories(categoriesData);
-      this.updateCategoriesUrlData();
-      this.updateUrlData();
+
+      await this.updateCategoriesUrlData();
+      await this.updateUrlData();
     } catch (error) {
       console.log({error});
+    } finally {
+      this.setIsLoading(false);
     }
   };
 
@@ -54,6 +57,7 @@ class SectionsStore {
     for (let i = 0; i < this.categories.length; i++) {
       const iconRef = storage().ref(this.categories[i].icon);
       const url = await iconRef.getDownloadURL();
+
       runInAction(
         () =>
           (this.categories[i] = {
@@ -98,8 +102,6 @@ class SectionsStore {
         );
       }
     }
-
-    this.setIsLoading(false);
   };
 
   updateLikeStatus = async (uid: string, category: DataType) => {
@@ -127,11 +129,9 @@ class SectionsStore {
 
     const reff = collectionRef(uid).collection('sections').doc(category.uid);
     dataWithChanges &&
-      (await reff
-        .update({
-          data: dataWithChanges,
-        })
-        .then(() => console.log('good')));
+      (await reff.update({
+        data: dataWithChanges,
+      }));
   };
 
   setCategories = (categories: CategoriesType) => {

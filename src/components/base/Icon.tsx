@@ -23,7 +23,7 @@ export const Icon = (props: Props) => {
           style={svgStyle}
           onLoad={() => setLoading(false)}
         />
-        {loading && <Loader absolute white />}
+        {loading && <Loader white />}
       </>
     );
 

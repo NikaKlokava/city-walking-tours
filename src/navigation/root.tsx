@@ -10,6 +10,7 @@ import {TabBar} from '../components/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors, commonStyles} from '../utils';
 import {StyleSheet} from 'react-native';
+import {useThemeContext} from '../context/theme-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,9 +23,11 @@ const MyTheme = {
 };
 
 export const RootNavigator = () => {
+  const context = useThemeContext();
+
   return (
     <LinearGradient
-      colors={colors.gradient}
+      colors={context.theme.colors.gradient}
       style={StyleSheet.flatten([commonStyles.container])}>
       <NavigationContainer theme={MyTheme}>
         <Tab.Navigator

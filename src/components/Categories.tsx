@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text} from './base/Text';
-import {colors, commonStyles} from '../utils';
+import {commonStyles} from '../utils';
 import {Line} from './Line';
 import {CategoryItem} from './CategoryItem';
 import {Loader} from './Loader';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   data: SectionsDataType;
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export const Categories = ({data, isLoading, onSelect}: Props) => {
+  const {theme} = useThemeContext();
+
   if (isLoading) return <Loader white withText />;
   return (
     <>
@@ -23,11 +26,11 @@ export const Categories = ({data, isLoading, onSelect}: Props) => {
               styles.titleContainer,
               commonStyles.flexRow,
             ])}>
-            <Text type="primary" color={colors.primary1}>
+            <Text type="primary" color={theme.colors.primary1}>
               {caregory.category.title}
             </Text>
             <TouchableOpacity onPress={() => onSelect(caregory.category.title)}>
-              <Text type="secondary" color={colors.semi_primary1}>
+              <Text type="secondary" color={theme.colors.semi_primary1}>
                 see all
               </Text>
             </TouchableOpacity>

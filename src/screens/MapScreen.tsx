@@ -15,6 +15,7 @@ import {observer} from 'mobx-react';
 import {sectionsStore} from '../context/sections-store';
 import {Rating} from '../components/Rating';
 import {Line} from '../components/Line';
+import {useThemeContext} from '../context/theme-context';
 
 type LocationType = {
   latitude: number;
@@ -28,6 +29,7 @@ type LocationType = {
 
 export const MapScreenContent = observer(({store}: {store: SectionsStore}) => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
+  const {theme} = useThemeContext();
 
   const [currentLocation, setCurrentLocation] = useState<LocationType>();
 
@@ -71,12 +73,12 @@ export const MapScreenContent = observer(({store}: {store: SectionsStore}) => {
                     style={styles.description}
                     onPress={() => navigation.navigate(routes.DETAILS, place)}>
                     <Image src={place.image} style={styles.imageStyle} />
-                    <Text type="quaternary" color={colors.primary2}>
+                    <Text type="quaternary" color={theme.colors.primary2}>
                       {place.title}
                     </Text>
                     <Rating rating={place.rating} />
                     <Line black />
-                    <Text type="quaternary" color={colors.semi_primary2}>
+                    <Text type="quaternary" color={theme.colors.semi_primary2}>
                       Read more...
                     </Text>
                   </Callout>

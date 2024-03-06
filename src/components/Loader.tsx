@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from './base/Text';
 import {StyleSheet, ActivityIndicator, View} from 'react-native';
-import {colors} from '../utils';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   absolute?: boolean;
@@ -10,6 +10,8 @@ type Props = {
 };
 
 export const Loader = ({absolute, white, withText}: Props) => {
+  const {theme} = useThemeContext();
+
   return (
     <View
       style={StyleSheet.flatten([
@@ -17,12 +19,12 @@ export const Loader = ({absolute, white, withText}: Props) => {
         absolute && styles.absolute,
       ])}>
       <ActivityIndicator
-        color={white ? colors.semi_primary1 : colors.active_bright}
+        color={white ? theme.colors.semi_primary1 : theme.colors.active_bright}
         size={'large'}
         style={styles.indicator}
       />
       {withText && (
-        <Text type="primary" color={colors.active_bright}>
+        <Text type="primary" color={theme.colors.active_bright}>
           Loading...
         </Text>
       )}

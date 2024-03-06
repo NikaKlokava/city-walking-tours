@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useMemo, useRef} from 'react';
 import {
   Animated,
   ImageBackground,
@@ -9,10 +9,10 @@ import {
 import {Text} from '../components/base/Text';
 import {
   commonStyles,
-  colors,
   DEVICE_HEIGHT,
   DEVICE_WIDTH,
   getInitialRegion,
+  ids,
 } from '../utils';
 import {BackBtn} from '../components/BackBtn';
 import {Rating} from '../components/Rating';
@@ -24,6 +24,7 @@ import {AppWrapper} from '../components/AppWrapper';
 import SVG_LOCATION from '../assets/icons/location.svg';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MapView, {Marker} from 'react-native-maps';
+import {useThemeContext} from '../context/theme-context';
 
 const MAX_HEADER_HEIGHT = DEVICE_HEIGHT * 0.4;
 const MIN_HEADER_HEIGHT = DEVICE_HEIGHT * 0.3;
@@ -32,8 +33,11 @@ const SCROLL_DISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 export const DetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const {theme} = useThemeContext();
 
   const data = route.params as DataType;
+
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   const coordinates = {
     latitude: data.details.coordinates.latitude,
@@ -47,7 +51,7 @@ export const DetailsScreen = () => {
     outputRange: [MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT],
     extrapolate: 'clamp',
   });
-  
+
   return (
     <AppWrapper noPaddingTop>
       <View style={StyleSheet.flatten([commonStyles.container])}>
@@ -58,7 +62,7 @@ export const DetailsScreen = () => {
               <BackBtn onClick={() => navigation?.goBack()} />
             </View>
             <View style={styles.headerDescription}>
-              <Text type="primary" color={colors.primary1}>
+              <Text type="primary" color={theme.colors.primary1}>
                 {data.title}
               </Text>
               <View
@@ -67,11 +71,11 @@ export const DetailsScreen = () => {
                   commonStyles.flexRow,
                 ])}>
                 <Icon icon={SVG_LOCATION} size="small" />
-                <Text type="quaternary" color={colors.primary1}>
+                <Text type="quaternary" color={theme.colors.primary1}>
                   {data.details.location}
                 </Text>
               </View>
-              <Rating rating={data.rating} white />
+              <Rating rating={data.rating} white={theme.id === ids.dark} />
             </View>
           </ImageBackground>
         </Animated.View>
@@ -87,7 +91,7 @@ export const DetailsScreen = () => {
           )}>
           <View style={styles.generalInfo}>
             <Line white />
-            <Text type="tertiary" color={colors.semi_primary1}>
+            <Text type="tertiary" color={theme.colors.primary1}>
               {data.description}
             </Text>
             <Line />
@@ -119,32 +123,33 @@ export const DetailsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    height: '100%',
-    justifyContent: 'space-between',
-  },
-  backBtnContainer: {
-    marginTop: 70,
-    marginLeft: 20,
-    opacity: 0.7,
-  },
-  headerDescription: {
-    backgroundColor: colors.semi_primary2,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    rowGap: 5,
-  },
-  locationContainer: {columnGap: 5},
-  generalInfo: {
-    paddingHorizontal: 10,
-    marginTop: 20,
-    rowGap: 20,
-  },
-  detailsContainer: {margin: 30, rowGap: 20},
-  mapStyle: {
-    width: DEVICE_WIDTH,
-    height: DEVICE_HEIGHT * 0.3,
-    marginVertical: 30,
-  },
-});
+const createStyles = (theme: ThemeType) =>
+  StyleSheet.create({
+    headerContainer: {
+      height: '100%',
+      justifyContent: 'space-between',
+    },
+    backBtnContainer: {
+      marginTop: 70,
+      marginLeft: 20,
+      opacity: 0.7,
+    },
+    headerDescription: {
+      backgroundColor: theme.colors.semi_primary2,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      rowGap: 5,
+    },
+    locationContainer: {columnGap: 5},
+    generalInfo: {
+      paddingHorizontal: 10,
+      marginTop: 20,
+      rowGap: 20,
+    },
+    detailsContainer: {margin: 30, rowGap: 20},
+    mapStyle: {
+      width: DEVICE_WIDTH,
+      height: DEVICE_HEIGHT * 0.3,
+      marginVertical: 30,
+    },
+  });
