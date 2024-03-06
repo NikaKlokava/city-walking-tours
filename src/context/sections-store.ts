@@ -17,12 +17,12 @@ class SectionsStore {
       isLoading: observable,
       data: observable,
       uploadData: action,
-      setCategories: action,
+      updateLikeStatus: action,
       updateUrlData: action,
       updateCategoriesUrlData: action,
       setData: action,
       setIsLoading: action,
-      updateLikeStatus: action,
+      setCategories: action,
     });
   }
 
@@ -129,11 +129,9 @@ class SectionsStore {
 
     const reff = collectionRef(uid).collection('sections').doc(category.uid);
     dataWithChanges &&
-      (await reff
-        .update({
-          data: dataWithChanges,
-        })
-        .then(() => console.log('good')));
+      (await reff.update({
+        data: dataWithChanges,
+      }));
   };
 
   setCategories = (categories: CategoriesType) => {

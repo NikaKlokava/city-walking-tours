@@ -23,20 +23,19 @@ type Props = {
 };
 
 const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
-  const [selectedCategory, setSelectedCategory] = useState<SectionDataType>();
+  const [selectedCategory, setSelectedCategory] = useState<string>();
   const {theme} = useThemeContext();
 
   useEffect(() => {
     settingsStore.cityUid && sectionStore.uploadData(settingsStore.cityUid);
   }, []);
   const styles = useMemo(() => createStyles(theme), [theme]);
+
   const handleCategorySelect = (title: string) => {
-    const category = sectionStore.data.find(
-      item => item.category.title === title,
-    );
-    if (!category) setSelectedCategory(undefined);
-    setSelectedCategory(category);
+    if (title === 'See All') setSelectedCategory(undefined);
+    else setSelectedCategory(title);
   };
+
   return (
     <AppWrapper>
       <View
@@ -60,34 +59,32 @@ const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
           <Loader />
         ) : (
           <ScrollView>
-            <View style={styles.scrollContainer}>
-              <View
-                style={StyleSheet.flatten([
-                  styles.inputContainer,
-                  commonStyles.flexRow,
-                ])}>
-                <TextInput
-                  style={styles.searchInput}
-                  placeholder="What do you want to find?"
-                  placeholderTextColor={theme.colors.semi_primary1}
-                />
-                <Icon icon={SEARCH_ICON} size="medium" />
-              </View>
-              <SearchBar
-                onSelect={handleCategorySelect}
-                title={selectedCategory?.category.title}
-                categories={sectionStore.categories}
+            <View
+              style={StyleSheet.flatten([
+                styles.inputContainer,
+                commonStyles.flexRow,
+              ])}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="What do you want to find?"
+                placeholderTextColor={theme.colors.semi_primary1}
               />
-              {selectedCategory ? (
-                <SelectedCategory category={selectedCategory} />
-              ) : (
-                <Categories
-                  data={sectionStore.data}
-                  onSelect={handleCategorySelect}
-                  isLoading={sectionStore.isLoading}
-                />
-              )}
+              <Icon icon={SEARCH_ICON} size="medium" />
             </View>
+            <SearchBar
+              onSelect={handleCategorySelect}
+              title={selectedCategory}
+              categories={sectionStore.categories}
+            />
+            {selectedCategory ? (
+              <SelectedCategory selectedCategory={selectedCategory} />
+            ) : (
+              <Categories
+                data={sectionStore.data}
+                onSelect={handleCategorySelect}
+                isLoading={sectionStore.isLoading}
+              />
+            )}
           </ScrollView>
         )}
       </View>
@@ -110,7 +107,6 @@ const createStyles = (theme: ThemeType) =>
     headerContainer: {
       marginBottom: 20,
     },
-    scrollContainer: {rowGap: 10, marginTop: 10},
     cityContainer: {columnGap: 10, justifyContent: 'flex-end'},
     inputContainer: {
       padding: 15,

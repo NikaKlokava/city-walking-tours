@@ -1,20 +1,8 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Text} from '../components/base/Text';
-import {
-  DEVICE_WIDTH,
-  SETTINGS,
-  commonStyles,
-  ids,
-  settingsItem,
-} from '../utils';
-import {
-  Animated,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {SETTINGS, commonStyles, settingsItem} from '../utils';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon} from '../components/base/Icon';
 import SVG_RIGHT_ARROW from '../assets/icons/right_arrow.svg';
 import {settingsStore} from '../context/settings-store';
@@ -94,5 +82,11 @@ const createStyles = (theme: ThemeType) =>
       borderRadius: 10,
       minHeight: 50,
       marginVertical: 5,
+    },
+    box: {
+      width: 10,
+      height: 10,
+      backgroundColor: 'black',
+      borderRadius: 50,
     },
   });

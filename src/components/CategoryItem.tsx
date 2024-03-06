@@ -7,7 +7,12 @@ import {
   View,
 } from 'react-native';
 import {Text} from './base/Text';
-import {DEVICE_HEIGHT, DEVICE_WIDTH, commonStyles} from '../utils';
+import {
+  DEVICE_HEIGHT,
+  DEVICE_WIDTH,
+  commonStyles,
+  layoutAnimConfig,
+} from '../utils';
 import {Rating} from './Rating';
 import {Icon} from './base/Icon';
 import {
@@ -22,6 +27,7 @@ import {observer} from 'mobx-react';
 import {BlurView} from '@react-native-community/blur';
 import {settingsStore} from '../context/settings-store';
 import {useThemeContext} from '../context/theme-context';
+import {Loader} from './Loader';
 
 const image = require('../assets/images/viln.png');
 
@@ -50,18 +56,6 @@ export const Category = observer(
     const {theme} = useThemeContext();
     const styles = useMemo(() => createStyles(theme), [theme]);
 
-    const layoutAnimConfig = {
-      duration: 500,
-      update: {
-        type: LayoutAnimation.Types.easeInEaseOut,
-      },
-      delete: {
-        duration: 400,
-        type: LayoutAnimation.Types.easeInEaseOut,
-        property: LayoutAnimation.Properties.opacity,
-      },
-    };
-
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(routes.DETAILS, category)}
@@ -73,6 +67,7 @@ export const Category = observer(
         <ImageBackground
           src={category.image}
           style={styles.image}
+          progressiveRenderingEnabled={true}
           defaultSource={image}
           onLoadEnd={() => setIsLoading(false)}
           imageStyle={styles.imageBackgorund}>

@@ -21,6 +21,7 @@ export const Line = ({white, black}: {white?: boolean; black?: boolean}) => {
 const createStyles = (theme: ThemeType) =>
   StyleSheet.create({
     line: {
+      marginVertical: 10,
       borderWidth: 0.7,
       borderColor: theme.colors.active_bright,
     },

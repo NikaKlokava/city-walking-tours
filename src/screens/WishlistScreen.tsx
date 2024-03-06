@@ -31,7 +31,8 @@ const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
       ) : (
         <FlatList
           data={wishlistData}
-          renderItem={({item, index}) => (
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
             <View key={item.title} style={styles.itemsContainer}>
               <CategoryItem category={item} isLiked={item.liked} inWishlist />
             </View>

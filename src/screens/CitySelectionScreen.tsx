@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {StyledBtn} from '../components/StyledBtn';
 import {Text} from '../components/base/Text';
-import {colors, commonStyles} from '../utils';
+import {commonStyles} from '../utils';
 import {SelectCityModal} from '../components/SelectCityModal';
 import {AppWrapper} from '../components/AppWrapper';
 import {CityStore} from '../context/cities-store';
 import {observer} from 'mobx-react';
+import {useThemeContext} from '../context/theme-context';
 
 const image = require('../assets/images/city.png');
 
@@ -20,6 +21,8 @@ export const CitySelectionScreen = observer(
     const [modalVisible, setModalVisible] = useState(false);
     const [currentCity, setCurrentCity] = useState<string>('');
     const [currentCityUid, setCurrentCityUid] = useState<string>('');
+
+    const {theme} = useThemeContext();
 
     useEffect(() => {
       cityStore.uploadCitiesData();
@@ -47,7 +50,7 @@ export const CitySelectionScreen = observer(
           {!modalVisible && (
             <>
               <View style={styles.selectBlock}>
-                <Text type="primary" color={colors.active_bright} center>
+                <Text type="primary" color={theme.colors.active_bright} center>
                   Select your city
                 </Text>
                 <StyledBtn
@@ -55,7 +58,10 @@ export const CitySelectionScreen = observer(
                   onClick={() => setModalVisible(true)}
                 />
                 {currentCity && (
-                  <Text type="primary" color={colors.active_bright} center>
+                  <Text
+                    type="primary"
+                    color={theme.colors.active_bright}
+                    center>
                     {currentCity}
                   </Text>
                 )}
