@@ -18,4 +18,4 @@ export const WishlistStack = () => {
       <Stack.Screen name={routes.DETAILS} component={DetailsScreen} />
     </Stack.Navigator>
   );
-}; // wishlist, details
+};

@@ -1,41 +1,55 @@
-import React, {lazy} from 'react';
+import React from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 import {CategoryItem} from '../components/CategoryItem';
-import {WISHLIST_DATA, colors} from '../utils';
 import {Text} from '../components/base/Text';
+import {observer} from 'mobx-react';
+import {sectionsStore} from '../context/sections-store';
+import {useThemeContext} from '../context/theme-context';
 
-export const WishlistScreen = () => {
+const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
+  const {theme} = useThemeContext();
+
+  const wishlistData = store.data.reduce((accum: DataType[], curr) => {
+    return [...accum, ...curr.data.filter(elem => elem.liked)];
+  }, []);
+
   return (
     <AppWrapper>
-      <LazyWishlistContent />
-    </AppWrapper>
-  );
-};
-
-const WishlistContent = () => {
-  return (
-    <>
-      <Text type={'primary'} color={colors.active_bright} center>
+      <Text type={'primary'} color={theme.colors.active_bright} center>
         Wishlist
       </Text>
-      <FlatList
-        data={WISHLIST_DATA}
-        renderItem={({item, index}) => (
-          <View key={index} style={styles.itemsContainer}>
-            <CategoryItem category={item} liked />
-          </View>
-        )}
-      />
-    </>
+      {wishlistData.length === 0 ? (
+        <Text
+          type="primary"
+          color={theme.colors.semi_pink}
+          center
+          style={styles.noFav}>
+          no favorites...
+        </Text>
+      ) : (
+        <FlatList
+          data={wishlistData}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <View key={item.title} style={styles.itemsContainer}>
+              <CategoryItem category={item} isLiked={item.liked} inWishlist />
+            </View>
+          )}
+        />
+      )}
+    </AppWrapper>
   );
-};
+});
 
-const LazyWishlistContent = lazy(async () => ({default: WishlistContent}));
+export const WishlistScreen = () => <WishlistComponent store={sectionsStore} />;
 
 const styles = StyleSheet.create({
   itemsContainer: {
     marginVertical: 20,
+  },
+  noFav: {
+    marginTop: 20,
   },
 });

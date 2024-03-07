@@ -12,9 +12,7 @@ import {
 import {DEVICE_HEIGHT, DEVICE_WIDTH, commonStyles, getIndex} from '../utils';
 import {ProgressBar} from './ProgressBar';
 
-const image: ImageSourcePropType = require('../assets/images/gedim.png');
-
-export const Gallery = () => {
+export const Gallery = ({images}: {images: string[]}) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const handleImageScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -23,7 +21,6 @@ export const Gallery = () => {
     setImageIndex(index);
   };
 
-  const images = Array.from({length: 7}, () => image);
   return (
     <View style={styles.container}>
       <FlatList
@@ -35,7 +32,7 @@ export const Gallery = () => {
         renderItem={({item, index}) => (
           <View style={styles.imageContainer}>
             <Image
-              source={item}
+              src={item}
               style={[styles.image, imageIndex === index && styles.other]}
             />
           </View>

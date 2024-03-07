@@ -1,27 +1,54 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
-import {colors} from '../utils';
 import {CategoryItem} from './CategoryItem';
+import {useThemeContext} from '../context/theme-context';
+import {observer} from 'mobx-react';
+import {sectionsStore} from '../context/sections-store';
 
 type Props = {
-  category: CategotyType;
-  city: string | null;
+  category: string;
+  store: SectionsStore;
 };
-export const SelectedCategory = ({category, city}: Props) => {
-  return (
-    <>
-      <Text type="primary" color={colors.primary1} center>
-        {category.title}
-      </Text>
-      <View style={styles.itemContainer}>
-        {category.data.map((item, index) => (
-          <CategoryItem category={item} key={index} verticalScroll />
-        ))}
-      </View>
-    </>
-  );
-};
+export const SelectedCategoryComponent = observer(
+  ({category, store}: Props) => {
+    const {theme} = useThemeContext();
+
+    const selectedCategoryData = store.data.find(
+      item => item.category.title === category,
+    );
+
+    return (
+      <>
+        <Text type="primary" color={theme.colors.primary1} center>
+          {selectedCategoryData?.category.title}
+        </Text>
+        <View style={styles.itemContainer}>
+          {selectedCategoryData?.data?.map(item => (
+            <CategoryItem
+              category={item}
+              key={item.title}
+              verticalScroll
+              isLiked={item.liked}
+            />
+          ))}
+        </View>
+      </>
+    );
+  },
+);
+
+export const SelectedCategory = ({
+  selectedCategory,
+}: {
+  selectedCategory: string;
+}) => (
+  <SelectedCategoryComponent
+    store={sectionsStore}
+    category={selectedCategory}
+  />
+);
+
 const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',

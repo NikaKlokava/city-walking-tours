@@ -1,26 +1,46 @@
-import React, {Suspense} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Animated, StyleSheet} from 'react-native';
 import {Loader} from './Loader';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors} from '../utils';
+import SplashScreen from 'react-native-splash-screen';
+import {settingsStore} from '../context/settings-store';
+import {observer} from 'mobx-react';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   children: any;
   noPaddingTop?: boolean;
+  store?: SettingsStore;
 };
 
-export const AppWrapper = ({children, noPaddingTop}: Props) => {
-  return (
-    <LinearGradient
-      colors={colors.gradient}
-      style={StyleSheet.flatten([
-        styles.main,
-        noPaddingTop && styles.noPadding,
-      ])}>
-      <Suspense fallback={<Loader />}>{children}</Suspense>
-    </LinearGradient>
-  );
-};
+export const AppWrapperComponent = observer(
+  ({children, noPaddingTop, store}: Props) => {
+    const {theme} = useThemeContext();
+
+    useEffect(() => {
+      SplashScreen.hide();
+    }, []);
+
+    return (
+      <LinearGradient
+        colors={theme.colors.gradient}
+        style={StyleSheet.flatten([
+          styles.main,
+          noPaddingTop && styles.noPadding,
+        ])}>
+        {store?.isLoading ? <Loader withText /> : children}
+      </LinearGradient>
+    );
+  },
+);
+
+export const AppWrapper = ({children, noPaddingTop}: Props) => (
+  <AppWrapperComponent
+    children={children}
+    noPaddingTop={noPaddingTop}
+    store={settingsStore}
+  />
+);
 
 const styles = StyleSheet.create({
   main: {

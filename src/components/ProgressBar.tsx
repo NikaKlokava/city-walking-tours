@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors} from '../utils';
+import {useThemeContext} from '../context/theme-context';
 
 type Props = {
   index: number;
@@ -9,6 +9,10 @@ type Props = {
 
 export const ProgressBar = ({index, dataLength}: Props) => {
   const emptyArray = Array.from({length: dataLength});
+
+  const {theme} = useThemeContext();
+
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
     <>
@@ -25,15 +29,16 @@ export const ProgressBar = ({index, dataLength}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  dott: {
-    width: 15,
-    height: 15,
-    borderRadius: 10,
-    backgroundColor: colors.active_bright,
-    opacity: 0.4,
-  },
-  active: {
-    opacity: 1,
-  },
-});
+const createStyles = (theme: ThemeType) =>
+  StyleSheet.create({
+    dott: {
+      width: 15,
+      height: 15,
+      borderRadius: 10,
+      backgroundColor: theme.colors.active_bright,
+      opacity: 0.4,
+    },
+    active: {
+      opacity: 1,
+    },
+  });
