@@ -27,7 +27,6 @@ import {observer} from 'mobx-react';
 import {BlurView} from '@react-native-community/blur';
 import {settingsStore} from '../context/settings-store';
 import {useThemeContext} from '../context/theme-context';
-import {Loader} from './Loader';
 
 const image = require('../assets/images/viln.png');
 

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   FlatList,
   Image,
-  ImageSourcePropType,
   LayoutAnimation,
   NativeScrollEvent,
   NativeSyntheticEvent,

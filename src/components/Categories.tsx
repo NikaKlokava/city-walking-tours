@@ -39,7 +39,7 @@ export const Categories = ({data, isLoading, onSelect}: Props) => {
           <FlatList
             data={caregory.data}
             horizontal
-            keyExtractor={(_, index) => index.toString()}
+            keyExtractor={item => item.title}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <CategoryItem category={item} isLiked={item.liked} />

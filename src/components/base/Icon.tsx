@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageProps, StyleSheet, View} from 'react-native';
+import {ImageProps, StyleSheet} from 'react-native';
 import {iconSize} from '../../utils';
 import {SvgProps, SvgUri} from 'react-native-svg';
 import {Loader} from '../Loader';

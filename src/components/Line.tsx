@@ -4,7 +4,6 @@ import {useThemeContext} from '../context/theme-context';
 
 export const Line = ({white, black}: {white?: boolean; black?: boolean}) => {
   const {theme} = useThemeContext();
-
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (

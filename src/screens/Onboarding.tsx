@@ -43,7 +43,7 @@ export const Onboarding = observer(({store}: {store: SettingsStore}) => {
             horizontal
             pagingEnabled
             onScroll={e => handleScreenScroll(e)}
-            keyExtractor={(_, index) => index.toString()}
+            keyExtractor={(item) => item.title}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => {
               return (

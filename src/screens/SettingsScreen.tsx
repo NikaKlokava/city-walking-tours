@@ -21,7 +21,7 @@ export const SettingsScreen = () => {
           Settings
         </Text>
         <ScrollView>
-          <CitySettings />
+          <CitySettingItem store={settingsStore} />
           <ThemeSettings />
         </ScrollView>
       </View>
@@ -49,8 +49,6 @@ const CitySettingItem = observer(({store}: {store: SettingsStore}) => {
     </TouchableOpacity>
   );
 });
-
-const CitySettings = () => <CitySettingItem store={settingsStore} />;
 
 const ThemeSettings = () => {
   const {theme, updateTheme} = useThemeContext();

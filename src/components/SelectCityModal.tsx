@@ -59,7 +59,7 @@ export const SelectCityModal = ({
           <Loader withText />
         ) : (
           <FlatList
-            keyExtractor={(_, index) => index.toString()}
+            keyExtractor={item => item.city}
             data={data}
             renderItem={({item}) => (
               <CityItem item={item} onSelect={onSelect} />

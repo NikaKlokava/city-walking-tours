@@ -15,7 +15,7 @@ export const DARK_THEME: ThemeType = {
     semi_pink: 'rgba(255, 85, 110, 0.8)',
     active_bright: '#FF677E', // #5EDFFF
     active_dark: '#031F2B',
-    grey: '#F5F5F5',
+    grey: '#e5e5e5',
     input_background: '#263238',
     gradient: ['#031F2B', '#031F2B', '#000000'],
   },
@@ -33,8 +33,8 @@ export const LIGHT_THEME: ThemeType = {
     semi_pink: 'rgba(255, 85, 110, 0.8)',
     active_bright: '#FF677E',
     active_dark: '#FFE6EA',
-    grey: '#F5F5F5',
+    grey: '#e5e5e5',
     input_background: '#C6C6C6',
-    gradient: ['#FFE6EA', '#fff', '#fff'], //
+    gradient: ['#FFE6EA', '#fff', '#fff'],
   },
 };
