@@ -1,0 +1,6 @@
+projectKey=city-walking-tours
+serverUrl=http://localhost:9000
+serverVersion=10.4.1.88267
+dashboardUrl=http://localhost:9000/dashboard?id=city-walking-tours
+ceTaskId=fe90e807-e2aa-4c61-b8bf-809d5e5a0803
+ceTaskUrl=http://localhost:9000/api/ce/task?id=fe90e807-e2aa-4c61-b8bf-809d5e5a0803
