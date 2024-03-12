@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Image, StyleSheet, View} from 'react-native';
-import {INITIAL_REGION, colors, commonStyles} from '../utils';
+import {INITIAL_REGION, commonStyles} from '../utils';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from './base/Text';
 import {CategoryItem} from './CategoryItem';
 import {useThemeContext} from '../context/theme-context';

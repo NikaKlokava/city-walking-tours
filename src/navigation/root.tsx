@@ -8,7 +8,7 @@ import {MapStack} from './map';
 import {SettingsStack} from './settings';
 import {TabBar} from '../components/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors, commonStyles} from '../utils';
+import {commonStyles} from '../utils';
 import {StyleSheet} from 'react-native';
 import {useThemeContext} from '../context/theme-context';
 
