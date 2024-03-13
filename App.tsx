@@ -17,7 +17,7 @@ function App(): React.JSX.Element {
   );
 }
 
-const ContextComponent = observer(({store}: {store: SettingsStore}) => {
+export const ContextComponent = observer(({store}: {store: SettingsStore}) => {
   useEffect(() => {
     store.uploadSettingsData();
   }, []);
@@ -25,7 +25,7 @@ const ContextComponent = observer(({store}: {store: SettingsStore}) => {
   if (!store.isOnboardingPassed) {
     return <Onboarding store={settingsStore} />;
   }
-  
+
   if (!store.city) {
     return (
       <CitySelectionScreen

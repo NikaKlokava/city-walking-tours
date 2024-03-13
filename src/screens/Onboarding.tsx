@@ -50,7 +50,7 @@ export const Onboarding = observer(({store}: {store: SettingsStore}) => {
                 <View style={styles.listContainer}>
                   <Image source={item.image} style={styles.backImg} />
                   <View style={styles.descriptionContainer}>
-                    <Text type="primary" color={theme.colors.primary1} center>
+                    <Text type="primary" color={theme.colors.primary1} center testID='onboarding'>
                       {item.title}
                     </Text>
                     <Line />

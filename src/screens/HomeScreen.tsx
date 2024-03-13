@@ -22,7 +22,7 @@ type Props = {
   settingsStore: SettingsStore;
 };
 
-const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
+export const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const {theme} = useThemeContext();
 
@@ -46,7 +46,7 @@ const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
               styles.cityContainer,
               commonStyles.flexRow,
             ])}>
-            <Text type="tertiary" center color={theme.colors.semi_primary1}>
+            <Text type="tertiary" center color={theme.colors.semi_primary1} testID='home-screen-city'>
               city:
             </Text>
             <Text type="primary" center color={theme.colors.primary1}>

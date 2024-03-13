@@ -50,7 +50,7 @@ export const CitySelectionScreen = observer(
           {!modalVisible && (
             <>
               <View style={styles.selectBlock}>
-                <Text type="primary" color={theme.colors.active_bright} center>
+                <Text type="primary" color={theme.colors.active_bright} center testID='city-select'>
                   Select your city
                 </Text>
                 <StyledBtn

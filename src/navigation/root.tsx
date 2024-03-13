@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
-import {tabs} from '.';
+import {tabs} from './routes';
 import {HomeStack} from './home';
 import {WishlistStack} from './wishlist';
 import {MapStack} from './map';
