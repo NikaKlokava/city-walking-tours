@@ -5,10 +5,15 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios --udid 26046EC5-C51B-4399-AF07-82C251920C25 ",
-    "lint": "eslint .",
+    "lint": "eslint --fix --ext .ts,.tsx ./src",
     "start": "react-native start",
     "test": "jest",
     "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.21.0",
