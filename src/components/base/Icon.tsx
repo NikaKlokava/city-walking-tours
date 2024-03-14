@@ -11,7 +11,6 @@ type Props = {
 
 export const Icon = (props: Props) => {
   const [loading, setLoading] = useState(true);
-
   const SVG = props.icon;
   const svgStyle = StyleSheet.flatten([props.style, iconSize[props.size]]);
 
