@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-
 import {RootNavigator} from './src/navigation';
 
 import {Onboarding} from './src/screens/Onboarding';
