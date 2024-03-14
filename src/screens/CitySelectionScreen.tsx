@@ -26,7 +26,7 @@ export const CitySelectionScreen = observer(
 
     useEffect(() => {
       cityStore.uploadCitiesData();
-    }, []);
+    }, [cityStore]);
 
     const handleModalClose = () => {
       setModalVisible(false);
@@ -50,7 +50,11 @@ export const CitySelectionScreen = observer(
           {!modalVisible && (
             <>
               <View style={styles.selectBlock}>
-                <Text type="primary" color={theme.colors.active_bright} center testID='city-select'>
+                <Text
+                  type="primary"
+                  color={theme.colors.active_bright}
+                  center
+                  testID="city-select">
                   Select your city
                 </Text>
                 <StyledBtn

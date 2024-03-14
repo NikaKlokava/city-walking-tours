@@ -22,75 +22,87 @@ type Props = {
   settingsStore: SettingsStore;
 };
 
-export const HomeScreenComponent = observer(({sectionStore, settingsStore}: Props) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>();
-  const {theme} = useThemeContext();
+export const HomeScreenComponent = observer(
+  ({sectionStore, settingsStore}: Props) => {
+    const [selectedCategory, setSelectedCategory] = useState<string>();
+    const {theme} = useThemeContext();
 
-  useEffect(() => {
-    settingsStore.cityUid && sectionStore.uploadData(settingsStore.cityUid);
-  }, []);
-  const styles = useMemo(() => createStyles(theme), [theme]);
+    useEffect(() => {
+      settingsStore.cityUid && sectionStore.uploadData(settingsStore.cityUid);
+    }, [sectionStore, settingsStore.cityUid]);
+    const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const handleCategorySelect = (title: string) => {
-    if (title === 'See All') setSelectedCategory(undefined);
-    else setSelectedCategory(title);
-  };
+    const handleCategorySelect = (title: string) => {
+      if (title === 'See All') {
+        setSelectedCategory(undefined);
+      } else {
+        setSelectedCategory(title);
+      }
+    };
 
-  return (
-    <AppWrapper>
-      <View
-        style={StyleSheet.flatten([styles.container, commonStyles.container])}>
-        <View style={styles.headerContainer}>
-          <View
-            style={StyleSheet.flatten([
-              styles.cityContainer,
-              commonStyles.flexRow,
-            ])}>
-            <Text type="tertiary" center color={theme.colors.semi_primary1} testID='home-screen-city'>
-              city:
-            </Text>
-            <Text type="primary" center color={theme.colors.primary1}>
-              {settingsStore.city}
-            </Text>
-          </View>
-        </View>
-        <Line />
-        {sectionStore.isLoading ? (
-          <Loader />
-        ) : (
-          <ScrollView>
+    return (
+      <AppWrapper>
+        <View
+          style={StyleSheet.flatten([
+            styles.container,
+            commonStyles.container,
+          ])}>
+          <View style={styles.headerContainer}>
             <View
               style={StyleSheet.flatten([
-                styles.inputContainer,
+                styles.cityContainer,
                 commonStyles.flexRow,
               ])}>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="What do you want to find?"
-                placeholderTextColor={theme.colors.semi_primary1}
-              />
-              <Icon icon={SEARCH_ICON} size="medium" />
+              <Text
+                type="tertiary"
+                center
+                color={theme.colors.semi_primary1}
+                testID="home-screen-city">
+                city:
+              </Text>
+              <Text type="primary" center color={theme.colors.primary1}>
+                {settingsStore.city}
+              </Text>
             </View>
-            <SearchBar
-              onSelect={handleCategorySelect}
-              title={selectedCategory}
-              categories={sectionStore.categories}
-            />
-            {selectedCategory ? (
-              <SelectedCategory selectedCategory={selectedCategory} />
-            ) : (
-              <Categories
-                data={sectionStore.data}
+          </View>
+          <Line />
+          {sectionStore.isLoading ? (
+            <Loader />
+          ) : (
+            <ScrollView>
+              <View
+                style={StyleSheet.flatten([
+                  styles.inputContainer,
+                  commonStyles.flexRow,
+                ])}>
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder="What do you want to find?"
+                  placeholderTextColor={theme.colors.semi_primary1}
+                />
+                <Icon icon={SEARCH_ICON} size="medium" />
+              </View>
+              <SearchBar
                 onSelect={handleCategorySelect}
-                isLoading={sectionStore.isLoading}
+                title={selectedCategory}
+                categories={sectionStore.categories}
               />
-            )}
-          </ScrollView>
-        )}
-      </View>
-    </AppWrapper>
-  );
-});
+              {selectedCategory ? (
+                <SelectedCategory selectedCategory={selectedCategory} />
+              ) : (
+                <Categories
+                  data={sectionStore.data}
+                  onSelect={handleCategorySelect}
+                  isLoading={sectionStore.isLoading}
+                />
+              )}
+            </ScrollView>
+          )}
+        </View>
+      </AppWrapper>
+    );
+  },
+);
 
 export const HomeScreen = () => (
   <HomeScreenComponent
