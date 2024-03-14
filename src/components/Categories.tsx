@@ -19,7 +19,7 @@ export const Categories = ({data, isLoading, onSelect}: Props) => {
   if (isLoading) return <Loader white withText />;
   return (
     <>
-      {data.map((caregory, index) => (
+      {data?.map((caregory, index) => (
         <View style={styles.container} key={index}>
           <View
             style={StyleSheet.flatten([
