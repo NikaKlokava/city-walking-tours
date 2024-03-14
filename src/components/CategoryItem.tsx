@@ -49,7 +49,6 @@ export const Category = observer(
     inWishlist,
   }: Props) => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();
-
     const [isLoading, setIsLoading] = useState(true);
 
     const {theme} = useThemeContext();
