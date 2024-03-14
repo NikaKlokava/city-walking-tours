@@ -28,7 +28,9 @@ export class SettingsStore {
       if (result) {
         this.setOnboarding(result);
         this.setIsLoading(true);
-      } else this.setIsLoading(false);
+      } else {
+        this.setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +43,9 @@ export class SettingsStore {
         cityUid && this.setCityUid(cityUid);
         city && this.setCity(city);
         this.setIsLoading(true);
-      } else this.setIsLoading(false);
+      } else {
+        this.setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     } finally {

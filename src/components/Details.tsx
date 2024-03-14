@@ -20,7 +20,7 @@ export const Details = ({type, title}: Props) => {
         <Icon icon={detailsSvgs[type]} size={'xlarge'} />
       </View>
       <TouchableOpacity
-        onPress={() => detailsDescription['site'] && Linking.openURL(title)}>
+        onPress={() => detailsDescription.site && Linking.openURL(title)}>
         <Text type="quaternary" color={theme.colors.semi_primary1}>
           {detailsDescription[type]}
         </Text>

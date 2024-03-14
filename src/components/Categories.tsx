@@ -16,7 +16,9 @@ type Props = {
 export const Categories = ({data, isLoading, onSelect}: Props) => {
   const {theme} = useThemeContext();
 
-  if (isLoading) return <Loader white withText />;
+  if (isLoading) {
+    return <Loader white withText />;
+  }
   return (
     <>
       {data?.map((caregory, index) => (
