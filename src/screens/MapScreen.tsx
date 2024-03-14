@@ -10,12 +10,12 @@ import {
   NavigationProp,
 } from '@react-navigation/native';
 import {Text} from '../components/base/Text';
-import {routes} from '../navigation';
 import {observer} from 'mobx-react';
 import {sectionsStore} from '../context/sections-store';
 import {Rating} from '../components/Rating';
 import {Line} from '../components/Line';
 import {useThemeContext} from '../context/theme-context';
+import {routes} from '../navigation/routes';
 
 type LocationType = {
   latitude: number;

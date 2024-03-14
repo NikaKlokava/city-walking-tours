@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render WishlistScreen WishlistScreen renders correctly 1`] = `
+<BVLinearGradient
+  colors={
+    [
+      4278394667,
+      4278394667,
+      4278190080,
+    ]
+  }
+  endPoint={
+    {
+      "x": 0.5,
+      "y": 1,
+    }
+  }
+  locations={null}
+  startPoint={
+    {
+      "x": 0.5,
+      "y": 0,
+    }
+  }
+  style={
+    {
+      "flex": 1,
+      "paddingTop": 80,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }
+  >
+    <ActivityIndicator
+      color="#FF677E"
+      size="large"
+      style={
+        {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+    <Text
+      color="#FF677E"
+      style={
+        {
+          "color": "#FF677E",
+          "fontFamily": "Montserrat Alternates",
+          "fontSize": 25,
+        }
+      }
+      type="primary"
+    >
+      Loading...
+    </Text>
+  </View>
+</BVLinearGradient>
+`;

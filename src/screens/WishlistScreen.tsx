@@ -8,7 +8,7 @@ import {observer} from 'mobx-react';
 import {sectionsStore} from '../context/sections-store';
 import {useThemeContext} from '../context/theme-context';
 
-const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
+export const WishlistComponent = observer(({store}: {store: SectionsStore}) => {
   const {theme} = useThemeContext();
 
   const wishlistData = store.data.reduce((accum: DataType[], curr) => {

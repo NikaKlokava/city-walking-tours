@@ -11,7 +11,7 @@ type Props = {
 
 export const BackBtn = ({onClick}: Props) => {
   const {theme} = useThemeContext();
-  const styles = useMemo(() => createStyles(theme), [theme]); 
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
     <TouchableOpacity

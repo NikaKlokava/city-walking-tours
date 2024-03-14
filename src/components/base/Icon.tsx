@@ -11,11 +11,10 @@ type Props = {
 
 export const Icon = (props: Props) => {
   const [loading, setLoading] = useState(true);
-
   const SVG = props.icon;
   const svgStyle = StyleSheet.flatten([props.style, iconSize[props.size]]);
 
-  if (typeof props.icon === 'string')
+  if (typeof props.icon === 'string') {
     return (
       <>
         <SvgUri
@@ -26,6 +25,7 @@ export const Icon = (props: Props) => {
         {loading && <Loader white />}
       </>
     );
+  }
 
   return <SVG style={svgStyle} />;
 };

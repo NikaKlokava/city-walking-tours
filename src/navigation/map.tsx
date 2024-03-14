@@ -2,8 +2,8 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {DetailsScreen} from '../screens/DetailsScreen';
-import {routes} from '.';
 import {MapScreen} from '../screens/MapScreen';
+import {routes} from './routes';
 
 const Stack = createNativeStackNavigator();
 
