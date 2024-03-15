@@ -35,14 +35,14 @@
 
 # <p align="center">Project visualization </p>
 
-
 ## <p align="center">Video visualization </p>
 
 <p align="center">
- <video src='./static/video_1.mp4' height='450' controls ></video> <video src='./static/video_2.mp4' height='450' controls ></video> <video src='./static/video_3.mp4' height='450' controls ></video> <video src='./static/video_4.mp4' height='450' controls ></video> <video src='./static/video_5.mp4' height='450' controls ></video> <video src='./static/video_6.mp4' height='450' controls ></video> <video src='./static/video_7.mp4' height='450' controls ></video>
- </p>
+<img src="./static/video_1.gif" height="350" alt="video_1"> <img src="./static/video_2.gif" height="350" alt="video_2"> <img src="./static/video_3.gif" height="350" alt="video_3"> <img src="./static/video_4.gif" height="350" alt="video_4"> <img src="./static/video_5.gif" height="350" alt="video_5"> <img src="./static/video_6.gif" height="350" alt="video_6"> <img src="./static/video_7.gif" height="350" alt="video_7">
 
-# 
+</p>
+
+#
 
 ## <p align="center">Screenshots visualization </p>
 
@@ -64,6 +64,7 @@
 ### CitySelectionScreen
 
 #
+
 <p align="center">
   <img src="./static/city_select_1.png" height="350" alt="city_select_1"> <img src="./static/city_select_2.png" height="350" alt="city_select_2"> <img src="./static/city_select_3.png" height="350" alt="city_select_3"> 
 </p>
