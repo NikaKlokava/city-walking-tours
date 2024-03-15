@@ -1,14 +1,15 @@
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
-import {tabs} from '.';
+import {tabs} from './routes';
 import {HomeStack} from './home';
 import {WishlistStack} from './wishlist';
 import {MapStack} from './map';
 import {SettingsStack} from './settings';
 import {TabBar} from '../components/TabBar';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors, commonStyles} from '../utils';
+import {commonStyles} from '../utils';
 import {StyleSheet} from 'react-native';
 import {useThemeContext} from '../context/theme-context';
 

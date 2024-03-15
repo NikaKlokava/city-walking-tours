@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageProps, StyleSheet, View} from 'react-native';
+import {ImageProps, StyleSheet} from 'react-native';
 import {iconSize} from '../../utils';
 import {SvgProps, SvgUri} from 'react-native-svg';
 import {Loader} from '../Loader';
@@ -11,11 +11,10 @@ type Props = {
 
 export const Icon = (props: Props) => {
   const [loading, setLoading] = useState(true);
-
   const SVG = props.icon;
   const svgStyle = StyleSheet.flatten([props.style, iconSize[props.size]]);
 
-  if (typeof props.icon === 'string')
+  if (typeof props.icon === 'string') {
     return (
       <>
         <SvgUri
@@ -26,6 +25,7 @@ export const Icon = (props: Props) => {
         {loading && <Loader white />}
       </>
     );
+  }
 
   return <SVG style={svgStyle} />;
 };

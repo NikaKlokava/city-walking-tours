@@ -18,7 +18,7 @@ export const Rating = ({rating, white}: Props) => {
       <Icon icon={STAR_ICON} size="small" />
       <Text
         type="quaternary"
-        color={white ? theme.colors.primary1 : theme.colors.active_dark}>
+        color={white ? theme.colors.primary1 : theme.colors.standart}>
         ({rating})
       </Text>
     </View>

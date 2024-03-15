@@ -43,14 +43,18 @@ export const Onboarding = observer(({store}: {store: SettingsStore}) => {
             horizontal
             pagingEnabled
             onScroll={e => handleScreenScroll(e)}
-            keyExtractor={(_, index) => index.toString()}
+            keyExtractor={item => item.title}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => {
               return (
                 <View style={styles.listContainer}>
                   <Image source={item.image} style={styles.backImg} />
                   <View style={styles.descriptionContainer}>
-                    <Text type="primary" color={theme.colors.primary1} center>
+                    <Text
+                      type="primary"
+                      color={theme.colors.primary1}
+                      center
+                      testID="onboarding">
                       {item.title}
                     </Text>
                     <Line />

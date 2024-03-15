@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Animated, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {Loader} from './Loader';
 import LinearGradient from 'react-native-linear-gradient';
 import SplashScreen from 'react-native-splash-screen';

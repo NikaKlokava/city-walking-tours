@@ -80,7 +80,9 @@ class SectionsStore {
     for (let i = 0; i < this.data.length; i++) {
       for (let k = 0; k < this.data[i].data.length; k++) {
         const dataInside = this.data[i].data;
-        if (dataInside[k].image.startsWith('https')) continue;
+        if (dataInside[k].image.startsWith('https')) {
+          continue;
+        }
         const iconRef = storage().ref(dataInside[k].image);
         const url = await iconRef.getDownloadURL();
 

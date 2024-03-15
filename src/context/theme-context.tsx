@@ -41,7 +41,7 @@ export const ThemeContextProvider = ({children}: any) => {
     AsyncStorage.setItem('THEME', currentTheme.id).catch(err =>
       console.log(err),
     );
-  }, []);
+  }, [currentTheme.id]);
 
   const theme = useMemo(
     () => ({

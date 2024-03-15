@@ -20,14 +20,13 @@ import {
   ParamListBase,
   NavigationProp,
 } from '@react-navigation/native';
-import {routes} from '../navigation';
 import HEART_ICON from '../assets/icons/heart.svg';
 import {sectionsStore} from '../context/sections-store';
 import {observer} from 'mobx-react';
 import {BlurView} from '@react-native-community/blur';
 import {settingsStore} from '../context/settings-store';
 import {useThemeContext} from '../context/theme-context';
-import {Loader} from './Loader';
+import {routes} from '../navigation/routes';
 
 const image = require('../assets/images/viln.png');
 
@@ -50,7 +49,6 @@ export const Category = observer(
     inWishlist,
   }: Props) => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();
-
     const [isLoading, setIsLoading] = useState(true);
 
     const {theme} = useThemeContext();
@@ -111,7 +109,7 @@ export const Category = observer(
           </Text>
           {inWishlist && (
             <Text type="quaternary" color={theme.colors.standart}>
-              {category.description.slice(0, 70) + `...`}
+              {category.description.slice(0, 70) + '...'}
             </Text>
           )}
           <Rating rating={category.rating} />

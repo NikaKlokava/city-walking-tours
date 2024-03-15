@@ -1,5 +1,4 @@
-import {tabs} from '../navigation';
-
+import {tabs} from '../navigation/routes';
 import SVG_HOME from '../assets/icons/home.svg';
 import SVG_WISHLIST from '../assets/icons/wishlist.svg';
 import SVG_MAP from '../assets/icons/map.svg';

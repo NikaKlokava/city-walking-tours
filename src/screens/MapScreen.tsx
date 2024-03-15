@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AppWrapper} from '../components/AppWrapper';
 import {Image, StyleSheet, View} from 'react-native';
-import {INITIAL_REGION, colors, commonStyles} from '../utils';
+import {INITIAL_REGION, commonStyles} from '../utils';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {
@@ -10,12 +10,12 @@ import {
   NavigationProp,
 } from '@react-navigation/native';
 import {Text} from '../components/base/Text';
-import {routes} from '../navigation';
 import {observer} from 'mobx-react';
 import {sectionsStore} from '../context/sections-store';
 import {Rating} from '../components/Rating';
 import {Line} from '../components/Line';
 import {useThemeContext} from '../context/theme-context';
+import {routes} from '../navigation/routes';
 
 type LocationType = {
   latitude: number;

@@ -16,10 +16,12 @@ type Props = {
 export const Categories = ({data, isLoading, onSelect}: Props) => {
   const {theme} = useThemeContext();
 
-  if (isLoading) return <Loader white withText />;
+  if (isLoading) {
+    return <Loader white withText />;
+  }
   return (
     <>
-      {data.map((caregory, index) => (
+      {data?.map((caregory, index) => (
         <View style={styles.container} key={index}>
           <View
             style={StyleSheet.flatten([
@@ -39,7 +41,7 @@ export const Categories = ({data, isLoading, onSelect}: Props) => {
           <FlatList
             data={caregory.data}
             horizontal
-            keyExtractor={(_, index) => index.toString()}
+            keyExtractor={item => item.title}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <CategoryItem category={item} isLiked={item.liked} />
