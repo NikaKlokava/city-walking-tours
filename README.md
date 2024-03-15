@@ -38,7 +38,7 @@
 ## <p align="center">Video visualization </p>
 
 <p align="center">
-<img src="./static/video_1.gif" height="350" alt="video_1"> <img src="./static/video_2.gif" height="350" alt="video_2"> <img src="./static/video_3.gif" height="350" alt="video_3"> <img src="./static/video_4.gif" height="350" alt="video_4"> <img src="./static/video_5.gif" height="350" alt="video_5"> <img src="./static/video_6.gif" height="350" alt="video_6"> <img src="./static/video_7.gif" height="350" alt="video_7">
+<img src="./static/video_1.gif" height="350" alt="video_1"> <img src="./static/video_2.gif" height="350" alt="video_2"> <img src="./static/video_3.gif" height="350" alt="video_3"> <img src="./static/video_4.gif" height="350" alt="video_4"> <img src="./static/video_5.gif" height="350" alt="video_5"> <img src="./static/video_6.gif" height="350" alt="video_6"> <img src="./static/video_7.gif" height="350" alt="video_7"> <img src="./static/video_8.gif" height="350" alt="video_8">
 
 </p>
 
